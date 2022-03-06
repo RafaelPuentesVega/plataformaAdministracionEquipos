@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     {{-- <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto:ital@1&display=swap" rel="stylesheet"> --}}
@@ -271,9 +271,9 @@
 @include('modulos.ordenServicio.modalFacturaNumero')
 
 @section('js')
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/js/facturaNumero.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/facturaNumero.js"></script>
     <script>
    $(function () {
     $('[data-toggle="tooltip"]').tooltip()

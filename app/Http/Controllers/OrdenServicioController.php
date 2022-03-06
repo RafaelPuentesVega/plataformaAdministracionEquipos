@@ -45,7 +45,7 @@ class OrdenServicioController extends Controller
         $departamentos = Departamentos::all();
         $tipoEquipo = TipoEquipo::all();
 
-        return view('modulos.crearordenservicio')
+        return view('modulos.ordenServicio.crearordenservicio')
         ->with('user',$user)
         ->with('servicios',$servicios)
         ->with('consultorios',$consultorios)

@@ -22,7 +22,7 @@ class EquiposController extends Controller
     {
 
             $equipos = Equipos::all();
-            return view('modulos.equipo')
+            return view('modulos.equipo.equipo')
             ->with('equipos' ,$equipos) ;
 
 
@@ -58,7 +58,7 @@ class EquiposController extends Controller
         'equipo_byg'=>$datos['equipo_byg'],
 
        ]);
-      return redirect('equipos');
+        return redirect('equipos');
     }
 
     /**

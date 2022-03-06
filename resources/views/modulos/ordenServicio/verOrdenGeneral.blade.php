@@ -1,9 +1,9 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
 
@@ -15,7 +15,7 @@
 
         <div class="content" style="font-family: Verdana, sans-serif" >
 
-            <body style="background-image: url(http://192.168.1.10/plataforma/public/assets/img/background.jpg)">
+            <body style="background-image: url(http://localhost/plataforma/public/assets/img/background.jpg)">
 
                 <div class="container-fluid">
 
@@ -371,7 +371,7 @@
                                             </tr>
                                             @if(sizeOf($repuesto) != 0)
                                                 @foreach ($repuesto as $repuestos)
-                                                    <tr style=" font-size: 13px ">
+                                                    <tr style=" font-size: 13px " class="table-striped">
                                                         <th width=""
                                                             style="font-size: 16px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                             &nbsp;{{ $repuestos->cantidad_repuesto }}
@@ -538,10 +538,10 @@
 
 
 @section('js')
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/js/editOrden.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/js/entregarOrden.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/editOrden.js"></script>
+    <script src="http://localhost/plataforma/public/js/entregarOrden.js"></script>
 @endsection
 
 

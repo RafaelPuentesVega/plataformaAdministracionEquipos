@@ -4,10 +4,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
-{{-- <link rel="stylesheet" type="text/css" href="http://192.168.1.10/plataforma/public/fontawesome/css/fontawesome.min.css"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/fontawesome/css/fontawesome.min.css"/> --}}
 
-{{-- <link href="http://192.168.1.10/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" /> --}}
-<link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+{{-- <link href="http://localhost/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" /> --}}
+<link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
 
 @endsection
 
@@ -94,7 +94,7 @@
 @section('js')
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>

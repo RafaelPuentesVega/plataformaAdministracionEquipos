@@ -10,7 +10,7 @@ function entregarOrden() {
     }
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/entregarOrden',
+        url: 'http://localhost/plataforma/public/entregarOrden',
         data: {
             sinIva: sinIva,
             idOrden : idOrden

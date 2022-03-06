@@ -3,7 +3,7 @@ var idRepuesto = '';
 function editarRepuesto(id) {
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/editarRepuesto',
+        url: 'http://localhost/plataforma/public/editarRepuesto',
         data: {
             id: id
         },
@@ -57,7 +57,7 @@ function autorizarRepuesto() {
 }
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/autorizarRepuesto',
+        url: 'http://localhost/plataforma/public/autorizarRepuesto',
         data: {
             precioUnitario:precioUnitario,
             idRepuesto:idRepuesto,

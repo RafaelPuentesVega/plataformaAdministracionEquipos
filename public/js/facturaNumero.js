@@ -2,7 +2,7 @@ numeroOrden = '';
 function facturaNumero(id) {
     showModal();
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/facturaNumero',
+        url: 'http://localhost/plataforma/public/facturaNumero',
         data: {
             id: id
         },
@@ -76,7 +76,7 @@ function guardarNumeroFactura() {
     }
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarNumeroFactura',
+        url: 'http://localhost/plataforma/public/guardarNumeroFactura',
         data: {
             numeroOrden:numeroOrden,
             numeroFactura:numeroFactura

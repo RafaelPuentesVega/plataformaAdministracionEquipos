@@ -10,7 +10,7 @@ function guardarDiagnostico() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarObservacion',
+        url: 'http://localhost/plataforma/public/guardarObservacion',
         data: {
             diagnostico: diagnostico,
             idOrden : idOrden
@@ -48,7 +48,7 @@ function guardarAnotacion() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarAnotacion',
+        url: 'http://localhost/plataforma/public/guardarAnotacion',
         data: {
             anotacion: anotacion,
             idOrden : idOrden
@@ -91,7 +91,7 @@ function guardarRepuesto() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarRepuesto',
+        url: 'http://localhost/plataforma/public/guardarRepuesto',
         data: {
             repuesto: repuesto,
             idOrden : idOrden,
@@ -133,7 +133,7 @@ function guardarRepuesto() {
             return;
         }
         $.ajax({
-            url: 'http://192.168.1.10/plataforma/public/termirnarOrden',
+            url: 'http://localhost/plataforma/public/termirnarOrden',
             data: {
                 reporteTecnico: reporteTecnico,
                 idOrden : idOrden,
@@ -147,8 +147,8 @@ function guardarRepuesto() {
 
                     btnguardar.disabled = true;
                     setTimeout( toastr["success"]("<h6>Se registro correctamente</h6>", "GUARDADO"), 20000)
-                    window.location.href = 'http://192.168.1.10/plataforma/public/inicio';
-                    // window.open('http://192.168.1.10/plataforma/public/OrdenEntrada/'+id);
+                    window.location.href = 'http://localhost/plataforma/public/inicio';
+                    // window.open('http://localhost/plataforma/public/OrdenEntrada/'+id);
                     }
             },
             error: function (xhr, status) {

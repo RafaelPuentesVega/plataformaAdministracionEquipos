@@ -68,7 +68,7 @@ function guardarEquipoOrden() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarEquipoOrden',
+        url: 'http://localhost/plataforma/public/guardarEquipoOrden',
         data: {
             equipo_tipo: equipo_tipo,
             equipo_tipo_select:equipo_tipo_select,
@@ -99,7 +99,7 @@ function guardarEquipoOrden() {
 }
 function consultarEquipo() {
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarEquipo',
+        url: 'http://localhost/plataforma/public/consultarEquipo',
         data: {
             id: cliente_id
         },
@@ -164,13 +164,6 @@ function consultarEquipo() {
 
 }
 function guardarCliente() {
-    id =   82 ;
-    //imprimir%orden%ingreso/2022{idOrden}2022r2016x{idOrden}rf6102hg
-    window.open ('http://192.168.1.10/plataforma/public/imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI')
-
-
-    document.querySelectorAll('.automatic').a.href = link.Generator.go(a.dataset.href);
-
 
     emailval = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
     btnguardar = document.getElementById('btnGuardarCliente');
@@ -231,7 +224,7 @@ function guardarCliente() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarCliente',
+        url: 'http://localhost/plataforma/public/guardarCliente',
          data: {
             cliente_id: cliente_id,
             equipo_id: equipo_id,
@@ -297,7 +290,7 @@ function guardarUsuarioEmpresa() {
             return;
         }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarUsuarioEmpresa',
+        url: 'http://localhost/plataforma/public/guardarUsuarioEmpresa',
         data: {
             cliente_id: cliente_id,
             usuario_empresa : usuario_empresa,
@@ -336,7 +329,7 @@ function consultarCliente(id) {
     documentoCliente = document.getElementById('cliente_documento');
     nombreCliente = document.getElementById('cliente_nombres');
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarCliente',
+        url: 'http://localhost/plataforma/public/consultarCliente',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -400,7 +393,7 @@ function consultarCliente(id) {
 function SeleccionarUsaurioEmpresa(id) {
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/SeleccionarUsaurioEmpresa',
+        url: 'http://localhost/plataforma/public/SeleccionarUsaurioEmpresa',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -432,7 +425,7 @@ function SeleccionarUsaurioEmpresa(id) {
 function SeleccionarEquipo(id) {
 btnGuardarEquipo = document.getElementById('btnGuardarEquipo');
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/SeleccionarEquipo',
+        url: 'http://localhost/plataforma/public/SeleccionarEquipo',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -467,7 +460,7 @@ btnGuardarEquipo = document.getElementById('btnGuardarEquipo');
 }
 function consultarUsuarioEmpresa() {
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarUsuarioEmpresa',
+        url: 'http://localhost/plataforma/public/consultarUsuarioEmpresa',
         data: {
             id: cliente_id
         },
@@ -529,7 +522,7 @@ function consultarMunicipio() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarMunicipio',
+        url: 'http://localhost/plataforma/public/consultarMunicipio',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -569,7 +562,7 @@ function consultarClienteEnter() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarClienteEnter',
+        url: 'http://localhost/plataforma/public/consultarClienteEnter',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -721,7 +714,7 @@ function guardarOrdenServicio() {
 
     $.ajax({
         // la URL para la petición
-        url: 'http://192.168.1.10/plataforma/public/guardarOrden',
+        url: 'http://localhost/plataforma/public/guardarOrden',
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
         data: {
@@ -747,7 +740,7 @@ function guardarOrdenServicio() {
                 toastr["success"]("<h6>Enviando Orden</h6>", "ENVIANDO")
                 setTimeout(function(){
                 }, 2000);
-                window.location.href ('http://192.168.1.10/plataforma/public/OrdenEntrada/'+ encrypt(id) );
+                window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI' );
 
                 location.reload();
             }

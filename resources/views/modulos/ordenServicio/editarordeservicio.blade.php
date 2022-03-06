@@ -1,9 +1,9 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <style>
@@ -711,9 +711,9 @@
 
 
 @section('js')
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/js/editOrden.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/editOrden.js"></script>
 @endsection
 
 

@@ -3,7 +3,7 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-<link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
+<link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
 @endsection
 
 <div class="wrapper">
@@ -66,9 +66,9 @@
 @include('modulos.requerimiento.modalAutorizar')
 
 @section('js')
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/js/requerimiento.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/requerimiento.js"></script>
+    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
 @endsection
 
 @endsection

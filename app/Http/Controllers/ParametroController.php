@@ -14,9 +14,11 @@ class ParametroController extends Controller
     }
     public function index()
     {
-
+        if(auth()->user()->rol != 'ADMINISTRATIVO'){
+            return redirect('inicio');
+        }
         $servicios = Parametro::all();
-        return view('modulos.parametro') ->with('servicios' ,$servicios) ;
+        return view('modulos.parametro.parametro') ->with('servicios' ,$servicios) ;
 
     }
 

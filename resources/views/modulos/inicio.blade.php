@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="http://192.168.1.10/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" />
-    <link href="http://192.168.1.10/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" />
+    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
 
@@ -46,7 +46,7 @@
                             <h1 style="color: rgb(28, 28, 61)"> <strong>PLATAFORMA DE ADMINISTRACION Y CONTROL DE EQUIPOS</strong></h1>
                             <br>
 
-                            <img class="img-circle" style="border-image: 15px" src="http://192.168.1.10/plataforma/public/assets/img/myAvatar.png"   height="180" >
+                            <img class="img-circle" style="border-image: 15px" src="http://localhost/plataforma/public/assets/img/myAvatar.png"   height="180" >
                             <div class="row">
                                 <div class="col-12 mt-3 mb-1" style="text-align: center">
                                     <p class="">{{ auth()->user()->name }}</p>
@@ -246,10 +246,10 @@
 
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="http://192.168.1.10/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://192.168.1.10/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
 
-    <script src="http://192.168.1.10/plataforma/public/js/inicio.js"></script>
+    <script src="http://localhost/plataforma/public/js/inicio.js"></script>
     <script>
         function codeAddress() {
             toastr["success"]("<h4>{{ auth()->user()->name }}::{{ auth()->user()->rol }} </h4>",

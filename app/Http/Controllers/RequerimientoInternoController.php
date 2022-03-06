@@ -23,6 +23,10 @@ class RequerimientoInternoController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->rol != 'ADMINISTRATIVO'){
+            return redirect('inicio');
+        }
+
         $repuestoSinAutorizar = 1; //ESTADO DE REPUESTO - SIN AUTORIZAR -
         $repuestoAutorizar = Repuesto::where('estado_repuesto',$repuestoSinAutorizar)->get();
 

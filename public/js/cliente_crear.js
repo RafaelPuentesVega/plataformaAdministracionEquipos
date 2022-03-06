@@ -58,7 +58,7 @@ function guardarCliente() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarCliente',
+        url: 'http://localhost/plataforma/public/guardarCliente',
          data: {
             cliente_id: cliente_id,
             equipo_id: equipo_id,
@@ -124,7 +124,7 @@ function guardarUsuarioEmpresa() {
             return;
         }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/guardarUsuarioEmpresa',
+        url: 'http://localhost/plataforma/public/guardarUsuarioEmpresa',
         data: {
             cliente_id: cliente_id,
             usuario_empresa : usuario_empresa,
@@ -158,7 +158,7 @@ function consultarCliente(id) {
     let municipio = $("#municipioSelect").val();
     let departamento = $("#departamentoSelect").val();
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarCliente',
+        url: 'http://localhost/plataforma/public/consultarCliente',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -216,7 +216,7 @@ function consultarCliente(id) {
 function SeleccionarUsaurioEmpresa(id) {
 
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/SeleccionarUsaurioEmpresa',
+        url: 'http://localhost/plataforma/public/SeleccionarUsaurioEmpresa',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -244,7 +244,7 @@ function SeleccionarUsaurioEmpresa(id) {
 
 function consultarUsuarioEmpresa() {
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarUsuarioEmpresa',
+        url: 'http://localhost/plataforma/public/consultarUsuarioEmpresa',
         data: {
             id: cliente_id
         },
@@ -306,7 +306,7 @@ function consultarMunicipio() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarMunicipio',
+        url: 'http://localhost/plataforma/public/consultarMunicipio',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -345,7 +345,7 @@ function consultarClienteEnter() {
         return;
     }
     $.ajax({
-        url: 'http://192.168.1.10/plataforma/public/consultarClienteEnter',
+        url: 'http://localhost/plataforma/public/consultarClienteEnter',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
