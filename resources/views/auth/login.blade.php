@@ -68,6 +68,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/css/util.css">
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/css/main.css">
+
+
 <!--===============================================================================================-->
 
 @endsection
@@ -90,7 +92,12 @@
                 <input class="input100" type="password" name="password" placeholder="Contraseña">
                 <span class="focus-input100"></span>
             </div>
+
             <br>
+            @error('email') <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>Correo no registrado</strong> </h3> </li> </ul><br></div> @enderror
+            @error('password') <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>Contraseña incorrecta</strong> </h3> </li> </ul><br></div> @enderror
+            @error('state') <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>USUARIO INACTIVO</strong> </h3> </li> </ul><br></div> @enderror
+
 
             <div class="container-login100-form-btn">
                 <button type="submit" class="login100-form-btn">
@@ -106,53 +113,6 @@
     </div>
 </div>
 
-
-
-
-{{-- <div class="login-box">
-    <div class="login-logo">
-        <b>PLATAFORMA</b>
-
-    </div>
-
-    <div class="login-box-body">
-        <p class="login-box-msg"> Ingresar al Sistema</p>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-
-
-                <div class="row-cols-lg-1">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>USUARIO</label>
-                            <input type="text" name="email" class="form-control" placeholder="Usuario" required>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label >Contraseña</label>
-                            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
-                        </div>
-                    </div>
-
-                    <div class=" col-xs-5 " >
-                        <button type="submit" class="btn btn-primary btn-block btn-flat btn-fill ">Ingresar</button>
-
-
-                    </div>
-
-                </div>
-
-        </form>
-
-    </div>
-
-</div> --}}
 
 @endsection
 
@@ -174,6 +134,7 @@
 	<script src="http://localhost/plataforma/public/login1/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="http://localhost/plataforma/public/login1/js/main.js"></script>
+
 
 @endsection
 

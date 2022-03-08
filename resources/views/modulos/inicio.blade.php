@@ -51,8 +51,6 @@
                                 <div class="col-12 mt-3 mb-1" style="text-align: center">
                                     <p class="">{{ auth()->user()->name }}</p>
                                     <label class="text-uppercase">{{ auth()->user()->rol }}{{auth()->user()->id}}</label>
-                                    <br><br>
-
                                 </div>
                             </div>
                         </div>
@@ -60,7 +58,6 @@
 
 
                     <div class="row" style="justify-content: center">
-
 
                         <div class="col-md-3 ">
                             <a>
@@ -226,6 +223,9 @@
                         </div>
 
                     </div>
+                    <div class="row" style="justify-content: center">
+                        <div id="piechart_3d" style="border-top-left-radius: 0.5rem;width: 500px; height: 310px"></div>
+                    </div>
 
 
                 </section>
@@ -239,12 +239,46 @@
 
 
 
-
     </div>
     </div>
 @section('js')
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<script type="text/javascript">
+
+    ordenesVigentes = "<?= json_encode($tamañovigentes) ?>";
+    ordenesVencidas = "<?= json_encode($tamañoVencidas) ?>";
+    ordenesListas = "<?= json_encode($tamañoListas) ?>";
+    //Parse int
+    ordenesVigentes = parseInt(ordenesVigentes);
+    ordenesVencidas = parseInt(ordenesVencidas);
+    ordenesListas = parseInt(ordenesListas);
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['orden', 'historia de ordenes'],
+      [ordenesVigentes+' Vigentes' , ordenesVigentes ],
+      [ordenesVencidas+' Vencidas', ordenesVencidas],
+      [ordenesListas+ ' Lista para entrega',  ordenesListas]
+    ]);
+
+    var options = {
+
+      is3D: true,
+      colors:['green','red' , '#F5B041'],
+      chartArea:{left:20,top:50,width:'100%',height:'100%'},
+      backgroundColor: '#FBFCFF' ,
+      fontName : 'Verdana',
+      fontSize : '13',
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
+</script>
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
     <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
     <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>

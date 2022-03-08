@@ -12,9 +12,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'password' => 'Contraseñ incorrecta',
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
+    'email' => 'Correo No registrado',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

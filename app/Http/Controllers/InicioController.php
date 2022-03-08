@@ -29,6 +29,9 @@ class InicioController extends Controller
     ->join('equipo', 'id_equipo_orden', '=', 'equipo.equipo_id')
     ->whereNull('fecha_entrega_orden' )->where('id_tecnico_orden',$idUsuario)->where('estadoOrden','1')->get()->toArray();
 
+    $ordenServicioListas = OrdenServicio::
+    whereNull('fecha_entrega_orden' )->where('id_tecnico_orden',$idUsuario)->where('estadoOrden','2')->get()->toArray();
+
         $control = sizeof($ordenServicio) - 1;
         $fechaActual = date('Y-m-d');
         $vencidas[] = null;
@@ -36,7 +39,6 @@ class InicioController extends Controller
         for ($i = 0; $i <= $control; $i++) {
 
         $fechaEstimada = $ordenServicio[$i]['fecha_estimada_orden'];
-        $idTecnico = $ordenServicio[$i]['id_tecnico_orden'];
 
         if($fechaActual >  $fechaEstimada){
             $vencidas[] = $ordenServicio[$i];
@@ -47,6 +49,7 @@ class InicioController extends Controller
 
 
         }
+        $tamañoListas =    sizeof($ordenServicioListas);
         $tamañoVencidas = sizeof($vencidas)-1;
         $tamañovigentes = sizeof($vigentes) -1;
       //CONSULTA PARA TRAER LOS TECNICOS A VISTA DE ADMINISTRADORES
@@ -54,7 +57,8 @@ class InicioController extends Controller
        ->orWhere('rol', 'Coordinador Técnico')->get();
 
          return view('modulos.inicio')->with('vigentes' ,$vigentes)->with('vencidas' ,$vencidas)->with('user' ,$user)
-         ->with('tamañoVencidas' ,$tamañoVencidas)->with('tamañovigentes' ,$tamañovigentes) ;
+         ->with('tamañoVencidas' ,$tamañoVencidas)->with('tamañovigentes' ,$tamañovigentes)
+         ->with('tamañoListas' ,$tamañoListas) ;
     }
 
     /**
