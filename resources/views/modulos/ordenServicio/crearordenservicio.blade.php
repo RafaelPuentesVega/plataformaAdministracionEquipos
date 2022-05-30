@@ -2,13 +2,17 @@
 @section('content')
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+{{-- <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/> --}}
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
+<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+{{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> --}}
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
 <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
-<div class="wrapper">
+<div class="wrapper" >
 
     <div class="main-panel">
 
@@ -18,6 +22,7 @@
 
             <div class="container-fluid">
 
+
                 <div class="row ">
                     <div class="col-md-15">
 
@@ -26,7 +31,7 @@
                                 <h3 class="title text-center" style="font-size: 20px; color: #ffffff ; padding-bottom :8px;"><strong>CREAR ORDEN DE SERVICIO</strong></h3>
                             </div>
                             </div>
-                            <div class="card " style="border-color: blue" >
+                            <div class="card " >
 
 
                                 <div class="header" style="border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;background-color: #AED6F1">
@@ -41,7 +46,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="">TIPO CLIENTE</label>
-                                                    <select class="js-example-basic js-states form-control" name="cliente_tipo" onchange="change(this)" id="tipocliente" required>
+                                                    <select style="appearance:none;"  class="js-example-basic js-states form-control" name="cliente_tipo" onchange="change(this)" id="tipocliente" required>
                                                         <option value=  >Seleccionar...</option>
                                                         <option  value="PERSONA">PERSONA</option>
                                                         <option value="EMPRESA">EMPRESA</option>
@@ -64,7 +69,11 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >CORREO</label>
-                                                    <input type="email" class="form-control" name="cliente_correo" id="cliente_correo" placeholder="Correo Electronico" required autocomplete="off">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">@</span>
+                                                        <input type="email" class="form-control" name="cliente_correo" id="cliente_correo" placeholder="Correo Electronico" required autocomplete="off">
+
+                                                      </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,15 +128,15 @@
                                             </div>
                                         </div>
                                                  <!-- Button  modal -->
-                                                 <button title="BUSCAR" data-toggle="tooltip" data-placement="bottom" style="border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-info btn-fill  pull-right " data-toggle="modal" data-target="#md-buscaCliente" onclick="showModal()"  >
-                                                    <i style="color: #ffffff; font-size: 17px" class="bi bi-search "></i>
-                                                    <span>Buscar Cliente</span>
+                                                 <button title="BUSCAR" data-toggle="tooltip" data-placement="bottom" style="padding: 5px; border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-warning btn-fill  pull-right " data-toggle="modal" data-target="#md-buscaCliente" onclick="showModal()"  >
+                                                    <i style="color: #ffffff; font-size: 18px" class="bi bi-search "></i>
+                                                    <span style="">Buscar Cliente</span>
                                                  </button>
 
                                                  <div id="btn-update">
-                                                    <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-success btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
-                                                        <i style="color: #ffffff; font-size: 17px" class="bi bi-save pull-left"></i>
-                                                        <span style="margin-left: 5px" > Guardar Cliente</span>
+                                                    <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="padding: 5px;border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-info btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
+                                                        <i style="color: #ffffff; font-size: 18px" class="bi bi-save pull-left"></i>
+                                                        <span style="margin-block-start: 15%" > Guardar Cliente</span>
                                                     </button>
                                                 </div>
 
@@ -176,17 +185,19 @@
 
                             </div>
 
-                            <div class="card">
+                             <div class="card">
 
                                 <div class="header" style="border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;background-color: #AED6F1">
                                     <p  style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #1C2833; text-align: center; font-size: 14px"> <strong> DATOS EQUIPO </strong></p>
                                 </div>
-                                <div class="content" >
+
+
+                                <div class="content">
 
 
                                         <div id="consultarEquipo" hidden>
 
-                            <!-- lISTA DE LOS EQUIPOS -->
+                                        <!-- lISTA DE LOS EQUIPOS -->
                                         </div>
                                         <div class="row" >
                                         <div class="col-md-2">
@@ -332,7 +343,7 @@
                                                     <div class="form-group">
                                                         <label for="">TECNICO</label>
                                                         <select class="js-example-basic js-states form-control" id="tecnicoSelect" required>
-                                                                    <option >-SELECCIONAR-</option>
+                                                                    <option value="">-SELECCIONAR-</option>
                                                                     @foreach ($user as $users)
                                                                      <option value="{{ $users->id }}">{{$users->name}}</option>
                                                                     @endforeach
@@ -342,6 +353,7 @@
 
                                             </div>
                                     </div>
+                                </div>
                                 </div>
 
                                 <button  class="btn btn-success btn-fill pull-right" onclick="guardarOrdenServicio()"><strong style="font-size: 15px">GUARDAR Y ENVIAR</strong></button>
@@ -366,6 +378,7 @@
     <script src="http://localhost/plataforma/public/js/crearorden.js"></script>
     <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
 @endsection
 
 

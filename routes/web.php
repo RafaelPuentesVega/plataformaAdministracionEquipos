@@ -28,9 +28,10 @@ Route::get('/login', function () {
   //  return view('register');
      return view('modulos.ingresar');
 });
-Route::get('/home', function () {
+Route::get('home', function () {
     //  return view('register');
-       return view('modulos.ingresar');
+     //  return route('modulos.inicio');
+     return redirect()->route('home');
   });
 Route::get('/register', function () {
     return view('register');

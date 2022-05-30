@@ -2,7 +2,7 @@
 @section('content')
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
 <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
 @endsection
 

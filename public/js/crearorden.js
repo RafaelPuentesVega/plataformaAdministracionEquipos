@@ -39,6 +39,7 @@ function guardarEquipoOrden() {
         equipo_tipo_select = '';
         if (equipo_tipo.length < 1) {
             toastr["warning"]("<h6>Digitar Tipo de equipo</h6>")
+            $("#equipo_tipo").focus();
             return;
         }
     }
@@ -47,24 +48,30 @@ function guardarEquipoOrden() {
         equipo_tipo = '';
         if (equipo_tipo_select.length < 1) {
             toastr["warning"]("<h6>Seleccionar Tipo Equipo</h6>")
+            $("#equipo_tipo_select").focus();
             return;
         }
 
     }
     if (equipo_marca.length < 1) {
         toastr["warning"]("<h6>Diligenciar Marca del equipo </h6>")
+        $("#equipo_tipo").focus();
+        $("#equipo_marca").focus();
         return;
     }
     if (equipo_referencia.length < 1) {
         toastr["warning"]("<h6>Diligenciar Referencia del equipo </h6>")
+        $("#equipo_referencia").focus();
         return;
     }
     if (equipo_serial.length < 1) {
         toastr["warning"]("<h6>Diligenciar el serial del equipo </h6>")
+        $("#equipo_serial").focus();
         return;
     }
     if (equipo_serial.length > 6 || equipo_serial.length < 6) {
         toastr["warning"]("<h6>El Serial debe de contener 6 digitos </h6>")
+        $("#equipo_serial").focus();
         return;
     }
     $.ajax({
@@ -680,10 +687,12 @@ function guardarOrdenServicio() {
     if (document.getElementById('checkadaptador').checked) {
         if (serialAdaptatador.length < 1) {
             toastr["warning"]("<h6>Digitar Serial Adaptador</h6>")
+            $("#serialAdaptador").focus();
             return;
         }
         if (serialAdaptatador.length < 6) {
             toastr["warning"]("<h6>El serial debe contener 6 digitos</h6>")
+            $("#serialAdaptador").focus();
             return;
         }
     }
@@ -693,22 +702,32 @@ function guardarOrdenServicio() {
 
     if (verifica_funcionamiento.length < 1) {
         toastr["warning"]("<h6>Seleccionar Verificacion de funcionamiento</h6>")
+        $("#verificacion_funcionamiento").focus();
+        return;
+    }
+    if (accesorios.length < 1) {
+        toastr["warning"]("<h6>Diligenciar accessorios</h6>")
+        $("#accesorios").focus();
         return;
     }
     if (servicio.length < 1) {
         toastr["warning"]("<h6>Seleccionar un servicio</h6>")
+        $("#servicio").focus();
         return;
     }
     if (caracteristicas_equipo.length < 1) {
         toastr["warning"]("<h6>Diligenciar Caracteristicas del equipo</h6>")
+        $("#caracteristicas_equipo").focus();
         return;
     }
     if (descripcion_dano.length == 0) {
         toastr["warning"]("<h6>Diligenciar el daño del equipo </h6>")
+        $("#descripcion_dano").focus();
         return;
     }
     if (tecnico.length < 1) {
         toastr["warning"]("<h6>Selecionar un Tecnico</h6>")
+        $("#tecnico").focus();
         return;
     }
 
@@ -831,6 +850,12 @@ $(document).ready(function () {
         "language": idioma_espanol
 
     });
+    $('.dataTables_filter input[type="search"]').
+    attr('class','form-control').
+    css({'width':'340px','display':'inline-block','position':'left'});
+    $('.dataTables_length select').
+    attr('class','form-control').
+    css({'width':'54px','display':'inline-block','position':'relative'});
 
     $('.js-example-basic-multiple').select2();
 

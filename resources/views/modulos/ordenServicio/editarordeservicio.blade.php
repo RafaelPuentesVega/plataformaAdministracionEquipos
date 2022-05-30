@@ -383,7 +383,10 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea @if($arrayData->estadoOrden != 1) disabled @endif rows="3" id="reporteTecnico" class="form-control" maxlength="240" placeholder="REPORTE TECNICO" autocomplete="off" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">{{$arrayData->reporte_tecnico_orden}}</textarea>
+                                                <textarea
+                                                @if($arrayData->estadoOrden != 1) disabled @endif
+                                                @if (sizeOf($diagnostico) != 1) disabled placeholder="Guardar diagnostico" @endif
+                                                rows="3" id="reporteTecnico" class="form-control" maxlength="240" placeholder="REPORTE TECNICO" autocomplete="off" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">{{$arrayData->reporte_tecnico_orden}}</textarea>
                                             </div>
                                         </div>
                                     </div>

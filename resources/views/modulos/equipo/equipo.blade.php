@@ -1,15 +1,11 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    {{-- <link rel="stylesheet" type="text/css"
-        href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
+        <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css"
+        <link rel="stylesheet" type="text/css"
+
         href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
 @endsection
 
@@ -23,79 +19,18 @@
                     <h3 class="title text-center" style="color: #ffffff ; padding-bottom :8px;"><strong>EQUIPOS</strong></h3>
                 </div>
             </div>
-            
+
             <div class="container-fluid">
 
 
                 <div class="row ">
-                    <div class="col-md-15">
+                    <div class="col-md-12">
 
-                        <form action="" method="post">
-                            @csrf
-
-                            <div class="card " style="border: #ffffff">
-
-
-                                <div class="header">
-                                    <h3 class="title text-center"><strong>CREAR EQUIPO</strong></h3>
-                                </div>
-                                <div class="content">
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>TIPO EQUIPO</label>
-                                                <input type="text" class="form-control" name="equipo_tipo"
-                                                    placeholder="Equipo" required>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>MARCA</label>
-                                                <input type="text" class="form-control" name="equipo_marca"
-                                                    placeholder="Marca" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>REFERENCIA</label>
-                                                <input type="text" class="form-control" name="equipo_referencia"
-                                                    placeholder="Referencia" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>SERIAL</label>
-                                                <input type="text" class="form-control" name="equipo_serial"
-                                                    placeholder="Serial" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="">BYG</label>
-                                                <select class="js-example-basic-multiple js-states form-control"
-                                                    name="equipo_byg" required>
-                                                    <option value="NO">NO</option>
-                                                    <option value="SI">SI</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" style="margin: 10px"
-                                        class="btn btn-success btn-fill pull-right btn-round">CREAR</button>
-                                    <div class="clearfix"></div>
-                                </div> <br>
-
-                            </div>
-                            {{-- <table  id="clients" class="table" border bordercolor="#CDCDD8"> --}}
                             <table id="clients" class="table table-striped table-hover"
                             style="webkit-font-smoothing: antialiased;
                                 font-family: Roboto,Helvetica Neue,Arial,sans-serif;">
                                 <thead class="thead-light">
-                                    <tr style="font-size: 50px;">
+                                    <tr style="">
 
                                         <th scope="col" class="text-center" style="font-size: 15px;color:#16172C">
                                             <strong>EQUIPO</strong></th>
@@ -129,9 +64,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-
-                        </form>
                     </div>
                 </div>
             </div>
@@ -173,7 +105,11 @@
             });
             $('.dataTables_filter input[type="search"]').
             attr('class','form-control').
-            css({'width':'595px','display':'inline-block','position':'relative',});
+            css({'width':'340px','display':'inline-block','position':'left'});
+
+            $('.dataTables_length select').
+            attr('class','form-control').
+            css({'width':'54px','display':'inline-block','position':'relative'});
         });
         var idioma_espanol = {
             "processing": "Procesando...",

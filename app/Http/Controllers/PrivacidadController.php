@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PrivacidadController extends Controller
@@ -14,6 +15,10 @@ class PrivacidadController extends Controller
 
     public function index()
     {
-    return view('modulos.privacidad');
+
+        $usuario = User::all();
+
+
+    return view('modulos.privacidad')->with('usuario', $usuario);
     }
 }

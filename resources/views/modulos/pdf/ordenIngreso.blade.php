@@ -211,7 +211,7 @@
 
             </table>
             {{-- <p style="font-size: 12px; font-weight: bold; margin: 0% ">TECNICO - {{$tecnico}}</p> --}}
-            <table width="100%" style="font-size: 10.5pxs">
+            <table width="100%" style="font-size: 10pxs">
                 <tr>
                     <th width="100%" colspan="2"
                         style="   height: 30px; font-weight:normal; text-align: left ; border: rgb(0, 0, 0) 1px solid !important">

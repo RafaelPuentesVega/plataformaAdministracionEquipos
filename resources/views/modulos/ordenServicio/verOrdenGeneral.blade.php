@@ -71,9 +71,7 @@
                                                     id="fecha_reparacion_orden" required autocomplete="off">
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
 
-                                        </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">FECHA ENTREGA</label>
@@ -81,6 +79,12 @@
                                                     id="fecha_entrega_orden"
                                                     value="{{ $arrayData->fecha_entrega_orden }}"
                                                     required autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{-- <label style="text-align: left" for="">Editar Orden</label> --}}
+                                                <button style="float: right" class="btn btn-info ">Editar Orden</button>
                                             </div>
                                         </div>
                                     </div>
@@ -240,9 +244,10 @@
                                     </div>
                                     <hr>
                                     <div>
-                                        <label><strong> REPORTE TECNICO: </strong></label> <br>
+                                        <label><strong> REPORTE TECNICO: </strong></label> 
+                                         <br>
                                         {{ $arrayData->reporte_tecnico_orden }}
-                                        <br>
+                                        <br><br>
                                         <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label>{{$arrayData->name}} </div>
 
                                     </div>
@@ -522,9 +527,11 @@
                                     <a href="{{ url('OrdenEntrada', encrypt($arrayData->id_orden)  ) }}">
                                         <button   class="btn btn-info btn-fill pull-left" style="margin: 5px"> ORDEN DE ENTRADA</button>
                                     </a>
+                                    @if($arrayData->estadoOrden == 3)
                                     <a href="{{ url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', $arrayData->id_orden  ) }}">
                                         <button  class="btn btn-info btn-fill pull-left" style="margin: 5px"> ORDEN DE SALIDA</button>
                                     </a>
+                                    @endif
                                     <div class="clearfix"></div>
 
                                 </div>

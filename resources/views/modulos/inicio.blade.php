@@ -257,26 +257,31 @@
 
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
+    //alert(ordenesListas);
     function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['orden', 'historia de ordenes'],
-      [ordenesVigentes+' Vigentes' , ordenesVigentes ],
-      [ordenesVencidas+' Vencidas', ordenesVencidas],
-      [ordenesListas+ ' Lista para entrega',  ordenesListas]
-    ]);
 
-    var options = {
+        if(ordenesVencidas == 0 && ordenesVigentes == 0 && ordenesListas == 0 ){
+            //No imprimimos nada
+        }else{
+            var data = google.visualization.arrayToDataTable([
+        ['orden', 'historia de ordenes'],
+        [ordenesVigentes+' Vigentes' , ordenesVigentes ],
+        [ordenesVencidas+' Vencidas', ordenesVencidas],
+        [ordenesListas+ ' Lista para entrega',  ordenesListas]
+        ]);
+        var options = {
 
-      is3D: true,
-      colors:['green','red' , '#F5B041'],
-      chartArea:{left:20,top:50,width:'100%',height:'100%'},
-      backgroundColor: '#FBFCFF' ,
-      fontName : 'Verdana',
-      fontSize : '13',
-    };
+        is3D: true,
+        colors:['green','red' , '#F5B041'],
+        chartArea:{left:20,top:50,width:'100%',height:'100%'},
+        backgroundColor: '#FBFCFF' ,
+        fontName : 'Verdana',
+        fontSize : '13',
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+        }
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
   }
 </script>
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}

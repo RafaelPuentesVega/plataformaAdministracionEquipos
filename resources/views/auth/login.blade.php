@@ -58,13 +58,10 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/css/util.css">
 	<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/login1/css/main.css">
@@ -75,7 +72,7 @@
 @endsection
 @section('contenido')
 
-<div class="container-login100" style="background-image: url('http://localhost/plataforma/public/login1/images/bg-01.jpg');">
+<div class="container-login100" style="background-image: url('http://localhost/plataforma/public/login1/images/fondo.jpg');">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
         <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
         @csrf

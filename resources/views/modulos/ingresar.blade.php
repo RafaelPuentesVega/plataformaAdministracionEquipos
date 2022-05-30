@@ -62,51 +62,6 @@
 
 
 
-{{-- <div class="login-box">
-    <div class="login-logo">
-        <b>PLATAFORMA</b>
-
-    </div>
-
-    <div class="login-box-body">
-        <p class="login-box-msg"> Ingresar al Sistema</p>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-
-
-                <div class="row-cols-lg-1">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>USUARIO</label>
-                            <input type="text" name="email" class="form-control" placeholder="Usuario" required>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label >Contraseña</label>
-                            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
-                        </div>
-                    </div>
-
-                    <div class=" col-xs-5 " >
-                        <button type="submit" class="btn btn-primary btn-block btn-flat btn-fill ">Ingresar</button>
-
-
-                    </div>
-
-                </div>
-
-        </form>
-
-    </div>
-
-</div> --}}
-
 @endsection
 
 @section('js')

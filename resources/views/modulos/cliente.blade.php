@@ -1,13 +1,18 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/> --}}
+{{-- <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/> --}}
 {{-- <link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/fontawesome/css/fontawesome.min.css"/> --}}
 
 {{-- <link href="http://localhost/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" /> --}}
 <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+{{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
+<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+
+<link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
 
 @endsection
 
@@ -26,24 +31,12 @@
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-md-15">
+                    <div class="col-md-12">
 
 
-                    <a href="crear_cliente">
-
-                        <div title="CREAR CLIENTE" data-toggle="tooltip" data-placement="right"   class="btn btn-success btn-fill pull btn-round">
-                            <i style="color: #ffffff; font-size: 22px" class="bi bi-person-plus-fill box-info pull-left"></i>
-
-                        </div>
-
-
-                    </a>
-                    <br><br>
-
-                        <div class="card">
                             <div class="table-responsive-xl">
-                            <table id="clients" class="table table-striped table-hover"
-                                style="webkit-font-smoothing: antialiased;
+                                <table id="clients" class="table table-striped table-hover"
+                                    style="webkit-font-smoothing: antialiased;
                                     font-family: Roboto,Helvetica Neue,Arial,sans-serif;">
                                     <thead class="thead-light">
                                         <tr  >
@@ -64,12 +57,12 @@
                                             <tr style="font-size: 12px;height: 50px">
 
 
-                                            <td class="text-center">{{ $cliente->cliente_tipo}}</td>
-                                            <td class="text-center">{{ $cliente->cliente_documento}}</td>
-                                            <td class="text-center">{{ $cliente->cliente_nombres}}</td>
-                                            <td class="text-center">{{ $cliente->cliente_correo}}</td>
-                                            <td class="text-center">{{ $cliente->cliente_celular}}</td>
-                                            <td class="text-center">{{ $cliente->cliente_telefono}}</td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_tipo}}</strong></td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_documento}}</strong></td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_nombres}}</strong></td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_correo}}</strong></td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_celular}}</strong></td>
+                                            <td class="text-center"><strong>{{ $cliente->cliente_telefono}}</strong></td>
                                             <td>
 
                                                 <button style="border: none; outline:none; text-decoration: none; margin: 0%" type="button" title="Datos de cliente" data-toggle="tooltip" data-placement="left"  class="btn btn-info btn-fill  pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
@@ -82,7 +75,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -119,7 +112,14 @@
                  "language": idioma_espanol
 
              });
+             $('.dataTables_filter input[type="search"]').
+            attr('class','form-control').
+            css({'width':'340px','display':'inline-block','position':'left'});
+            $('.dataTables_length select').
+            attr('class','form-control').
+            css({'width':'54px','display':'inline-block','position':'relative'});
         } );
+
         var idioma_espanol = {
                     "processing": "Procesando...",
                     "lengthMenu": "Mostrar _MENU_ registros",
