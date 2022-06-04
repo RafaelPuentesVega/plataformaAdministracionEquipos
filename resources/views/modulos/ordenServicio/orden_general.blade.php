@@ -181,7 +181,7 @@
                                                     <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"class="table-success" style="cursor: pointer;background-color: #28B463">
                                                         {{-- {{-- ORDEN LISTA PARA ENTREGAR --}}
                                                     @elseif($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null)
-                                                    <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'" class="table-warning" style="cursor: pointer;background-color: #FFFF00">
+                                                    <tr  class="table-warning" style="cursor: pointer;background-color: #FFFF00">
                                                         {{-- {{-- ORDEN ENTREGADA SIN FACTURA --}}
                                                     @elseif($OrdenServicio->estadoOrden == 3)
                                                     <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"class="table-primary" style="cursor: pointer;">
@@ -192,50 +192,50 @@
                                                 {{-- <tr style="background-color: #ffffff7e" > --}}
 
 
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="height: 55px;font-size: 16px ; text-align: center ">
                                                     <strong>{{ $OrdenServicio->id_orden }}</strong>
 
                                                 </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 12px ; font-weight:normal;text-align: left">
                                                     <strong>{{ $OrdenServicio->fecha_creacion_orden }}</strong>
 
                                                 </th>
 
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 12px ;font-weight:normal; text-align: left ">
                                                     <strong>{{ $OrdenServicio->cliente_documento }}</strong>
 
                                                 </th>
 
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
 
                                                     style="font-size: 11px ; font-weight:normal;text-align: left">
 
                                                     <strong>{{ $OrdenServicio->cliente_nombres }}</strong>
 
                                                 </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 11px ;font-weight:normal;  text-align: left">
                                                     <strong>{{ $OrdenServicio->equipo_tipo }}- {{ $OrdenServicio->equipo_marca }} -
                                                     {{ $OrdenServicio->equipo_referencia }}</strong>
                                                 </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 11px ;font-weight:normal; text-align: left ">
                                                     <strong>{{ $OrdenServicio->name }}</strong> </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 14px ;font-weight:normal; text-align: left ">
-                                                    <strong>{{ $OrdenServicio->valor_servicio_orden }}</strong>
+                                                    <strong>${{number_format($OrdenServicio->valor_servicio_orden  , 0, ',', '.') }}</strong>
                                                 </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 14px ; font-weight:normal;text-align: left">
-                                                    <strong>{{ $OrdenServicio->iva_orden }}</strong>
+                                                    <strong> ${{ number_format($OrdenServicio->iva_orden , 0, ',', '.')  }}</strong>
 
                                                 </th>
-                                                <th
+                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
                                                     style="font-size: 14px ; font-weight:normal;text-align: left">
-                                                    <strong>{{ $OrdenServicio->valor_total_orden }}</strong>
+                                                    <strong>${{ number_format($OrdenServicio->valor_total_orden , 0, ',', '.') }}</strong>
                                                 </th>
 
                                                 <th  style="font-size: 12px ;font-weight:normal;  text-align: center">

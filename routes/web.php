@@ -56,6 +56,8 @@ Route::POST('editarRepuesto',[RequerimientoInternoController::class, 'editarRepu
 Route::POST('termirnarOrden',[OrdenServicioController::class, 'termirnarOrden']);
 Route::POST('facturaNumero',[OrdenServicioController::class, 'facturaNumero']);
 Route::POST('guardarNumeroFactura',[OrdenServicioController::class, 'guardarNumeroFactura']);
+Route::POST('editarReporteTecnico',[OrdenServicioController::class, 'editarReporteTecnico']);
+
 ///Pdf ordenes
 Route::GET('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI{idOrden}TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',[OrdenServicioController::class, 'ordenEntradaEmailAndPDF'])->name('ordenEntradaEmailyPDF');
 Route::GET('OrdenEntrada/{idOrden}',[OrdenServicioController::class, 'ordenEntradaPDF'])->name('OrdenEntradaPDF');

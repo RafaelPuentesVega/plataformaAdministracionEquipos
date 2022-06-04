@@ -276,6 +276,10 @@ class OrdenServicioController extends Controller
         for($i = 0 ; $i < $control ; $i++ ){
         $totalValorRepuestos = $totalValorRepuestos + $repuesto[$i]->valor_total_repuesto;
         }
+       // setlocale(LC_MONETARY, 'en_US');
+       $totalValorRepuestos = number_format($totalValorRepuestos, 0, ',', '.');
+
+
 
         //Consulta para traer los comentarios a la vista
         $anotacion = DB::table('observacion')
@@ -618,7 +622,8 @@ class OrdenServicioController extends Controller
             if($emailSend != 2){
                 $arrayDatos = [
                     'correo'=> $array->cliente_correo,
-                    'orden' => $array->id_orden
+                    'orden' => $array->id_orden,
+                    'nombre' => $array->cliente_nombres
                 ];
 
                 //dd($arrayDatos['orden']);
@@ -773,6 +778,21 @@ public function ordenEntradaPDF($idOrden)
 
         //   Mail::to("rafael.puentez@gmail.com")->send(new EmailPdf($datosCorreo));
 
+}
+
+public function editarReporteTecnico(Request $request)
+{
+    $idOrden = $request->idOrden;
+    $editReporte = $request->editReporte;
+
+
+    DB::table('orden_servicio')
+    ->where('id_orden', $idOrden)
+    ->update( [
+        'reporte_tecnico_orden' => $editReporte ] );
+
+    $response = Array('mensaje' => 'update' );
+    return json_encode($response);
 }
 
 

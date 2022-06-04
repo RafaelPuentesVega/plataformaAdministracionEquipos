@@ -81,12 +81,7 @@
                                                     required autocomplete="off">
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                {{-- <label style="text-align: left" for="">Editar Orden</label> --}}
-                                                <button style="float: right" class="btn btn-info ">Editar Orden</button>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <div class="tabla">
 
@@ -244,9 +239,25 @@
                                     </div>
                                     <hr>
                                     <div>
-                                        <label><strong> REPORTE TECNICO: </strong></label> 
+                                        <label><strong> REPORTE TECNICO: </strong></label>
+                                        @if(auth()->user()->rol == "ADMINISTRATIVO" &&  $arrayData->estadoOrden == 2)
+                                        <button style="border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Editar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditarReporte" onclick="reporteTecnicoEdit()" >
+                                            <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-pencil-fill box-info pull-left"></i>
+                                        </button>
+                                        @endif
+                                        <button style="display: none; border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Guardar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsaveReporte" onclick="reporteTecnicoSave()" >
+                                            <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
+                                        </button>
                                          <br>
-                                        {{ $arrayData->reporte_tecnico_orden }}
+                                         <div class="col-md-13">
+                                            <div class="form-group">
+                                                <textarea rows="2" id="editReporte" class="form-control" maxlength="240" placeholder="" autocomplete="off" style="display: none ; text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" >{{ $arrayData->reporte_tecnico_orden }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div id="reporteTecnicoDiv">
+                                            {{ $arrayData->reporte_tecnico_orden }}
+
+                                        </div>
                                         <br><br>
                                         <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label>{{$arrayData->name}} </div>
 
@@ -371,6 +382,12 @@
                                                 <th width="15%"
                                                     style="border-top-right-radius: 0.5rem;font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid">
                                                     &nbsp;<strong>$ Total</strong>
+                                                    <button style="border: none; outline:none; text-decoration: none; margin: -1px" type="button" title="Editar valor Servicio" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditvalorServicio" onclick="valorServicioEdit()" >
+                                                        <i style="color: #ffffff; font-size: 18px; margin: -7px" class="bi bi-pencil-fill box-info pull-left"></i>
+                                                    </button>
+                                                    <button style="display: none; border: none; outline:none; text-decoration: none; margin: -1px" type="button" title="Guardar valor Servicio" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsavevalorServicio" onclick="valorServicioEdit()" >
+                                                        <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
+                                                    </button>
                                                 </th>
 
                                             </tr>
@@ -392,11 +409,11 @@
                                                         @else
                                                         <th width=""
                                                             style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
-                                                            &nbsp;<strong>${{ $repuestos->valor_unitario_repuesto }}</strong>
+                                                            &nbsp;<strong>${{number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')   }}</strong>
                                                         </th>
                                                         <th width=""
                                                             style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;<strong>${{ $repuestos->valor_total_repuesto }}</strong>
+                                                            &nbsp;<strong>${{number_format($repuestos->valor_total_repuesto, 0, ',', '.') }}</strong>
                                                         </th>
                                                         @endif
 
@@ -437,9 +454,10 @@
                                                 </th>
                                                 <th width=""
                                                     style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                    <strong>${{$arrayData->valor_servicio_orden}}</strong>
-                                                <input style="display: none; margin-top: -10%;text-align: right; " type="number"
-                                                        class="form-control" name="valorservicio" id="valorservicio"
+                                                    <strong id="labelValorServicio">${{number_format($arrayData->valor_servicio_orden, 0, ',', '.')}}</strong>
+
+                                                    <input style="display: none; margin-top: -1%;text-align: right; " type="number"
+                                                        class="form-control" name="valorservicio" id="valorservicio" value="{{$arrayData->valor_servicio_orden}}"
                                                         placeholder="" autocomplete="off">
                                                 </th>
 
@@ -457,10 +475,16 @@
                                                     </strong></th>
                                                 <th width=""
                                                     style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid">
-                                                    &nbsp;<strong>IVA 19%</strong><input style="width: 15px; height: 15px" title="SIN IVA" data-toggle="tooltip" data-placement="top"  class="form-check-input" type="checkbox" value="" id="checkTipoEquipo" onchange="javascript:sinIva()" autocomplete="off">
+                                                    &nbsp;<strong style=" line-height: 30px">IVA 19%</strong>
+                                                    {{-- <select class="js-example-basic js-states form-control" id="verificacion_funcionamiento" style="float: right; width: 40%" >
+                                                        {{-- <option value="" >Seleccione..</option>
+                                                        <option value="SI">SI</option>
+                                                        <option value="NO" >NO</option>
+                                                    </select> --}}
+                                                    <input style="width: 15px; height: 15px" title="SIN IVA" data-toggle="tooltip" data-placement="top"  class="form-check-input" type="checkbox" value="" id="checkTipoEquipo" onchange="javascript:sinIva()" autocomplete="off">
                                                 </th>
                                                 <th width=""
-                                                    style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid"><strong><div class="" style="text-align: right ; margin: 0%" id="iva">${{$arrayData->iva_orden}}</div></strong>
+                                                    style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid"><strong><div class="" style="text-align: right ; margin: 0%" id="iva">${{number_format($arrayData->iva_orden, 0, ',', '.')}}</div></strong>
                                                 </th>
 
                                             </tr>
@@ -480,7 +504,7 @@
                                                 </th>
                                                 <th width="" id="valorTotalOrden"
                                                 style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                &nbsp;<strong>${{$arrayData->valor_total_orden}}</strong>
+                                                &nbsp;<strong>${{number_format($arrayData->valor_total_orden, 0, ',', '.')}}</strong>
                                                 </th>
 
                                             </tr>
@@ -547,8 +571,10 @@
 @section('js')
     <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
     <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://localhost/plataforma/public/js/editOrden.js"></script>
+   / <script src="http://localhost/plataforma/public/js/editOrden.js"></script>
     <script src="http://localhost/plataforma/public/js/entregarOrden.js"></script>
+    <script src="http://localhost/plataforma/public/js/ordenGeneral.js"></script>
+
 @endsection
 
 
