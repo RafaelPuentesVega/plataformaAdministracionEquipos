@@ -86,9 +86,35 @@ class ClientesController extends Controller
      * @param  \App\Models\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function show(Clientes $clientes)
+    public function editCliente($idcliente)
     {
-        //
+        $idcliente =  decrypt($idcliente) ;
+
+        $dataCliente = DB::table('cliente')
+        ->leftJoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+        ->leftJoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+        ->where('cliente_id', '=', $idcliente)->get()->toArray();
+        $dataCliente=$dataCliente[0];
+
+        $arrayOrden = DB::table('orden_servicio')
+        //Agregar seguridad al select
+        ->leftJoin('users', 'orden_servicio.id_tecnico_orden', '=', 'users.id')
+        ->leftJoin('equipo', 'orden_servicio.id_equipo_orden', '=', 'equipo.equipo_id')
+        ->select('orden_servicio.*', 'users.name','equipo.*')
+        ->where('id_cliente_orden', '=', $idcliente)->get()->toArray();
+
+        $arrayEquipo = DB::table('equipo')
+        ->where('equipo_cliente_id', '=', $idcliente)->get()->toArray();
+
+        $arrayUsuarioEmpresa = DB::table('usuario_empresa')
+        ->where('id_cliente_usuario', '=', $idcliente)->get()->toArray();
+        //  dd($arrayUsuarioEmpresa);
+        //dd($idcliente);
+        return view('modulos.cliente.editarCliente')
+        ->with('dataCliente' ,$dataCliente)
+        ->with('arrayEquipo' ,$arrayEquipo)
+        ->with('arrayUsuarioEmpresa' ,$arrayUsuarioEmpresa)
+        ->with('arrayOrden' ,$arrayOrden);
     }
 
     /**

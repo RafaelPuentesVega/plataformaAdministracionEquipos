@@ -1,15 +1,15 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/> --}}
-{{-- <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/> --}}
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/> --}}
-{{-- <link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/fontawesome/css/fontawesome.min.css"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css') !!}"/> --}}
+{{-- <link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css') !!}"/> --}}
+{{-- <link rel="stylesheet" type="text/css" href="{!! url('fontawesome/css/fontawesome.min.css') !!}"/> --}}
 
-{{-- <link href="http://localhost/plataforma/public/iniciocss/bootstrap.css" rel="stylesheet" /> --}}
-<link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
-{{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
-<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+{{-- <link href="{!! url('iniciocss/bootstrap.css') !!}" rel="stylesheet" /> --}}
+<link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet" />
+{{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css') !!}" /> --}}
+<link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
 
 <link rel="stylesheet" type="text/css"
     href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
@@ -64,10 +64,11 @@
                                             <td class="text-center"><strong>{{ $cliente->cliente_celular}}</strong></td>
                                             <td class="text-center"><strong>{{ $cliente->cliente_telefono}}</strong></td>
                                             <td>
-
-                                                <button style="border: none; outline:none; text-decoration: none; margin: 0%" type="button" title="Datos de cliente" data-toggle="tooltip" data-placement="left"  class="btn btn-info btn-fill  pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
+                                                <a href="{{ url('clienteEdit', encrypt($cliente->cliente_id) ) }}">
+                                                <button style="border: none; outline:none; text-decoration: none; margin: 0%" type="button" title="Datos de cliente" data-toggle="tooltip" data-placement="left"  class="btn btn-info btn-fill  pull-right " id="btnGuardarCliente"  >
                                                     <i style="color: #ffffff; font-size: 20px; margin: -5px" class="bi bi-person-lines-fill box-info pull-left"></i>
                                                 </button>
+                                                </a>
                                             </td>
 
                                         </tr>
@@ -87,11 +88,12 @@
 @section('js')
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+    <script src="{!! url('js/cliente.js') !!}"></script>
     <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -108,7 +110,7 @@
              $('#clients').DataTable({
                  responsive: true,
                  autoWidth: false,
-                 lengthMenu:[[100,50,10,5,-1],[100,50,10,5,"Todos"]],
+                 lengthMenu:[[10,50,100,5,-1],[10,50,100,5,"Todos"]],
                  "language": idioma_espanol
 
              });

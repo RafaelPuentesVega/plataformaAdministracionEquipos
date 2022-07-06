@@ -56,8 +56,11 @@ class InicioController extends Controller
        $user = User::where('rol','Tecnico')
        ->orWhere('rol', 'Coordinador Técnico')->get();
 
-         return view('modulos.inicio')->with('vigentes' ,$vigentes)->with('vencidas' ,$vencidas)->with('user' ,$user)
-         ->with('tamañoVencidas' ,$tamañoVencidas)->with('tamañovigentes' ,$tamañovigentes)
+         return view('modulos.inicio')
+         ->with('vigentes' ,$vigentes)
+         ->with('vencidas' ,$vencidas)->with('user' ,$user)
+         ->with('tamañoVencidas' ,$tamañoVencidas)
+         ->with('tamañovigentes' ,$tamañovigentes)
          ->with('tamañoListas' ,$tamañoListas) ;
     }
 

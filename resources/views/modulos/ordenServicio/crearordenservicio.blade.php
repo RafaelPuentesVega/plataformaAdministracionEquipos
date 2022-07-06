@@ -2,13 +2,18 @@
 @section('content')
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-{{-- <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/> --}}
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
-<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+{{-- <link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/> --}}
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css') !!}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
+<link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
+<link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
 {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> --}}
+<style type="text/css">
+    table { border-color: #CDCDD8; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+    .card label { color: black; font-weight: bold}
 
+    </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
-<link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
+<link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -17,7 +22,7 @@
     <div class="main-panel">
 
         <div class="content" style="font-family: Verdana, sans-serif">
-            <body style="background-image: url(http://localhost/plataforma/public/assets/img/background.jpg)">
+            <body style="background-image: url(http://localhsost/plataforma/public/assets/img/background.jpg)">
             {{-- <body style="background-color: aliceblue"> --}}
 
             <div class="container-fluid">
@@ -63,14 +68,20 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Nombres</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">
+                                                            <i style="color: #242424; font-size: 22px; margin: -5px" class="bi bi-person-fill box-info pull-left"></i>
+                                                        </span>
                                                     <input type="text" class="form-control" name="cliente_nombres" id="cliente_nombres" placeholder="Nombres"  required autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                                 </div>
+                                            </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >CORREO</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-addon" id="basic-addon1">@</span>
+
+                                                        <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-at"></i></span>
                                                         <input type="email" class="form-control" name="cliente_correo" id="cliente_correo" placeholder="Correo Electronico" required autocomplete="off">
 
                                                       </div>
@@ -90,14 +101,26 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label >CELULAR</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">
+                                                            {{-- <i style="color: #242424; font-size: 22px; margin: -5px" class="bi bi-phone box-info pull-left"></i> --}}
+                                                            <i style="font-size: 19px" class="fa-solid fa-mobile-screen-button"></i>
+                                                        </span>
                                                     <input type="phone" maxlength="10" class="form-control"  name="cliente_celular" id="cliente_celular" placeholder="Celular" required autocomplete="off" >
                                                 </div>
+                                            </div>
 
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="">TELEFONO</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">
+                                                            <i style="color: #242424; font-size: 17px; margin: -5px" class="bi bi-telephone-fill box-info pull-left"></i>
+                                                        </span>
                                                     <input type="text" class="form-control" maxlength="10" name="cliente_telefono" id="cliente_telefono" placeholder="Telefono" autocomplete="off">
+                                                </div>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -128,15 +151,18 @@
                                             </div>
                                         </div>
                                                  <!-- Button  modal -->
-                                                 <button title="BUSCAR" data-toggle="tooltip" data-placement="bottom" style="padding: 5px; border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-warning btn-fill  pull-right " data-toggle="modal" data-target="#md-buscaCliente" onclick="showModal()"  >
-                                                    <i style="color: #ffffff; font-size: 18px" class="bi bi-search "></i>
-                                                    <span style="">Buscar Cliente</span>
+                                                 <button title="BUSCAR" data-toggle="tooltip" data-placement="bottom" style=" border: none;  margin: 10px" type="button" class="btn btn-secondary btn-fill  pull-right " data-toggle="modal" data-target="#md-buscaCliente" onclick="showModal()"  >
+                                                    {{-- <i style="color: #ffffff; font-size: 18px" class="bi bi-search "></i> --}}
+                                                    <i style="font-size: 19px" class="fa-solid fa-magnifying-glass"></i>
+                                                    <span  style="font-size: 16px">Buscar Cliente</span>
                                                  </button>
 
                                                  <div id="btn-update">
-                                                    <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="padding: 5px;border: none; outline:none; text-decoration: none; margin: 10px" type="button" class="btn btn-info btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
-                                                        <i style="color: #ffffff; font-size: 18px" class="bi bi-save pull-left"></i>
-                                                        <span style="margin-block-start: 15%" > Guardar Cliente</span>
+                                                    <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="border: none; margin: 10px" type="button" class="btn btn-info btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
+                                                        {{-- <i style="color: #ffffff; font-size: 18px" class="bi bi-save pull-left"></i> --}}
+                                                        <i style="font-size: 20px" class="fas fa-save"></i>
+                                                        {{-- <i class="fa-light fa-floppy-disk"></i> --}}
+                                                        <span style="font-size: 16px" > Guardar Cliente</span>
                                                     </button>
                                                 </div>
 
@@ -158,14 +184,25 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>USUARIO</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">
+                                                            <i style="color: #242424; font-size: 22px; margin: -5px" class="bi bi-person-fill box-info pull-left"></i>
+                                                        </span>
                                                     <input type="text" class="form-control" name="cliente_usuario_empresa" id="cliente_usuario_empresa" placeholder="Usuario Encargado" autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                                 </div>
+                                            </div>
+
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>CELULAR USUARIO</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="basic-addon1">
+                                                            <i style="color: #242424; font-size: 22px; margin: -5px" class="bi bi-phone box-info pull-left"></i>
+                                                        </span>
                                                     <input type="text" class="form-control" maxlength="10" name="cliente_celular_usuario" id="cliente_celular_usuario" placeholder="Celular Usuario" autocomplete="off" >
                                                 </div>
+                                            </div>
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="form-group">
@@ -174,8 +211,10 @@
                                                         <div class="btnUpdate">
 
                                                         </div>
-                                                        <button title="AGREGAR DEPENDENCIA" data-toggle="tooltip" data-placement="bottom"  style="margin-left: 15%; margin: -5px; border: none; outline:none; text-decoration: none" type="submits" class="btn btn-success btn-fill  btn-round " id="btnGuardarUsuarioEmpresa" onclick="guardarUsuarioEmpresa()" >
-                                                            <i style="color: #ffffff; font-size: 21px; margin: -5px" class="bi bi-plus box-info pull-left"></i>
+                                                        <button title="AGREGAR DEPENDENCIA" data-toggle="tooltip" data-placement="bottom"  style="margin-left: 15%; margin: -5px; border: none; outline:none; text-decoration: none" type="submits" class="btn btn-success btn-fill " id="btnGuardarUsuarioEmpresa" onclick="guardarUsuarioEmpresa()" >
+                                                            {{-- <i style="color: #ffffff; font-size: 21px; margin: -5px" class="bi bi-plus box-info pull-left"></i> --}}
+                                                            <i style="font-size: 16px" class="fa-solid fa-user-plus"></i>
+
                                                         </button>
                                                     </div>
                                                 </div>
@@ -324,8 +363,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-check text-right">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkcontrato" style="width: 19px; height: 19px">
+                                        <div style="float: right">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkcontrato" style=" width: 19px; height: 19px">
                                             <label class="form-check-label" for="checkcontrato">
                                             Contrato
                                             </label>
@@ -356,10 +395,11 @@
                                 </div>
                                 </div>
 
-                                <button  class="btn btn-success btn-fill pull-right" onclick="guardarOrdenServicio()"><strong style="font-size: 15px">GUARDAR Y ENVIAR</strong></button>
-                                <div class="clearfix"></div>
+
                         </div>
                     </div>
+                    <button  class="btn btn-success btn-fill pull-right" onclick="guardarOrdenServicio()"><strong style="font-size: 15px">GUARDAR Y ENVIAR</strong></button>
+                                <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -370,13 +410,13 @@
 
 @section('js')
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}""></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="http://localhost/plataforma/public/js/crearorden.js"></script>
-    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="{!! url('js/crearorden.js') !!}""></script>
+    <script src="{!! url('assets/js/toastr.min.js') !!}""></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
 @endsection

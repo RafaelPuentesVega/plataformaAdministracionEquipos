@@ -104,7 +104,7 @@ lbd = {
 
             nav_content = $navbar;
 
-           // nav_content = '<ul class="nav nav-mobile-menu">' + nav_content + '</ul>';
+            nav_content = '<ul class="nav nav-mobile-menu">' + nav_content + '</ul>';
 
             // navbar_form = $('nav').find('.navbar-form').get(0).outerHTML;
 

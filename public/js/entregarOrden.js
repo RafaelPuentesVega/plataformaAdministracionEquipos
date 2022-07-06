@@ -1,7 +1,7 @@
 function entregarOrden() {
 
     let idOrden = $("#idOrden").val();
-    checkSinIva = document.getElementById('checkTipoEquipo');
+    checkSinIva = document.getElementById('checkSinIva');
     let sinIva = '';
     if(checkSinIva.checked){
         sinIva = 'SI';
@@ -10,7 +10,7 @@ function entregarOrden() {
     }
 
     $.ajax({
-        url: 'http://localhost/plataforma/public/entregarOrden',
+        url: '../entregarOrden',
         data: {
             sinIva: sinIva,
             idOrden : idOrden

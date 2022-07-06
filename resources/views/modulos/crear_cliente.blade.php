@@ -2,13 +2,11 @@
 @section('content')
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+<link href="{!! url('bootstrap/bootstrap.css" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
-<link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet"/>
+<link href="{!! url('assets/js/toastr.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
-
-
 
     <div class="wrapper">
 
@@ -342,13 +340,13 @@
     {{-- @include('modulos.modal_buscar_cliente') --}}
 
 @section('js')
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="{!! url('js/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="http://localhost/plataforma/public/js/cliente_crear.js"></script>
-    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
+    <script src="{!! url('js/cliente_crear.js"></script>
+    <script src="{!! url('assets/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
 @endsection

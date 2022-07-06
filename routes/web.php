@@ -57,6 +57,7 @@ Route::POST('termirnarOrden',[OrdenServicioController::class, 'termirnarOrden'])
 Route::POST('facturaNumero',[OrdenServicioController::class, 'facturaNumero']);
 Route::POST('guardarNumeroFactura',[OrdenServicioController::class, 'guardarNumeroFactura']);
 Route::POST('editarReporteTecnico',[OrdenServicioController::class, 'editarReporteTecnico']);
+Route::POST('changePrice',[OrdenServicioController::class, 'changePrice']);
 
 ///Pdf ordenes
 Route::GET('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI{idOrden}TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',[OrdenServicioController::class, 'ordenEntradaEmailAndPDF'])->name('ordenEntradaEmailyPDF');
@@ -95,6 +96,7 @@ Route::get('requerimiento',[RequerimientoInternoController::class, 'index']) ->n
 
 
 Route::get('clientes',[ClientesController::class, 'index']) ->name('clientes');
+Route::get('clienteEdit/{idcliente}',[ClientesController::class, 'editCliente'])->name('clienteEdit') ;
 Route::get('crear_cliente',[ClientesController::class, 'create']);
 Route::post('crear_cliente',[ClientesController::class, 'store']);
 

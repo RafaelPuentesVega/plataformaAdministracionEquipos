@@ -2,7 +2,7 @@
 @section('content')
 @section('css')
         {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
-        <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+        <link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
 
         <link rel="stylesheet" type="text/css"
 
@@ -72,7 +72,7 @@
 </div>
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
 
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>

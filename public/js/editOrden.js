@@ -9,8 +9,9 @@ function guardarDiagnostico() {
         $("#diagnostico").focus();
         return;
     }
+    showpreloader();
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarObservacion',
+        url: '../guardarObservacion',
         data: {
             diagnostico: diagnostico,
             idOrden : idOrden
@@ -25,9 +26,10 @@ function guardarDiagnostico() {
                 btnguardar.style.display = "none";
                 $('#fecha_diagnostico').val(json.dataOrden)
                 setTimeout(function(){
+                    hidepreloader()
+
                     window.location.reload();
                 }, 800);
-
             }
         },
         error: function (xhr, status) {
@@ -47,8 +49,10 @@ function guardarAnotacion() {
         $("#anotacion").focus();
         return;
     }
+    showpreloader();
+
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarAnotacion',
+        url: '../guardarAnotacion',
         data: {
             anotacion: anotacion,
             idOrden : idOrden
@@ -59,11 +63,16 @@ function guardarAnotacion() {
             if (json.mensaje === "save") {
                 toastr["success"]("<h6>Se registro correctamente</h6>", "GUARDADO")
                 btnguardar.disabled = true;
-                window.location.reload();
+
+                setTimeout(function(){
+                    hidepreloader()
+                    window.location.reload();
+                }, 1000);
                 }
         },
         error: function (xhr, status) {
             alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+            hidepreloader();
         },
         complete: function (xhr, status) {
         }
@@ -90,8 +99,10 @@ function guardarRepuesto() {
         $("#descripcionRepuesto").focus();
         return;
     }
+    showpreloader()
+
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarRepuesto',
+        url: '../guardarRepuesto',
         data: {
             repuesto: repuesto,
             idOrden : idOrden,
@@ -104,12 +115,15 @@ function guardarRepuesto() {
                 toastr["success"]("<h6>Se agrego correctamente</h6>", "GUARDADO")
                 btnguardar.disabled = true;
                 setTimeout(function(){
+                    hidepreloader()
                     window.location.reload();
-                }, 800);
+                }, 1000);
             }
         },
         error: function (xhr, status) {
+            hidepreloader()
             alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+
         },
         complete: function (xhr, status) {
         }
@@ -121,7 +135,10 @@ function guardarRepuesto() {
         let reporteTecnico = $("#reporteTecnico").val();
         let idOrden = $("#idOrden").val();
         let valorservicio = $("#valorservicio").val();
-        let valorTotalRepuesto = $('#totalValorFinal').val();
+        valorservicio = parseInt(valorservicio.replace(/,/g, ""));
+        let valorTotalRepuesto = $('#totalValorRepuestos').val();
+
+
         if (reporteTecnico.length < 1) {
             toastr["warning"]("<h6>Diligenciar Reporte Tecnico </h6>")
             $("#reporteTecnico").focus();
@@ -132,13 +149,20 @@ function guardarRepuesto() {
             $("#valorservicio").focus();
             return;
         }
+        if (document.getElementById('checkSinIva').checked) {
+            iva = 'NO';
+        }else{
+            iva = 'SI' ;
+        }
+        hidepreloader()
         $.ajax({
-            url: 'http://localhost/plataforma/public/termirnarOrden',
+            url: '../termirnarOrden',
             data: {
                 reporteTecnico: reporteTecnico,
                 idOrden : idOrden,
                 valorservicio : valorservicio,
-                valorTotalRepuesto : valorTotalRepuesto
+                valorTotalRepuesto : valorTotalRepuesto,
+                iva : iva
             },
             type: 'POST',
             dataType: 'json',
@@ -147,7 +171,7 @@ function guardarRepuesto() {
 
                     btnguardar.disabled = true;
                     setTimeout( toastr["success"]("<h6>Se registro correctamente</h6>", "GUARDADO"), 20000)
-                    window.location.href = 'http://localhost/plataforma/public/inicio';
+                    window.location.href = '../inicio';
                     // window.open('http://localhost/plataforma/public/OrdenEntrada/'+id);
                     }
             },
@@ -164,7 +188,7 @@ $(function () {
 
   })
 
-function sinIva() {
+function sinIiva() {
 
     checkSinIva = document.getElementById('checkTipoEquipo');
 
@@ -200,40 +224,107 @@ function sinIva() {
 
 }
 
+function calcularValores(){
+
+let valorservicio = $("#valorservicio").val();
+totalValorRepuestos = $('#totalValorRepuestos').val();
+valorservicio = parseInt(valorservicio.replace(/,/g, ""));
+if (document.getElementById('checkSinIva').checked) {
+    iva = 0 ;
+    totalValorRepuestos = parseInt(totalValorRepuestos);
+    TotalValorFinal = valorservicio + totalValorRepuestos;
+    //$('#valorTotalOrde').val('$'+TotalValorFinal);
+    document.getElementById('valorTotalOrde').innerHTML = '$ ' + (new Intl.NumberFormat('es-MX').format(TotalValorFinal));
+    document.getElementById('iva').innerHTML = '$ ' + (new Intl.NumberFormat('es-MX').format(iva));
+   // alert(totalServicio);
+}else{
+    iva = valorservicio * 0.19 ;
+    totalServicio = valorservicio * 1.19;
+    var totalServicio = parseInt(totalServicio);
+    totalValorRepuestos = parseInt(totalValorRepuestos);
+    TotalValorFinal = totalServicio + totalValorRepuestos;
+    //$('#valorTotalOrde').val('$'+TotalValorFinal);
+    document.getElementById('valorTotalOrde').innerHTML = '$ ' + (new Intl.NumberFormat('es-MX').format(TotalValorFinal));
+    document.getElementById('iva').innerHTML = '$ ' + (new Intl.NumberFormat('es-MX').format(iva));
+}
+}
+function changePrice() {
+    let valorservicio = $("#valorservicio").val();
+    valorservicio = parseInt(valorservicio.replace(/,/g, ""));
+    totalValorRepuestos = $('#totalValorRepuestos').val();
+    let idOrden = $("#idOrden").val();
+    if (document.getElementById('checkSinIva').checked) {
+        iva = 'NO';
+    }else{
+        iva = 'SI' ;
+    }
+
+    showpreloader()
+    $.ajax({
+        url: '../changePrice',
+        data: {
+            valorservicio: valorservicio,
+            iva : iva,
+            totalValorRepuestos : totalValorRepuestos,
+            idOrden : idOrden
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (json) {
+            if (json.mensaje === "update") {
+                toastr["success"]("<h6>Se actualizo correctamente</h6>");
+                hidepreloader();
+                window.location.reload();
+
+
+            }
+        },
+        error: function (xhr, status) {
+            alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+        },
+        complete: function (xhr, status) {
+        }
+    });
+
+}
+
 document.getElementById('valorservicio').addEventListener('keydown', inputCharacters);
 
 function inputCharacters(event) {
-
-
-if (event.keyCode == 13) {
-let valorservicio = $("#valorservicio").val();
-totalValor = $('#totalValorFinal').val();
-
-iva = valorservicio * 0.19 ;
-totalServicio = valorservicio * 1.19;
-totalServicio = parseInt(totalServicio);
-totalValor = parseInt(totalValor);
-TotalValorFinal = totalServicio + totalValor;
-
-
-$('#valorTotal').val('$'+TotalValorFinal);
-document.getElementById('iva').innerHTML = new Intl.NumberFormat('es-MX').format(iva);
+if (event.keyCode == 13 ){
+    calcularValores();
 }
 $( "#valorservicio" ).blur(function() {
-    let valorservicio = $("#valorservicio").val();
-    totalValor = $('#totalValorFinal').val();
-
-    iva = valorservicio * 0.19 ;
-    totalServicio = valorservicio * 1.19;
-    totalServicio = parseInt(totalServicio);
-    totalValor = parseInt(totalValor);
-    TotalValorFinal = totalServicio + totalValor;
-
-
-    $('#valorTotal').val('$'+ TotalValorFinal);
-    document.getElementById('iva').innerHTML = new Intl.NumberFormat('es-MX').format(iva);
+    calcularValores();
 
 });
-
 }
+
+function calcularValoresTecnico(){
+
+ }
+// function inputCharactersTecnico(event) {
+//     if (event.keyCode == 13 ){
+//         calcularValoresTecnico();
+//     }
+//     $( "#valorservicio" ).blur(function() {
+//         calcularValoresTecnico();
+
+//     });
+
+// }
+$('input.number').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40){
+    event.preventDefault();
+    }
+
+    $(this).val(function(index, value) {
+    return value
+        .replace(/\D/g, "")
+        .replace(/([0-9])([0-9]{0})$/, '$1$2')
+        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",")    ;
+    });
+    });
 

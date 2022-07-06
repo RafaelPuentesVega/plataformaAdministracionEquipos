@@ -53,12 +53,12 @@
                 </tr>
                 <tr>
                 <th colspan="4" width="17%" rowspan="2" style="font-size: 18px;text-align: center ; border: rgb(0, 0, 0) 1.7px solid">{{$fecha_ingreso}}</th>
-                <th colspan="4"  width="17%" rowspan="2" style=" font-size: 18px;text-align: center; border: rgb(0, 0, 0) 1.7px solid"> {{$fecha_estimada}}</th>
-                <th colspan="4" width="17%"  rowspan="2" style=" font-size: 18px;text-align: center; border: rgb(0, 0, 0) 1.7px solid"> {{$fecha_estimada}}</th>
+                <th colspan="4"  width="17%" rowspan="2" style=" font-size: 18px;text-align: center; border: rgb(0, 0, 0) 1.7px solid"> {{$fecha_reparacion}}</th>
+                <th colspan="4" width="17%"  rowspan="2" style=" font-size: 18px;text-align: center; border: rgb(0, 0, 0) 1.7px solid"> {{$fecha_entrega}}</th>
                 <th colspan="4" width="17%"  rowspan="2" style=" font-size: 23px; text-align: center; border: rgb(0, 0, 0) 1.7px solid">{{$orden}}</th>
                 </tr>
                 <tr>
-                    {{-- AJUSTE PARA VER EL ENCABEZADO MAS DELGADO --}}
+                    {{-- AJUSTE PARA VER EL ENCABEZADO MAS DELGADOygyu --}}
                 </tr>
             </table>
             <div>
@@ -165,7 +165,7 @@
                     <tr>
                         <th width="100%"
                          style="vertical-align: top;  height: 50px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1.7px solid">
-                            {{$servicio}}
+                            {{$reporteTecnico}}
                         </th>
 
                 </table>
@@ -205,11 +205,11 @@
 
                             <th width=""
                                 style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" >
-                                &nbsp;<strong>${{$repuestos->valor_unitario_repuesto}}</strong>
+                                &nbsp;<strong>${{number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')}}</strong>
                             </th>
                             <th width=""
                                 style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                &nbsp;<strong>${{$repuestos->valor_total_repuesto}}</strong>
+                                &nbsp;<strong>${{number_format($repuestos->valor_total_repuesto, 0, ',', '.')}}</strong>
                             </th>
 
                         </tr>
@@ -250,7 +250,7 @@
                     </th>
                     <th width=""
                         style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2.5px solid">
-                        $ {{$subTotal}}
+                        $ {{number_format($subTotal, 0, ',', '.')}}
                     </th>
 
                 </tr>
@@ -270,7 +270,7 @@
                     </th>
                     <th width=""
                         style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2.5px solid">
-                        &nbsp; $ {{$valorServicio}}
+                        &nbsp; $ {{number_format($valorServicio, 0, ',', '.')}}
                     </th>
 
                 </tr>
@@ -290,7 +290,7 @@
                     </th>
                     <th width=""
                         style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2.5px solid">
-                         $ {{$iva}}
+                         $ {{number_format($iva, 0, ',', '.')}}
                     </th>
 
                 </tr>
@@ -308,7 +308,7 @@
                     </th>
                     <th width=""
                     style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2.5px solid">
-                    <strong> $ {{$totalOrden}}</strong>
+                    <strong> $ {{number_format($totalOrden, 0, ',', '.')}}</strong>
                 </th>
 
                 </tr>

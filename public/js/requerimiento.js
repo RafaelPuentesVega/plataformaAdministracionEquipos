@@ -3,7 +3,7 @@ var idRepuesto = '';
 function editarRepuesto(id) {
 
     $.ajax({
-        url: 'http://localhost/plataforma/public/editarRepuesto',
+        url: 'editarRepuesto',
         data: {
             id: id
         },
@@ -40,9 +40,10 @@ function autorizarRepuesto() {
 
     cantidadRepuesto = $('#cantidadRepuesto').val();
     let precioUnitario = $("#precioUnitario").val();
-
+    precioUnitario = parseInt(precioUnitario.replace(/,/g, ""));
     if(cantidadRepuesto.length  < 1) {
         toastr["warning"]("<h6>Digitar Cantidad</h6>")
+        $("#cantidadRepuesto").focus();
         return;
     }
     if(precioUnitario.length  < 1) {
@@ -54,10 +55,11 @@ function autorizarRepuesto() {
         toastr["warning"]("<h6>Digitar precio correcto</h6>")
         $("#precioUnitario").focus();
         return;
-}
+        }
+    showpreloader();
 
     $.ajax({
-        url: 'http://localhost/plataforma/public/autorizarRepuesto',
+        url: 'autorizarRepuesto',
         data: {
             precioUnitario:precioUnitario,
             idRepuesto:idRepuesto,
@@ -71,6 +73,7 @@ function autorizarRepuesto() {
                 toastr["success"]("<h6>Se guardo correctamente</h6>")
                 CloseModal()
                 setTimeout(function(){
+                    hidepreloader()
                     window.location.reload();
                 }, 1000);
             }
@@ -93,24 +96,23 @@ function showModal() {
 }
 
 document.getElementById('precioUnitario').addEventListener('keydown', inputCharacters);
+function calcularPrecioRepuesto(){
+    let valorRepuesto = $("#precioUnitario").val();
+    valorRepuesto = parseInt(valorRepuesto.replace(/,/g, ""));
+    cantidadRepuesto = $('#cantidadRepuesto').val();
+    totalRepuesto = cantidadRepuesto * valorRepuesto;
+    $('#precioTotalInput').val(totalRepuesto);
+    document.getElementById('precioTotal').innerHTML = '$ ' + (new Intl.NumberFormat('es-MX').format(totalRepuesto));
+
+}
 function inputCharacters(event) {
 
 if (event.keyCode == 13) {
-let valorservicio = $("#precioUnitario").val();
-cantidadRepuesto = $('#cantidadRepuesto').val();
-totalRepuesto = cantidadRepuesto * valorservicio;
+    calcularPrecioRepuesto()
 
-$('#precioTotal').val(totalRepuesto);
 }
 $( "#precioUnitario" ).blur(function() {
-
-    let valorservicio = $("#precioUnitario").val();
-    cantidadRepuesto = $('#cantidadRepuesto').val();
-    totalRepuesto = cantidadRepuesto * valorservicio;
-
-     $('#precioTotal').val(totalRepuesto);
-
-
+    calcularPrecioRepuesto()
 });
 
 }
@@ -118,3 +120,17 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 
   })
+  $('input.number').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40){
+    event.preventDefault();
+    }
+
+    $(this).val(function(index, value) {
+    return value
+        .replace(/\D/g, "")
+        .replace(/([0-9])([0-9]{0})$/, '$1$2')
+        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",")    ;
+    });
+    });

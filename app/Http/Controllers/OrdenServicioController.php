@@ -131,14 +131,20 @@ class OrdenServicioController extends Controller
      */
     public function termirnarOrden(Request $request)
     {
+        $valorTotalRepuesto = $request->valorTotalRepuesto;
+        $valorservicio = $request->valorservicio;
         $idOrden = $request->idOrden;
         $fechaActual = date('Y-m-d');
         $estadOrden = 2 ; ///Estado (2 - REPARADO)
-        $valorservicio = $request->valorservicio;
-        $iva = $valorservicio * 0.19 ;
-        $iva =  intval($iva * 1) / 1;//Dejamos sin decimales el IVA - Luego rendodeamos en el valor total
-        $valorTotalOrden =  intval($request->valorTotalRepuesto + $valorservicio + $iva);
-     //   dd($request->valorTotal);
+
+
+        if($request->iva == 'SI' ){
+            $iva = $valorservicio * 0.19;
+            $iva =  intval($iva * 1) / 1;//Dejamos sin decimales el IVA - Luego rendodeamos en el valor total
+        }else{
+            $iva = 0;
+        }
+        $valorTotalOrden =  intval($valorTotalRepuesto + $valorservicio + $iva);
         DB::table('orden_servicio')
             ->where('id_orden', $idOrden)
             ->update(
@@ -148,7 +154,7 @@ class OrdenServicioController extends Controller
                 'estadoOrden' =>  $estadOrden,
                 'valor_servicio_orden' =>  $valorservicio,
                 'iva_orden' =>  $iva,
-                'valor_repuestos_orden' => $request->valorTotalRepuesto,
+                'valor_repuestos_orden' => $valorTotalRepuesto,
                 'valor_total_orden' => $valorTotalOrden,
 
                 ]
@@ -277,7 +283,7 @@ class OrdenServicioController extends Controller
         $totalValorRepuestos = $totalValorRepuestos + $repuesto[$i]->valor_total_repuesto;
         }
        // setlocale(LC_MONETARY, 'en_US');
-       $totalValorRepuestos = number_format($totalValorRepuestos, 0, ',', '.');
+     //  $totalValorRepuestos = number_format($totalValorRepuestos, 0, ',', '.');
 
 
 
@@ -360,12 +366,17 @@ class OrdenServicioController extends Controller
                 setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
                 $fechaEntrada = $array->fecha_creacion_orden;
                 $fechaEntrada= strftime("%d %b %Y",strtotime($fechaEntrada));
-                $fechaEstimada = $array->fecha_estimada_orden;
-                $fechaEstimada= strftime("%d %b %Y",strtotime($fechaEstimada));
+                $fechareparacion = $array->fecha_reparacion_orden;
+                $fechareparacion= strftime("%d %b %Y",strtotime($fechareparacion));
+                $fechaEntrega = $array->fecha_diagnostico_orden;
+                $fechaEntrega= strftime("%d %b %Y",strtotime($fechaEntrega));
+                 
+                
                 $data = [
                     'orden' => $array->id_orden,
-                    'fecha_ingreso' => $fechaEntrada,
-                    'fecha_estimada' => $fechaEstimada,
+                    'fecha_ingreso' =>  $fechaEntrada,
+                    'fecha_reparacion' =>  $fechareparacion,
+                    'fecha_entrega' =>  $fechaEntrega,
                     'tipoCliente' => $array->cliente_tipo,
                     'nombre' => $array->cliente_nombres,
                     'documento' => $array->cliente_documento,
@@ -383,7 +394,7 @@ class OrdenServicioController extends Controller
                     'referencia' => $array->equipo_referencia,
                     'serial' => $array->equipo_serial,
                     'verficoFuncionamiento' => $array->verifica_funcionamiento_orden,
-                    'servicio' => $array->servicio_orden,
+                    'reporteTecnico' => $array->reporte_tecnico_orden,
                     'accesorios' => $array->accesorios_orden,
                     'adaptador' => $array->serial_adaptador_orden,
                     'caracteristicas' => $array->caracteristicas_equipo_orden,
@@ -411,7 +422,7 @@ class OrdenServicioController extends Controller
                     'orden' => $array->id_orden
                 ];
 
-                //dd($arrayDatos['orden']);
+             //  dd($arrayDatos['orden']);
 
                 Mail::send('modulos.email.email',["datos"=>$arrayDatos] , function($message) use ($arrayDatos,$pdf){
                     $numeroOrden = $arrayDatos['orden'];
@@ -795,5 +806,31 @@ public function editarReporteTecnico(Request $request)
     return json_encode($response);
 }
 
+public function changePrice(Request $request)
+{
+
+    $valorServicio = $request->valorservicio;
+    $valorTotalRepuesto = $request->totalValorRepuestos;
+    $idOrden = $request->idOrden;
+   if($request->iva == 'SI' ){
+       $iva = $valorServicio * 0.19;
+       $iva =  intval($iva * 1) / 1;
+       $totalOrden = $iva + $valorTotalRepuesto + $valorServicio;
+   }else{
+       $iva = 0;
+       $totalOrden = $valorServicio + $valorTotalRepuesto;
+   }
+
+
+    DB::table('orden_servicio')
+    ->where('id_orden', $idOrden)
+    ->update( [
+        'iva_orden' => $iva,
+        'valor_servicio_orden' => $valorServicio,
+        'valor_total_orden' => $totalOrden  ] );
+
+    $response = Array('mensaje' => 'update' );
+    return json_encode($response);
+}
 
 }

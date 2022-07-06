@@ -5,7 +5,7 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="{{url('inicio')}}" class="simple-text">
-                <img src="http://localhost/plataforma/public/assets/img/logo.png"  width="140" height="60" >
+                <img src="{!! url('assets/img/logo.png') !!}"  width="140" height="60" >
             </a>
         </div>
 

@@ -18,7 +18,8 @@ class Repuesto extends Model
         'valor_unitario_repuesto',
         'delete_at_repuesto',
         'valor_total_repuesto',
-        'cantidad_repuesto'
+        'cantidad_repuesto',
+        'estado_repuesto'
     ];
     public $timestamps = false;
 }

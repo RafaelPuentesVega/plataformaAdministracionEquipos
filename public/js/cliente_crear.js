@@ -22,7 +22,7 @@ function guardarCliente() {
 
 
     if (cliente_tipo.length == 0) {
-        toastr["warning"]("<h6>Diligenciar Tipo de cliente</h6>")
+        toastr["warning"]("<h6>Diligenciar Tipo de cliente prueba</h6>")
         return;
     }
     if (cliente_documento.length < 1) {
@@ -58,7 +58,7 @@ function guardarCliente() {
         return;
     }
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarCliente',
+        url: "guardarCliente",
          data: {
             cliente_id: cliente_id,
             equipo_id: equipo_id,
@@ -124,7 +124,7 @@ function guardarUsuarioEmpresa() {
             return;
         }
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarUsuarioEmpresa',
+        url: 'guardarUsuarioEmpresa',
         data: {
             cliente_id: cliente_id,
             usuario_empresa : usuario_empresa,
@@ -158,7 +158,7 @@ function consultarCliente(id) {
     let municipio = $("#municipioSelect").val();
     let departamento = $("#departamentoSelect").val();
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarCliente',
+        url: 'consultarCliente',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -216,7 +216,7 @@ function consultarCliente(id) {
 function SeleccionarUsaurioEmpresa(id) {
 
     $.ajax({
-        url: 'http://localhost/plataforma/public/SeleccionarUsaurioEmpresa',
+        url: 'sadsad',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -244,7 +244,7 @@ function SeleccionarUsaurioEmpresa(id) {
 
 function consultarUsuarioEmpresa() {
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarUsuarioEmpresa',
+        url: 'consultarUsuarioEmpresa',
         data: {
             id: cliente_id
         },
@@ -306,7 +306,7 @@ function consultarMunicipio() {
         return;
     }
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarMunicipio',
+        url: 'consultarMunicipio',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -345,7 +345,7 @@ function consultarClienteEnter() {
         return;
     }
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarClienteEnter',
+        url: 'consultarClienteEnter',
         data: { id: id },
         type: 'POST',
         dataType: 'json',

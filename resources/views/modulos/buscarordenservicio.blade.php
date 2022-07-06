@@ -2,9 +2,9 @@
 @section('content')
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+<link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="http://localhost/plataforma/public/fontawesome/css/fontawesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="{!! url('fontawesome/css/fontawesome.min.css') !!}"/>
 
 @endsection
 
@@ -58,7 +58,7 @@
 @section('js')
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>

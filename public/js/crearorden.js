@@ -2,7 +2,14 @@ var cliente_id = '';
 var equipo_id = '';
 var usuario_empresa = '' ;
 var id = '';
+$(window).on('load', function () {
+    showpreloader()
+    setTimeout(function () {
+        hidepreloader()
+}, 700);
 
+
+});
 function cerrarModal() {
     $('#md-buscarCliente').modal('hide');
 }
@@ -10,7 +17,6 @@ function showModal() {
     $('#md-buscarCliente').modal('show'); // abrir
 }
 function guardarEquipoOrden() {
-
 
     btnguardar = document.getElementById('btnGuardarEquipo');
     let tipoEmpresa = $("#tipocliente").val();
@@ -39,7 +45,7 @@ function guardarEquipoOrden() {
         equipo_tipo_select = '';
         if (equipo_tipo.length < 1) {
             toastr["warning"]("<h6>Digitar Tipo de equipo</h6>")
-            $("#equipo_tipo").focus();
+            $("#tipoEquipoSelect").focus();
             return;
         }
     }
@@ -70,12 +76,14 @@ function guardarEquipoOrden() {
         return;
     }
     if (equipo_serial.length > 6 || equipo_serial.length < 6) {
+
         toastr["warning"]("<h6>El Serial debe de contener 6 digitos </h6>")
         $("#equipo_serial").focus();
         return;
     }
+    showpreloader();
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarEquipoOrden',
+        url: 'guardarEquipoOrden',
         data: {
             equipo_tipo: equipo_tipo,
             equipo_tipo_select:equipo_tipo_select,
@@ -89,11 +97,20 @@ function guardarEquipoOrden() {
         dataType: 'json',
         success: function (json) {
             if (json.mensaje === "ok") {
+
+                setTimeout(function(){
+                    hidepreloader();
+
+                }, 800);
                 toastr["success"]("<h6>Se guardo correctamente el equipo</h6>", "GUARDADO")
+
+
                 //btnguardar.disabled = true;
                 btnguardar.style.display = "none";
 
                 equipo_id = json.dataEquipo.id;
+
+
             }
         },
         error: function (xhr, status) {
@@ -106,7 +123,7 @@ function guardarEquipoOrden() {
 }
 function consultarEquipo() {
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarEquipo',
+        url: 'consultarEquipo',
         data: {
             id: cliente_id
         },
@@ -119,14 +136,13 @@ function consultarEquipo() {
                 table = document.getElementById("consultarEquipo");
                 table.style.display = 'block';
                 if (control != 0) {
-                    output += '<table  id="equipo_orden" class="table table-striped" border bordercolor="#CDCDD8" >'
+                    output += '<table  id="equipo_orden" class="table table-striped"  >'
                     output += '<thead style="background:#E9F7EF" class="thead-light">'
                     output += '<tr >'
                     output += '<th scope="col" class="text-center" style="height: 5px; color:#16172C"><strong>EQUIPO</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>MARCA</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>REFERENCIA</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>SERIAL</strong></th>'
-                    output += '<th scope="col" class="text-center" style="color:#16172C; width: 2%"><strong></strong></th>'
                     output += '</tr>'
                     output += '</thead>'
                     output += '<tbody>'
@@ -136,12 +152,12 @@ function consultarEquipo() {
                         referencia = json.data[i].equipo_referencia;
                         serial = json.data[i].equipo_serial;
                         idEquipo = json.data[i].equipo_id;
-                        output += '<tr>'
+                        output += '<tr  style = "cursor: pointer" onclick="SeleccionarEquipo(' +idEquipo+ ')"  >'
                         output += '<td class="text-center">' + tipo + '</td>'
                         output += '<td class="text-center">' + marca + '</td>'
                         output += '<td class="text-center">' + referencia + '</td>'
                         output += '<td class="text-center">' + serial + '</td>'
-                        output += '<td> <button title="SELECCIONAR EQUIPO" data-toggle="tooltip" data-placement="bottom" onclick="SeleccionarEquipo(' +idEquipo+ ')" style="margin: 0%; border: none; outline:none; text-decoration: none" title="SELECCIONAR" class="btn btn-round btn-xs"> <i style="margin: 0%; color: #2E86C1; font-size: 17px" class="bi bi-arrow-down-circle-fill pull-left"> </i> </button> </td>'
+                        // output += '<td> <button title="SELECCIONAR EQUIPO" data-toggle="tooltip" data-placement="bottom" onclick="SeleccionarEquipo(' +idEquipo+ ')" style="margin: 0%; border: none; outline:none; text-decoration: none" title="SELECCIONAR" class="btn btn-round btn-xs"> <i style="margin: 0%; color: #2E86C1; font-size: 17px" class="bi bi-arrow-down-circle-fill pull-left"> </i> </button> </td>'
                         output += '</tr>'
                     }
                     output += '</tbody>'
@@ -183,7 +199,6 @@ function guardarCliente() {
     let cliente_telefono = $("#cliente_telefono").val();
     let departamento_id = $("#departamentoSelect").val();
     let municipio_id = $("#municipioSelect").val();
-
 
     if (cliente_tipo.length == 0) {
         toastr["warning"]("<h5>Diligenciar Tipo de cliente</h5>")
@@ -230,8 +245,11 @@ function guardarCliente() {
         $("#cliente_telefono").focus();
         return;
     }
+    showpreloader();
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarCliente',
+        // url: 'guardarCliente',
+        url: "guardarCliente",
+
          data: {
             cliente_id: cliente_id,
             equipo_id: equipo_id,
@@ -260,6 +278,8 @@ function guardarCliente() {
             if (json.mensaje === "clienteCreado") {
                 toastr["error"]("<h6>"+json.dataCliente[0].cliente_nombres+"</h6>" , "CLIENTE YA CREADO")
             }
+            hidepreloader();
+
         },
         error: function (xhr, status) {
             alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
@@ -297,7 +317,7 @@ function guardarUsuarioEmpresa() {
             return;
         }
     $.ajax({
-        url: 'http://localhost/plataforma/public/guardarUsuarioEmpresa',
+        url: 'guardarUsuarioEmpresa',
         data: {
             cliente_id: cliente_id,
             usuario_empresa : usuario_empresa,
@@ -314,7 +334,6 @@ function guardarUsuarioEmpresa() {
                 usuario_empresa = json.dataUsuario.id;
                 btnguardar.style.display = "none";
                 consultarUsuarioEmpresa();
-                alert(usuario_empresa);
             }
             if (json.mensaje === "update") {
                 toastr["info"]("<h6>Se actualizo correctamente el usuario</h6>", "ACTUALIZACION")
@@ -336,7 +355,7 @@ function consultarCliente(id) {
     documentoCliente = document.getElementById('cliente_documento');
     nombreCliente = document.getElementById('cliente_nombres');
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarCliente',
+        url: 'consultarCliente',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -376,10 +395,12 @@ function consultarCliente(id) {
                         $('#cliente_usuario_empresa').val('')
                         $('#cliente_celular_usuario').val('')
                     }
-                    output += '<button title="ACTUALIZAR" style="border: none; outline:none; text-decoration: none; margin: 10px" type="submits" class="btn btn-warning btn-fill   pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >';
-                    output += '<i style="color: #ffffff; font-size: 17px" class="bi bi-upload box-info pull-left"></i>';
+                    output += '<button title="ACTUALIZAR" style="font-size : 16px ;border: none; outline:none; text-decoration: none; margin: 10px" type="submits" class="btn btn-warning btn-fill   pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >';
+                    output += '<i style="font-size : 20px" class="fa-solid fa-pen-to-square"></i>';
                     output += '<span style="margin-left: 5px">Actualizar Cliente</span>'
                     $("#btn-update").html(output);
+                    toastr["success"]("<h6>Seleccionado correctamente</h6>")
+
                 }
             };
         },
@@ -400,7 +421,7 @@ function consultarCliente(id) {
 function SeleccionarUsaurioEmpresa(id) {
 
     $.ajax({
-        url: 'http://localhost/plataforma/public/SeleccionarUsaurioEmpresa',
+        url: 'SeleccionarUsaurioEmpresa',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -417,6 +438,9 @@ function SeleccionarUsaurioEmpresa(id) {
                         document.getElementById('cliente_usuario_empresa').disabled = true;
                         document.getElementById('cliente_celular_usuario').disabled = true;
                         document.getElementById('btnGuardarUsuarioEmpresa').style.display = "none";
+                        toastr["success"]("<h6>Seleccionado correctamente</h6>")
+
+
 
 
                 }
@@ -432,7 +456,7 @@ function SeleccionarUsaurioEmpresa(id) {
 function SeleccionarEquipo(id) {
 btnGuardarEquipo = document.getElementById('btnGuardarEquipo');
     $.ajax({
-        url: 'http://localhost/plataforma/public/SeleccionarEquipo',
+        url: 'SeleccionarEquipo',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -454,6 +478,8 @@ btnGuardarEquipo = document.getElementById('btnGuardarEquipo');
                         document.getElementById('equipo_marca').disabled = true;
                         document.getElementById('equipo_referencia').disabled = true;
                         document.getElementById('equipo_serial').disabled = true;
+                        toastr["success"]("<h6>Seleccionado correctamente</h6>")
+
 
                 }
             };
@@ -467,7 +493,7 @@ btnGuardarEquipo = document.getElementById('btnGuardarEquipo');
 }
 function consultarUsuarioEmpresa() {
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarUsuarioEmpresa',
+        url: 'consultarUsuarioEmpresa',
         data: {
             id: cliente_id
         },
@@ -478,13 +504,12 @@ function consultarUsuarioEmpresa() {
                 control = json.data.length;
                 var output = "";
                 if (control != 0) {
-                    output += '<table  id="usuarioEmpresa" class="table table-striped" border bordercolor="#CDCDD8" >'
+                    output += '<table  id="usuarioEmpresa" class="table table-striped table-hover"  >'
                     output += '<thead style="background:#E9F7EF " class="thead-light">'
                     output += '<tr >'
-                    output += '<th scope="col" class="text-center" style="height: 5px; color:#16172C"><strong>DEPENDENCIA</strong></th>'
+                    output += '<th  scope="col" class="text-center" style="height: 5px; color:#16172C"><strong>DEPENDENCIA</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>USUARIO</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>CELULAR</strong></th>'
-                    output += '<th scope="col" class="text-center" style="color:#16172C; width: 2%"><strong></strong></th>'
                     output += '</tr>'
                     output += '</thead>'
                     output += '<tbody>'
@@ -493,11 +518,10 @@ function consultarUsuarioEmpresa() {
                         usuario = json.data[i].usuario_nombre;
                         celular = json.data[i].usuario_celular;
                         idUsuario = json.data[i].id_cliente_empresa;
-                        output += '<tr>'
-                        output += '<td class="text-center">' + dependencia + '</td>'
-                        output += '<td class="text-center">' + usuario + '</td>'
+                        output += '<tr style = "cursor: pointer" onclick="SeleccionarUsaurioEmpresa(' +idUsuario+ ')">'
+                        output += '<td  class="text-center">' + dependencia + '</td>'
+                        output += '<td  class="text-center">' + usuario + '</td>'
                         output += '<td class="text-center">' + celular + '</td>'
-                        output += '<td> <button  onclick="SeleccionarUsaurioEmpresa(' +idUsuario+ ')" style=" margin: 0%; border: none; outline:none; text-decoration: none" title="SELECCIONAR" class="btn btn-round btn-xs"> <i style="margin: 0%; color: #2E86C1; font-size: 17px" class="bi bi-arrow-down-circle-fill pull-left"> </i> </button> </td>'
                         output += '</tr>'
                     }
                     output += '</tbody>'
@@ -529,7 +553,7 @@ function consultarMunicipio() {
         return;
     }
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarMunicipio',
+        url: 'consultarMunicipio',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -568,8 +592,9 @@ function consultarClienteEnter() {
         toastr["warning"]("<h6>Diligenciar N° de Documento</h6>")
         return;
     }
+    showpreloader();
     $.ajax({
-        url: 'http://localhost/plataforma/public/consultarClienteEnter',
+        url: 'consultarClienteEnter',
         data: { id: id },
         type: 'POST',
         dataType: 'json',
@@ -578,8 +603,8 @@ function consultarClienteEnter() {
             var textarea = document.getElementById("empresas");
             if (json.mensaje === "ok") {
                 if (json.data.length > 0) {
-                output += '<button title="ACTUALIZAR CLIENTE" data-toggle="tooltip" data-placement="bottom" style="border: none; outline:none; text-decoration: none; margin: 10px" type="submits" class="btn btn-warning btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >';
-                output += '<i style="color: #ffffff; font-size: 17px" class="bi bi-upload box-info pull-left"></i>';
+                output += '<button title="ACTUALIZAR CLIENTE" data-toggle="tooltip" data-placement="bottom" style="font-size : 16px ;border: none; outline:none; text-decoration: none; margin: 10px" type="submits" class="btn btn-warning btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >';
+                output += '<i style="font-size : 20px" class="fa-solid fa-pen-to-square"></i>';
                 output += '<span style="margin-left: 5px">Actualizar Cliente</span>'
 
                 $("#btn-update").html(output);
@@ -611,12 +636,9 @@ function consultarClienteEnter() {
                     consultarUsuarioEmpresa()
                     toastr["success"]("<h6>Cliente Consultado correctamente</h6>")
                 }else{
-                    output +=  '<button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="border: none; outline:none; text-decoration: none; margin: 10px" type="submits" class="btn btn-success btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >'
-                    output +=  '<i style="color: #ffffff; font-size: 17px" class="bi bi-save box-info pull-left"></i>'
-                    output +=  '<span style="margin-left: 5px"> Guardar Cliente</span>'
-                    $("#btn-update").html(output);
 
-                    toastr["info"]("<h6>Cliente no registrado en la base de datos </h6>")
+
+                    toastr["info"]("<h6>Cliente no registrado</h6>")
                     $('#tipocliente').val('')
                     $('#cliente_nombres').val('')
                     $('#cliente_correo').val('')
@@ -632,6 +654,8 @@ function consultarClienteEnter() {
                     consultarEquipo()
 
                 }
+                hidepreloader();
+
             };
         },
         error: function (xhr, status) {
@@ -726,14 +750,14 @@ function guardarOrdenServicio() {
         return;
     }
     if (tecnico.length < 1) {
-        toastr["warning"]("<h6>Selecionar un Tecnico</h6>")
+        toastr["warning"]("<h6>Seleccionar un Tecnico</h6>")
         $("#tecnico").focus();
         return;
     }
 
     $.ajax({
         // la URL para la petición
-        url: 'http://localhost/plataforma/public/guardarOrden',
+        url: 'guardarOrden',
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
         data: {
@@ -759,7 +783,8 @@ function guardarOrdenServicio() {
                 toastr["success"]("<h6>Enviando Orden</h6>", "ENVIANDO")
                 setTimeout(function(){
                 }, 2000);
-                window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI' );
+               // window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',"ventana1","width=120,height=300,scrollbars=NO" );
+               window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',"Orden Ingreso","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=600,left = 390,top = 50" );
 
                 location.reload();
             }
@@ -846,7 +871,7 @@ $(document).ready(function () {
     $('#clients').DataTable({
         responsive: true,
         autoWidth: false,
-        lengthMenu: [[8, 5, 10], [8, 5, 10]],
+        lengthMenu: [[12, 8, 5], [12, 8, 5]],
         "language": idioma_espanol
 
     });

@@ -2,7 +2,7 @@
 @section('content')
 
 @section('css')
-<link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+<link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
 
 @endsection
 <div class="wrapper">

@@ -1,10 +1,10 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="{!! url('assets/js/toastr.min.css" rel="stylesheet') !!}" />
     {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="http://localhost/plataforma/public/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <link href="{!! url('bootstrap/bootstrap.css" rel="stylesheet') !!}"/>
 
     {{-- <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto:ital@1&display=swap" rel="stylesheet"> --}}
 
@@ -121,7 +121,7 @@
                                 <table class="table table-hover" style="webkit-font-smoothing: antialiased;
                                     font-family: Roboto,Helvetica Neue,Arial,sans-serif;">
                                     <thead class="thead-light">
-                                        <tr >
+                                        <tr  >
                                             <th width="8%"
                                                 style=" font-size: 12px ;font-weight:normal; text-align: center ">
                                                 &nbsp;<strong>N° Orden </strong>
@@ -162,7 +162,7 @@
 
                                             </th>
                                             <th width="3%" style="font-size: 12px ;font-weight:normal;  text-align: left">
-
+                                                <strong>Estado Orden</strong>
                                             </th>
                                         </tr>
                                     </thead>
@@ -170,25 +170,8 @@
                                         @foreach ($ordenServicio as $OrdenServicio)
 
 
-                                                    @if ($OrdenServicio->fecha_estimada_orden < date('Y-m-d') && $OrdenServicio->estadoOrden == 1)
-                                                    <tr  onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'" class="table-danger" style="cursor: pointer; background-color: #E74C3C">
-                                                        {{-- {{-- ORDEN VENCIDA --}}
 
-                                                    @elseif($OrdenServicio->estadoOrden == 1)
-                                                    <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'" class="table" style="cursor: pointer;background-color: #faefff7e">
-                                                        {{-- {{-- ORDEN RECIEN INGRESO --}}
-                                                    @elseif($OrdenServicio->estadoOrden == 2)
-                                                    <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"class="table-success" style="cursor: pointer;background-color: #28B463">
-                                                        {{-- {{-- ORDEN LISTA PARA ENTREGAR --}}
-                                                    @elseif($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null)
-                                                    <tr  class="table-warning" style="cursor: pointer;background-color: #FFFF00">
-                                                        {{-- {{-- ORDEN ENTREGADA SIN FACTURA --}}
-                                                    @elseif($OrdenServicio->estadoOrden == 3)
-                                                    <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"class="table-primary" style="cursor: pointer;">
-                                                        {{-- {{-- ORDEN ENTREGADA --}}
-                                                    @else
-                                                    <tr onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'" style="cursor: pointer;background-color: #ffffff7e">
-                                                    @endif
+                                                <tr  style="cursor: pointer;background-color: #ffffff7e">
                                                 {{-- <tr style="background-color: #ffffff7e" > --}}
 
 
@@ -246,12 +229,26 @@
                                                         </button>
                                                     @endif
 
-                                                    {{-- <a href="{{ url('ordenGeneral', encrypt($OrdenServicio->id_orden) ) }}">
-                                                    <button title="VER ORDEN" data-toggle="tooltip" data-placement="left" style="border: none; outline:none; text-decoration: none; margin: 0px" type="submits" class="btn btn-orden btn-fill  pull-right " id="btnGuardarCliente" >
-                                                        <i style="color: #ffffff; font-size: 25px; margin: -9px;" class="bi bi-file-text box-info pull-left"></i>
-                                                    </button>
-                                                    <a> --}}
+                                                    @if ($OrdenServicio->fecha_estimada_orden < date('Y-m-d') && $OrdenServicio->estadoOrden == 1)
+                                                        {{-- {{-- ORDEN VENCIDA --}}
+                                                            <span style="float: left;" class="badge badge-pill badge-danger">Vencida</span>
+
+
+                                                    @elseif($OrdenServicio->estadoOrden == 1)
+                                                        {{-- {{-- ORDEN RECIEN INGRESO --}}
+                                                            <span style="float: left;" class="badge badge-pill badge-info">Reparacion</span>
+                                                    @elseif($OrdenServicio->estadoOrden == 2)
+                                                        {{-- {{-- ORDEN LISTA PARA ENTREGAR --}}
+                                                            <span style="float: left;" class="badge badge-pill badge-success">Lista Para Entregar</span>
+                                                    @elseif($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null)
+                                                        {{-- {{-- ORDEN ENTREGADA SIN FACTURA --}}
+                                                            <span style="float: left;" class="badge badge-pill badge-warning">Facturacion</span>
+                                                    @elseif($OrdenServicio->estadoOrden == 3)
+                                                        <span style="float: left;" class="badge badge-pill badge-primary">Entregada</span>
+                                                        {{-- {{-- ORDEN ENTREGADA --}}
+                                                    @endif
                                                 </th>
+
                                             <tr>
 
                                         @endforeach
@@ -271,9 +268,9 @@
 @include('modulos.ordenServicio.modalFacturaNumero')
 
 @section('js')
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://localhost/plataforma/public/js/facturaNumero.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
+    <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
+    <script src="{!! url('js/facturaNumero.js') !!}"></script>
     <script>
    $(function () {
     $('[data-toggle="tooltip"]').tooltip()

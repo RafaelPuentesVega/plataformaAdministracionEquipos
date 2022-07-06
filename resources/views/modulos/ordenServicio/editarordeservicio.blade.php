@@ -1,9 +1,9 @@
 @extends('plantilla')
 @section('content')
 @section('css')
-    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="http://localhost/plataforma/public/assets/js/toastr.min.css" rel="stylesheet" />
+    <link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <style>
@@ -44,7 +44,7 @@
 
                                 <div class="header">
                                     <input disabled id="idOrden" value="{{ $arrayData->id_orden }}" hidden>
-                                    <input disabled id="totalValorFinal" value="{{ $totalValorRepuestos }}" hidden>
+                                    <input disabled id="totalValorRepuestos" value="{{ $totalValorRepuestos }}" hidden>
                                 </div>
                                 <div class="content">
 
@@ -549,11 +549,11 @@
                                                     @else
                                                     <th width=""
                                                         style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
-                                                        &nbsp;<strong>${{ $repuestos->valor_unitario_repuesto }}</strong>
+                                                        &nbsp;<strong>${{number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')  }}</strong>
                                                     </th>
                                                     <th width=""
                                                         style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                        &nbsp;<strong>${{ $repuestos->valor_total_repuesto }}</strong>
+                                                        &nbsp;<strong>${{number_format($repuestos->valor_total_repuesto, 0, ',', '.')  }}</strong>
                                                     </th>
                                                     @endif
 
@@ -610,7 +610,7 @@
                                             </th>
                                             <th width=""
                                                 style="font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                <strong>${{$totalValorRepuestos}}
+                                                <strong>${{number_format($totalValorRepuestos, 0, ',', '.')}}
                                                 </strong>
                                             </th>
 
@@ -632,7 +632,7 @@
                                             <th width=""
                                                 style="font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                 &nbsp;
-                                                <input value="{{$arrayData->valor_servicio_orden}}" style="color: black;font-weight:bold ;margin-top: -10%;text-align: right; " type="number"class="form-control" name="valorservicio" id="valorservicio" placeholder="" autocomplete="off">
+                                                <input value="{{ $arrayData->valor_servicio_orden}}" style="color: black;font-weight:bold ;margin-top: -10%;text-align: right; " type="text" class="form-control number" name="valorservicio" id="valorservicio" placeholder="" autocomplete="off">
                                             </th>
 
                                         </tr>
@@ -649,11 +649,13 @@
                                             <th width=""
                                                 style="font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                 &nbsp; <strong>IVA 19%</strong>
+                                                <input style="width: 20px; height: 20px; border-radius: 1em; margin: 0%" title="SIN IVA" data-toggle="tooltip" data-placement="top"  class="form-check-input" type="checkbox" value="" id="checkSinIva"  autocomplete="off" onchange="calcularValores()">
+
                                             </th>
                                             <th width=""
-                                                style="font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                                                style="font-size: 14px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                 &nbsp;<strong>
-                                                    <div class="" style="color: black;text-align: right" id="iva">$ {{$arrayData->iva_orden}}
+                                                    <div class="" style="color: black;text-align: right" id="iva">$ {{number_format($arrayData->iva_orden, 0, ',', '.')}}
                                                     </div>
                                                 </strong>
                                             </th>
@@ -673,10 +675,14 @@
                                                 style="font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                 &nbsp;<strong>Total</strong>
                                             </th>
-                                            <th width=""
+                                            <th width="" id="valorTotalOrden"
+                                            style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
+                                            <strong><div style="text-align: right " id="valorTotalOrde">${{number_format($arrayData->valor_total_orden, 0, ',', '.')}}</div></strong>
+                                            </th>
+                                            {{-- <th width=""
                                             style="font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                            &nbsp;<input readonly = "readonly" value= "${{$arrayData->valor_total_orden}}" style="color: black;font-weight: bold; font-size: 14px; margin-top: -10%;text-align: right; " type="text" class="form-control" name="valorTotal" id="valorTotal"placeholder="" autocomplete="off">
-                                        </th>
+                                            &nbsp;<input readonly = "readonly" value= "${{number_format($arrayData->valor_total_orden, 0, ',', '.')}}" style="color: black;font-weight: bold; font-size: 14px; margin-top: -10%;text-align: right; " type="text" class="form-control" name="valorTotal" id="valorTotal"placeholder="" autocomplete="off">
+                                            </th> --}}
 
                                         </tr>
 
@@ -714,9 +720,9 @@
 
 
 @section('js')
-    <script src="http://localhost/plataforma/public/js/jquery.min.js"></script>
-    <script src="http://localhost/plataforma/public/assets/js/toastr.min.js"></script>
-    <script src="http://localhost/plataforma/public/js/editOrden.js"></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
+    <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
+    <script src="{!! url('js/editOrden.js') !!}"></script>
 @endsection
 
 

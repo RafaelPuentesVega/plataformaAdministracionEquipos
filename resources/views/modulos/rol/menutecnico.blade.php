@@ -1,9 +1,9 @@
 @section('css')
-<link href="http://localhost/plataforma/public/assets/css/bootstrap.min.css" rel="stylesheet" />
-<link href="http://localhost/plataforma/public/assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+<link href="{!! url('assets/css/bootstrap.min.css') !!}" rel="stylesheet" />
+<link href="{!! url('assets/css/light-bootstrap-dashboard.css?v=1.4.0') !!}" rel="stylesheet"/>
 
-<link href="http://localhost/plataforma/public/assets/css/animate.min.css" rel="stylesheet"/>
-<link href='http://localhost/plataforma/public/assets/css/pe-icon-7-stroke.css' rel='stylesheet' type='text/css'>
+<link href="{!! url('assets/css/animate.min.css') !!}" rel="stylesheet"/>
+<link href="{!! url('assets/css/pe-icon-7-stroke.css') !!}" rel='stylesheet' type='text/css'>
 
 
 @endsection
@@ -13,13 +13,13 @@
 
 
 
-<aside class="sidebar" data-color="azure" data-image="http://localhost/plataforma/public/assets/img/sidebar-5.jpg">
+<aside class="sidebar" data-color="azure" data-image="{!! url('assets/img/sidebar-5.jpg') !!}">
 
 
     <div class="sidebar-wrapper" >
         <div class="logo">
             <a href="{{url('inicio')}}" class="simple-text">
-                <img src="http://localhost/plataforma/public/assets/img/logo.png"  width="140" height="60" >
+                <img src="{!! url('assets/img/logo.png') !!}"  width="140" height="60" >
             </a>
         </div>
 

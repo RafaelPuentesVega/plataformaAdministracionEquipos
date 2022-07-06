@@ -21,7 +21,7 @@ function reporteTecnicoSave() {
         return;
     }
     $.ajax({
-        url: 'http://localhost/plataforma/public/editarReporteTecnico',
+        url: '../editarReporteTecnico',
         data: {
             editReporte: editReporte,
             idOrden : idOrden
@@ -47,10 +47,14 @@ function valorServicioEdit() {
     ValorServicioInput = document.getElementById("valorservicio");
     btnEdit = document.getElementById("btneditvalorServicio");
     btnSave = document.getElementById("btnsavevalorServicio");
+    btnTerminarOrden = document.getElementById("btnTerminarOrden");
+    checkSinIva = document.getElementById("checkSinIva");
+
 
     ValorServicioDiv.style.display = 'none';
     ValorServicioInput.style.display = 'block';
     btnEdit.style.display = 'none';
     btnSave.style.display = 'block';
-
+    btnTerminarOrden.style.display = 'none';
+    checkSinIva.disabled = false;
 }
