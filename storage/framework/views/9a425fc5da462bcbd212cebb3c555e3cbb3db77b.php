@@ -61,20 +61,7 @@
                     <p>EMPLEADOS</p>
                 </a>
             </li>
-            <br><br>
-            <li>
-              <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"  class="btn btn-danger btn-fill  btn-flat" style="" > Cerrar Sesion </a>
-                    <form method="POST" id="logout-form" action="<?php echo e(route('logout')); ?>">
-                     <?php echo csrf_field(); ?>
-
-                    </form>
-                </a>
-                <span style="font-size: 12px"><strong><?php echo e(auth()->user()->name); ?></strong></span>
-                <span style="font-size: 12px"><strong><?php echo e(auth()->user()->rol); ?></strong></span>
-
-
-            </li>
+            
 
         </ul>
     </div>

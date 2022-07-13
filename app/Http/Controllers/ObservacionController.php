@@ -15,7 +15,7 @@ class ObservacionController extends Controller
 
     public function guardarObservacion(Request $request)
     {
-        $fechaActual = date('Y-m-d h:i:s');
+        $fechaActual = new \DateTime();
         $tipoObservacion = 1; //Observacion - 1- DIAGNOSTICO - Guardado en la BD
         $user=  auth()->user()->name;
         $idOrden = $request->idOrden;

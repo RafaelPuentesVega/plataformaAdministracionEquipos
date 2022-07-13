@@ -26,7 +26,7 @@
                 <div class="row ">
                     <div class="col-md-12">
 
-                            <table id="clients" class="table table-striped table-hover"
+                            <table id="equipo" class="table table-striped table-hover"
                             style="webkit-font-smoothing: antialiased;
                                 font-family: Roboto,Helvetica Neue,Arial,sans-serif;">
                                 <thead class="thead-light">
@@ -90,12 +90,12 @@
 
 
 
-            $('#clients').DataTable({
+            $('#equipo').DataTable({
                 responsive: true,
                 autoWidth: false,
                 lengthMenu: [
-                    [100, 50, 10, 5, -1],
-                    [100, 50, 10, 5, "Todos"]
+                    [10, 20, 50, -1],
+                    [10, 20, 50, "Todos"]
                 ],
                 "language": idioma_espanol
 

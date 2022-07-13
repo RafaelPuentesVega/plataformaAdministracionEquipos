@@ -267,7 +267,7 @@ th {
   }
   a,
   a:visited {
-    text-decoration: underline;
+    text-decoration: none !important;
   }
   a[href]:after {
     content: " (" attr(href) ")";
@@ -1170,7 +1170,7 @@ a {
 a:hover,
 a:focus {
   color: #23527c;
-  text-decoration: underline;
+  text-decoration: none !important;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -1676,8 +1676,8 @@ pre code {
   margin-left: auto;
 }
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
@@ -4403,7 +4403,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: none;
     width: auto;
     margin-top: 0;
-    background-color: transparent;
+    background-color: white !important;
     border: 0;
     -webkit-box-shadow: none;
             box-shadow: none;
@@ -4516,8 +4516,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-nav > li > .dropdown-menu {
   margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
   margin-bottom: 0;
@@ -4993,23 +4993,23 @@ a.label:focus {
   border-radius: 10px;
 }
 .badge-success{
-    background-color: #5cb85c;
+    background-color: #5cb85c !important;
 
 }
 .badge-danger{
-    background-color: #d9534f;
+    background-color: #d9534f !important;
 
 }
 .badge-warning{
-    background-color: #f0ad4e;
+    background-color: #f0ad4e !important;
 
 }
 .badge-info{
-    background-color: #31b0d5;
+    background-color: #31b0d5 !important;
 
 }
 .badge-primary{
-    background-color: #286090;
+    background-color: #286090 !important;
 
 }
 .badge:empty {

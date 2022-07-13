@@ -33,7 +33,7 @@ class InicioController extends Controller
     whereNull('fecha_entrega_orden' )->where('id_tecnico_orden',$idUsuario)->where('estadoOrden','2')->get()->toArray();
 
         $control = sizeof($ordenServicio) - 1;
-        $fechaActual = date('Y-m-d');
+        $fechaActual = date('Y-m-d H:i');
         $vencidas[] = null;
         $vigentes[] = null ;
         for ($i = 0; $i <= $control; $i++) {

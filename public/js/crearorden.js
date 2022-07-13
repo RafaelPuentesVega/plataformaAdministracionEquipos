@@ -10,6 +10,12 @@ $(window).on('load', function () {
 
 
 });
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 function cerrarModal() {
     $('#md-buscarCliente').modal('hide');
 }
@@ -356,7 +362,7 @@ function consultarCliente(id) {
     nombreCliente = document.getElementById('cliente_nombres');
     $.ajax({
         url: 'consultarCliente',
-        data: { id: id },
+        data: {id: id },
         type: 'POST',
         dataType: 'json',
         success: function (json) {

@@ -1,15 +1,15 @@
 <!-- Modal AUTORIZAR -->
-<div class="modal fade " id="md-autorizarRepuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade " id="md-facturaNumero" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="card "  >
                 <div class="header" style="background-color: #06419f">
-                    <h3 class="title text-center" style="font-size: 20px; color: #ffffff ; padding-bottom :8px;"><strong>AUTORIZAR</strong></h3>
+                    <h3 class="title text-center" style="font-size: 20px; color: #ffffff ; padding-bottom :8px;"><strong>AGREGAR NUMERO DE FACTURA</strong></h3>
                 </div>
             </div>
             <div class="modal-header">
-                <table id="clients" class="table table-striped" >
+                <table style="margin-top: -35px" id="clients" class="table table-striped" border bordercolor="#CDCDD8">
                     <thead style="background:#aed6f18a" class="thead">
                         <tr>
                             <th scope="col" class="text-center" style="color:#16172C"><strong>CLIENTE</strong></th>
@@ -20,7 +20,7 @@
                     <tbody>
                     </tr>
                     <th id="clienteTipo" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                        &nbsp;<label><strong></strong></label>
+                        &nbsp;<label><strong>asa</strong></label>
 
                     </th>
                     <th id="clienteDocumento" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
@@ -28,12 +28,12 @@
                     </th>
 
                     <th id="clienteNombre" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                        &nbsp;<label><strong></strong></label>
+                        &nbsp;<label><strong>asa</strong></label>
                     </th>
                 </tr>
                     </tbody>
                 </table>
-                <table id="clients" class="table table-striped" >
+                <table id="equipo" class="table table-striped" border bordercolor="#CDCDD8">
                     <thead style="background:#aed6f18a" class="thead">
                         <tr>
                             <th scope="col" class="text-center" style="color:#16172C"><strong>EQUIPO</strong></th>
@@ -62,44 +62,31 @@
                         </tr>
                     </tbody>
                 </table>
+                <div  id="repuestoFactura" >
+
+                    
+                </div>
                 <div class="card">
                     <div class="row">
 
-
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label><strong>CANTIDAD</strong></label>
-                                <input type="number"  class="form-control" name="cantidadRepuesto" id="cantidadRepuesto"  required autocomplete="off" style="text-transform: uppercase">
+                                <label>&nbsp; VALOR TOTAL</label>
+                                <input disabled type="text"  class="form-control" name="valorTotalOrden" id="valorTotalOrden"  required autocomplete="off" style="text-transform: uppercase">
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label ><strong>REPUESTO</strong></label>
-                                <input type="text" disabled maxlength="10" class="form-control"  name="nombreRepuesto" id="nombreRepuesto"  required autocomplete="off">
-                            </div>
 
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group ">
-                                <label ><strong>PRECIO UNITARIO</strong></label>
-                                <input type="text" class="form-control number" placeholder="$ con IVA " maxlength="10" name="precioUnitario" id="precioUnitario"  autocomplete="off">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>&nbsp; NUMERO DE FACTURA</label>
+                                <input type="text"  class="form-control" name="numeroFactura" id="numeroFactura"  required autocomplete="off" style="text-transform: uppercase">
                             </div>
                         </div>
+
                     </div>
-                    <div class="row">
-                        <div class="col-md-10" style="text-align: right">
-                            <div class="form-group">
-                                <label for="">$ PRECIO TOTAL</label>
-                            </div>
-                        </div>
 
-                        <div class="col-md-2" style="text-align: right">
-                            <strong><div class="form-group" id="precioTotal" style="text-align: left; font-size: 15px">
-                            </div></strong>
-                        </div>
-                    </div>
                 </div>
-                <button style="float: right" class="btn btn-success btn-fill" onclick="autorizarRepuesto()" >AUTORIZAR</button>
+                <button style="float: right" class="btn btn-success btn-fill" onclick="guardarNumeroFactura()" >GUARDAR</button>
 
                 <button style="float: right ; margin-right: 15px" class="btn btn-danger btn-fill " onclick="CloseModal()">Cerrar</button>
 
@@ -110,3 +97,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/modulos/ordenServicio/modalFacturaNumero.blade.php ENDPATH**/ ?>

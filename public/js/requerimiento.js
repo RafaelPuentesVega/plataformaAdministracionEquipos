@@ -40,7 +40,6 @@ function autorizarRepuesto() {
 
     cantidadRepuesto = $('#cantidadRepuesto').val();
     let precioUnitario = $("#precioUnitario").val();
-    precioUnitario = parseInt(precioUnitario.replace(/,/g, ""));
     if(cantidadRepuesto.length  < 1) {
         toastr["warning"]("<h6>Digitar Cantidad</h6>")
         $("#cantidadRepuesto").focus();
@@ -56,6 +55,7 @@ function autorizarRepuesto() {
         $("#precioUnitario").focus();
         return;
         }
+    precioUnitario = parseInt(precioUnitario.replace(/,/g, ""));
     showpreloader();
 
     $.ajax({
@@ -133,4 +133,6 @@ $(function () {
         .replace(/([0-9])([0-9]{0})$/, '$1$2')
         .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",")    ;
     });
+    calcularPrecioRepuesto()
+
     });

@@ -135,7 +135,6 @@ function guardarRepuesto() {
         let reporteTecnico = $("#reporteTecnico").val();
         let idOrden = $("#idOrden").val();
         let valorservicio = $("#valorservicio").val();
-        valorservicio = parseInt(valorservicio.replace(/,/g, ""));
         let valorTotalRepuesto = $('#totalValorRepuestos').val();
 
 
@@ -154,6 +153,7 @@ function guardarRepuesto() {
         }else{
             iva = 'SI' ;
         }
+        valorservicio = parseInt(valorservicio.replace(/,/g, ""));
         hidepreloader()
         $.ajax({
             url: '../termirnarOrden',
@@ -250,15 +250,20 @@ if (document.getElementById('checkSinIva').checked) {
 }
 function changePrice() {
     let valorservicio = $("#valorservicio").val();
-    valorservicio = parseInt(valorservicio.replace(/,/g, ""));
     totalValorRepuestos = $('#totalValorRepuestos').val();
+
     let idOrden = $("#idOrden").val();
     if (document.getElementById('checkSinIva').checked) {
         iva = 'NO';
     }else{
         iva = 'SI' ;
     }
-
+    if(valorservicio.length < 1){
+        toastr["warning"]("<h6>Diligenciar el Valor del servicio</h6>")
+        $("#valorservicio").focus();
+        return;
+    }
+    valorservicio = parseInt(valorservicio.replace(/,/g, ""));
     showpreloader()
     $.ajax({
         url: '../changePrice',
@@ -326,5 +331,6 @@ $('input.number').keyup(function(event) {
         .replace(/([0-9])([0-9]{0})$/, '$1$2')
         .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",")    ;
     });
+    calcularValores();
     });
 

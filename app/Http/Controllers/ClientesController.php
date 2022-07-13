@@ -101,7 +101,10 @@ class ClientesController extends Controller
         ->leftJoin('users', 'orden_servicio.id_tecnico_orden', '=', 'users.id')
         ->leftJoin('equipo', 'orden_servicio.id_equipo_orden', '=', 'equipo.equipo_id')
         ->select('orden_servicio.*', 'users.name','equipo.*')
-        ->where('id_cliente_orden', '=', $idcliente)->get()->toArray();
+        ->where('id_cliente_orden', '=', $idcliente)
+        ->orderBy('orden_servicio.id_orden', 'desc')
+        ->get()->toArray();
+        //dd($arrayOrden);
 
         $arrayEquipo = DB::table('equipo')
         ->where('equipo_cliente_id', '=', $idcliente)->get()->toArray();
@@ -135,9 +138,23 @@ class ClientesController extends Controller
      * @param  \App\Models\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clientes $clientes)
+    public function update(Request $request,  $id)
     {
-        //
+        $datos = request();
+
+        DB::table('cliente')
+        ->where('cliente_id', $id)
+        ->update(
+            [
+            'cliente_tipo'=>$datos['cliente_tipo'],
+            'cliente_nombres'=>$datos['cliente_nombres'],
+            'cliente_correo'=>$datos['cliente_correo'],
+            'cliente_direccion'=>$datos['cliente_direccion'],
+            'cliente_celular'=>$datos['cliente_celular'],
+            'cliente_telefono'=>$datos['cliente_telefono'],
+        ]);
+        
+        return redirect()->back();
     }
 
     /**

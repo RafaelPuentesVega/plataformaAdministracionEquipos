@@ -1,15 +1,14 @@
-@extends('plantilla')
-@section('content')
-@section('css')
-    <link href="{!! url('assets/js/toastr.min.css" rel="stylesheet') !!}" />
-    {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
+<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('css'); ?>
+    <link href="<?php echo url('assets/js/toastr.min.css" rel="stylesheet'); ?>" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="{!! url('bootstrap/bootstrap.css" rel="stylesheet') !!}"/>
+    <link href="<?php echo url('bootstrap/bootstrap.css" rel="stylesheet'); ?>"/>
 
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto:ital@1&display=swap" rel="stylesheet"> --}}
+    
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 <div class="wrapper">
 
@@ -71,9 +70,9 @@
                                                             <select class="js-example-basic js-states form-control"
                                                                 name="cliente_tipo" id="tipocliente" required>
                                                                 <option value=>Seleccionar...</option>
-                                                                @foreach ($tecnico as $Tecnico)
-                                                                    <option value={{ $Tecnico->id }}>{{ $Tecnico->name }}</option>
-                                                                @endforeach
+                                                                <?php $__currentLoopData = $tecnico; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Tecnico): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <option value=<?php echo e($Tecnico->id); ?>><?php echo e($Tecnico->name); ?></option>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -167,91 +166,91 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ordenServicio as $OrdenServicio)
+                                        <?php $__currentLoopData = $ordenServicio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $OrdenServicio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 
 
                                                 <tr  style="cursor: pointer;background-color: #ffffff7e">
-                                                {{-- <tr style="background-color: #ffffff7e" > --}}
+                                                
 
 
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="height: 55px;font-size: 16px ; text-align: center ">
-                                                    <strong>{{ $OrdenServicio->id_orden }}</strong>
+                                                    <strong><?php echo e($OrdenServicio->id_orden); ?></strong>
 
                                                 </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 12px ; font-weight:normal;text-align: left">
-                                                    <strong>{{ $OrdenServicio->fecha_creacion_orden }}</strong>
+                                                    <strong><?php echo e($OrdenServicio->fecha_creacion_orden); ?></strong>
 
                                                 </th>
 
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 12px ;font-weight:normal; text-align: left ">
-                                                    <strong>{{ $OrdenServicio->cliente_documento }}</strong>
+                                                    <strong><?php echo e($OrdenServicio->cliente_documento); ?></strong>
 
                                                 </th>
 
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
 
                                                     style="font-size: 11px ; font-weight:normal;text-align: left">
 
-                                                    <strong>{{ $OrdenServicio->cliente_nombres }}</strong>
+                                                    <strong><?php echo e($OrdenServicio->cliente_nombres); ?></strong>
 
                                                 </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 11px ;font-weight:normal;  text-align: left">
-                                                    <strong>{{ $OrdenServicio->equipo_tipo }}- {{ $OrdenServicio->equipo_marca }} -
-                                                    {{ $OrdenServicio->equipo_referencia }}</strong>
+                                                    <strong><?php echo e($OrdenServicio->equipo_tipo); ?>- <?php echo e($OrdenServicio->equipo_marca); ?> -
+                                                    <?php echo e($OrdenServicio->equipo_referencia); ?></strong>
                                                 </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 11px ;font-weight:normal; text-align: left ">
-                                                    <strong>{{ $OrdenServicio->name }}</strong> </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                    <strong><?php echo e($OrdenServicio->name); ?></strong> </th>
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 14px ;font-weight:normal; text-align: left ">
-                                                    <strong>${{number_format($OrdenServicio->valor_servicio_orden  , 0, ',', '.') }}</strong>
+                                                    <strong>$<?php echo e(number_format($OrdenServicio->valor_servicio_orden  , 0, ',', '.')); ?></strong>
                                                 </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 14px ; font-weight:normal;text-align: left">
-                                                    <strong> ${{ number_format($OrdenServicio->iva_orden , 0, ',', '.')  }}</strong>
+                                                    <strong> $<?php echo e(number_format($OrdenServicio->iva_orden , 0, ',', '.')); ?></strong>
 
                                                 </th>
-                                                <th onclick="window.location.href='ordenGeneral/{{encrypt($OrdenServicio->id_orden)}}'"
+                                                <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
                                                     style="font-size: 14px ; font-weight:normal;text-align: left">
-                                                    <strong>${{ number_format($OrdenServicio->valor_total_orden , 0, ',', '.') }}</strong>
+                                                    <strong>$<?php echo e(number_format($OrdenServicio->valor_total_orden , 0, ',', '.')); ?></strong>
                                                 </th>
 
                                                 <th  style="font-size: 12px ;font-weight:normal;  text-align: center">
-                                                    {{-- VALIDAMOS SI LA ORDEN ESTA ENTREGADA Y NO TIENE FACTURA - PARA HABILIAR EL BOTON DE FACTURA --}}
-                                                    @if($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null && auth()->user()->rol == "ADMINISTRATIVO")
-                                                        <button title="NUMERO DE FACTURA" data-toggle="tooltip" data-placement="left" style="border: none; outline:none; text-decoration: none; margin: 0px; margin-bottom: 10px" type="button" class="btn btn-success btn-fill  pull-right " id="btnGuardarCliente" onclick="facturaNumero('{{ $OrdenServicio->id_orden }}')" >
+                                                    
+                                                    <?php if($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null && auth()->user()->rol == "ADMINISTRATIVO"): ?>
+                                                        <button title="NUMERO DE FACTURA" data-toggle="tooltip" data-placement="left" style="border: none; outline:none; text-decoration: none; margin: 0px; margin-bottom: 10px" type="button" class="btn btn-success btn-fill  pull-right " id="btnGuardarCliente" onclick="facturaNumero('<?php echo e($OrdenServicio->id_orden); ?>')" >
                                                             <i style="font-size: 19px;  margin: -20px%" class="fas fa-file-invoice-dollar"></i>
                                                         </button>
-                                                    @endif
+                                                    <?php endif; ?>
 
-                                                    @if ($OrdenServicio->fecha_estimada_orden < date('Y-m-d') && $OrdenServicio->estadoOrden == 1)
-                                                        {{-- {{-- ORDEN VENCIDA --}}
+                                                    <?php if($OrdenServicio->fecha_estimada_orden < date('Y-m-d') && $OrdenServicio->estadoOrden == 1): ?>
+                                                        
                                                             <span style="float: left;" class="badge badge-pill badge-danger">Vencida</span>
 
 
-                                                    @elseif($OrdenServicio->estadoOrden == 1)
-                                                        {{-- {{-- ORDEN RECIEN INGRESO --}}
+                                                    <?php elseif($OrdenServicio->estadoOrden == 1): ?>
+                                                        
                                                             <span style="float: left;" class="badge badge-pill badge-info">Reparacion</span>
-                                                    @elseif($OrdenServicio->estadoOrden == 2)
-                                                        {{-- {{-- ORDEN LISTA PARA ENTREGAR --}}
+                                                    <?php elseif($OrdenServicio->estadoOrden == 2): ?>
+                                                        
                                                             <span style="float: left;" class="badge badge-pill badge-success">Lista Para Entregar</span>
-                                                    @elseif($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null)
-                                                        {{-- {{-- ORDEN ENTREGADA SIN FACTURA --}}
+                                                    <?php elseif($OrdenServicio->estadoOrden == 3 && $OrdenServicio->factura_numero_orden == null): ?>
+                                                        
                                                             <span style="float: left;" class="badge badge-pill badge-warning">Facturacion</span>
-                                                    @elseif($OrdenServicio->estadoOrden == 3)
+                                                    <?php elseif($OrdenServicio->estadoOrden == 3): ?>
                                                         <span style="float: left;" class="badge badge-pill badge-primary">Entregada</span>
-                                                        {{-- {{-- ORDEN ENTREGADA --}}
-                                                    @endif
+                                                        
+                                                    <?php endif; ?>
                                                 </th>
 
                                             <tr>
 
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </tbody>
                                 </table>
@@ -265,12 +264,12 @@
     </div>
 </div>
 </div>
-@include('modulos.ordenServicio.modalFacturaNumero')
+<?php echo $__env->make('modulos.ordenServicio.modalFacturaNumero', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@section('js')
-    <script src="{!! url('js/jquery.min.js') !!}"></script>
-    <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
-    <script src="{!! url('js/facturaNumero.js') !!}"></script>
+<?php $__env->startSection('js'); ?>
+    <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
+    <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
+    <script src="<?php echo url('js/facturaNumero.js'); ?>"></script>
     <script>
    $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -280,7 +279,9 @@
     </script>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('plantilla', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/modulos/ordenServicio/orden_general.blade.php ENDPATH**/ ?>

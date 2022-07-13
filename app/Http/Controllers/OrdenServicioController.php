@@ -134,7 +134,7 @@ class OrdenServicioController extends Controller
         $valorTotalRepuesto = $request->valorTotalRepuesto;
         $valorservicio = $request->valorservicio;
         $idOrden = $request->idOrden;
-        $fechaActual = date('Y-m-d');
+        $fechaActual = new \DateTime();
         $estadOrden = 2 ; ///Estado (2 - REPARADO)
 
 
@@ -195,35 +195,20 @@ class OrdenServicioController extends Controller
             return ('ERROR 404');
         }
         $arrayQuestion = $dataCliente[0];
+            //VALIDAMOS SI EL CLIENTE ES PERSONA O EMPRESA, PARA EVITAR EL ERROR DE NULL
 
-        //VALIDAMOS SI EL CLIENTE ES PERSONA O EMPRESA, PARA EVITAR EL ERROR DE NULL
-        if($arrayQuestion->id_cliente_usuario_orden == 0 || $arrayQuestion->id_cliente_usuario_orden == null){
             $Data = DB::table('orden_servicio as orden')
             ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
             ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-            ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-            ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-            ->join('users', 'orden.id_tecnico_orden', '=', 'users.id')
-            ->select('cliente.*', 'equipo.*', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','users.name')
-            ->whereRaw("orden.id_orden = $id_cliente")
-            ->get()->toArray();
-
-            $arrayData = $Data[0];
-         }else{
-            $Data = DB::table('orden_servicio as orden')
-            ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
-            ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-            ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-            ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-            ->join('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
+            ->leftjoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+            ->leftjoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+            ->leftjoin('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
             ->join('users', 'orden.id_tecnico_orden', '=', 'users.id')
             ->select('cliente.*', 'equipo.*', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*','users.name' )
             ->whereRaw("orden.id_orden = $id_cliente")
             ->get()->toArray();
-            $arrayData = $Data[0];}
-           // dd($arrayData);
+            $arrayData = $Data[0];
 
-       //dd($diagnostico);
 
         return view('modulos.ordenServicio.editarordeservicio')->with('arrayData',$arrayData)
         ->with('diagnostico',$diagnostico)->with('Arraydiagnostico',$Arraydiagnostico)
@@ -235,7 +220,7 @@ class OrdenServicioController extends Controller
     {
         $idOrden = $request->idOrden;
         $estadoOrden = 3 ; // Colocamos estado 3 (1-Recien ingresa - 2-Terminada , 3-Entregada)
-        $fechaActual = date('Y-m-d h:i:s');
+        $fechaActual = new \DateTime();
 
         $arrayOrden  = DB::table('orden_servicio')
         ->where('id_orden', '=', $idOrden)->get();
@@ -296,34 +281,17 @@ class OrdenServicioController extends Controller
         }
         $arrayQuestion = $dataCliente[0];
 
-        //VALIDAMOS SI EL CLIENTE ES PERSONA O EMPRESA, PARA EVITAR EL ERROR DE NULL
-        if($arrayQuestion->id_cliente_usuario_orden == 0 || $arrayQuestion->id_cliente_usuario_orden == null){
-            $Data = DB::table('orden_servicio as orden')
-            ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
-            ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-            ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-            ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-            ->join('users', 'orden.id_tecnico_orden', '=', 'users.id')
-            ->select('cliente.*', 'equipo.*', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','users.name')
-            ->whereRaw("orden.id_orden = $id_cliente")
-            ->get()->toArray();
-
-            $arrayData = $Data[0];
-         }else{
-            $Data = DB::table('orden_servicio as orden')
-            ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
-            ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-            ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-            ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-            ->join('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
-            ->join('users', 'orden.id_tecnico_orden', '=', 'users.id')
-            ->select('cliente.*', 'equipo.*', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*','users.name' )
-            ->whereRaw("orden.id_orden = $id_cliente")
-            ->get()->toArray();
-            $arrayData = $Data[0];}
-         //dd($arrayData);
-
-       //dd($diagnostico);
+        $Data = DB::table('orden_servicio as orden')
+        ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
+        ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
+        ->leftjoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+        ->leftjoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+        ->leftjoin('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
+        ->join('users', 'orden.id_tecnico_orden', '=', 'users.id')
+        ->select('cliente.*', 'equipo.*', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*','users.name' )
+        ->whereRaw("orden.id_orden = $id_cliente")
+        ->get()->toArray();
+        $arrayData = $Data[0];
 
         return view('modulos.ordenServicio.verOrdenGeneral')->with('arrayData',$arrayData)
         ->with('diagnostico',$diagnostico)->with('Arraydiagnostico',$Arraydiagnostico)
@@ -348,30 +316,25 @@ class OrdenServicioController extends Controller
         $dataArray = $dataArray[0];
 
 
-            //if($dataArray->id_cliente_usuario_orden == null || $dataArray->id_cliente_usuario_orden == 0){
                 $pdfData = DB::table('orden_servicio as orden')
                 ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
                 ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-                ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-                ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+                ->leftJoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+                ->leftJoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
                 ->join('users', 'users.id', '=', 'orden.id_tecnico_orden')
-                //->leftJoin('repuesto', 'repuesto.id_orden_servicio_repuesto', '=', 'orden.id_orden')
                 ->leftJoin('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
-              //  ->select('cliente.*', 'equipo.*','users.name', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre' )
                 ->select('cliente.*', 'equipo.*', 'users.name', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*' )
                 ->whereRaw("orden.id_orden = $idOrden")
                 ->get()->toArray();
-
                 $array = $pdfData[0];
                 setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
                 $fechaEntrada = $array->fecha_creacion_orden;
                 $fechaEntrada= strftime("%d %b %Y",strtotime($fechaEntrada));
                 $fechareparacion = $array->fecha_reparacion_orden;
                 $fechareparacion= strftime("%d %b %Y",strtotime($fechareparacion));
-                $fechaEntrega = $array->fecha_diagnostico_orden;
+                $fechaEntrega = $array->fecha_entrega_orden;
                 $fechaEntrega= strftime("%d %b %Y",strtotime($fechaEntrega));
-                 
-                
+
                 $data = [
                     'orden' => $array->id_orden,
                     'fecha_ingreso' =>  $fechaEntrada,
@@ -458,7 +421,7 @@ class OrdenServicioController extends Controller
             $estadoOrden = 1; //INICIALIZAMOS LA VARIABLE EN EL ESTADO 1 (1-INGRESADO - 2-ORDEN TERMINADA - 3-ORDEN ENTREGADA)
             $diasVencimiento = 3 ;
             $fechaVencimiento = '';
-            $fechaVencimiento = date("Y-m-d");
+            $fechaVencimiento = date("Y-m-d G:i:s");
             //REALIZAMOS EL CONTEO DE LOS DIA HABILES
             $dia = date("w", strtotime($fechaVencimiento));
             // Solo analizas si es día inhábil
@@ -478,13 +441,12 @@ class OrdenServicioController extends Controller
             }
         // Sumas los días a la fecha
        $date_future = strtotime("+$diasVencimiento days", strtotime($fechaVencimiento));
-       $fechaVencimiento = date('Y-m-d', $date_future);
+       $fechaVencimiento = date('Y-m-d G:i:s', $date_future);
         $idcliente = $request->cliente_id;
         $emailSend = 1; // 1 Correo No Enviado -- 2 correo Si enviado
         $idUsuarioEmpresa = $request->usuario_empresa;
         $ordenServicio = new OrdenServicio;
         $fechaActual = new \DateTime();
-        $fechaActual = date('Y-m-d');
         $servicio = implode(" - ", $request->servicio);//Se concatena el array que lleg de la vista de todos los servicios  con -
 
         $ordenServicio->id_cliente_orden = $idcliente;
@@ -581,9 +543,9 @@ class OrdenServicioController extends Controller
             $pdfData = DB::table('orden_servicio as orden')
                     ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
                     ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-                    ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-                    ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-                    ->join('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
+                    ->leftjoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+                    ->leftjoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+                    ->leftjoin('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
                     ->join('users', 'users.id', '=', 'orden.id_tecnico_orden')
                     ->select('cliente.*', 'equipo.*', 'users.name', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*' )
                     ->whereRaw("orden.id_orden = $idOrden")
@@ -678,8 +640,8 @@ public function ordenEntradaPDF($idOrden)
                 $pdfData = DB::table('orden_servicio as orden')
                 ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
                 ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-                ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-                ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+                ->leftjoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+                ->leftjoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
                 ->join('users', 'users.id', '=', 'orden.id_tecnico_orden')
                 ->select('cliente.*', 'equipo.*','users.name', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre' )
                 ->whereRaw("orden.id_orden = $idOrden")
@@ -729,9 +691,9 @@ public function ordenEntradaPDF($idOrden)
             $pdfData = DB::table('orden_servicio as orden')
                     ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
                     ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
-                    ->join('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
-                    ->join('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
-                    ->join('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
+                    ->leftjoin('departamentos', 'cliente.departamento_id', '=', 'departamentos.departamento_id')
+                    ->leftjoin('municipios', 'cliente.municipio_id', '=', 'municipios.municipio_id')
+                    ->leftjoin('usuario_empresa', 'orden.id_cliente_usuario_orden', '=', 'usuario_empresa.id_cliente_empresa')
                     ->join('users', 'users.id', '=', 'orden.id_tecnico_orden')
                     ->select('cliente.*', 'equipo.*', 'users.name', 'orden.*', 'departamentos.departamento_nombre','municipios.municipio_nombre','usuario_empresa.*' )
                     ->whereRaw("orden.id_orden = $idOrden")

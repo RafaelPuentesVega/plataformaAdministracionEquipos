@@ -1,21 +1,20 @@
-@extends('plantilla')
-@section('content')
-@section('css')
+<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('css'); ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
-{{-- <link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/> --}}
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css') !!}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
-<link href="{!! url('bootstrap/bootstrap.css') !!}" rel="stylesheet"/>
-<link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
-{{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> --}}
+
+
+<link href="<?php echo url('bootstrap/bootstrap.css'); ?>" rel="stylesheet"/>
+<link href="<?php echo url('fontawesome/css/all.css'); ?>" rel="stylesheet"/>
+
 <style type="text/css">
     table { border-color: #CDCDD8; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
     .card label { color: rgba(0, 0, 0, 0.416); font-weight: bold}
 
     </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
-<link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet"/>
+<link href="<?php echo url('assets/js/toastr.min.css'); ?>" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
+<?php $__env->stopSection(); ?>
 
 <div class="wrapper" >
 
@@ -23,7 +22,7 @@
 
         <div class="content" style="font-family: Verdana, sans-serif">
             <body style="background-color: rgba(233, 233, 233, 0.295)">
-            {{-- <body style="background-color: aliceblue"> --}}
+            
 
             <div class="container-fluid">
 
@@ -43,9 +42,7 @@
                                     <p  style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #1C2833; text-align: center; font-size: 14px"> <strong> CLIENTE </strong></p>
                                 </div>
                                 <div class="content" >
-                                    {{--
-                                    <form action="/plataforma/public/crear_orden_servicio" method="post">
-                                        @csrf --}}
+                                    
 
                                         <div class="row" required>
                                             <div class="col-md-2">
@@ -103,7 +100,7 @@
                                                     <label >CELULAR</label>
                                                     <div class="input-group">
                                                         <span class="input-group-addon" id="basic-addon1">
-                                                            {{-- <i style="color: #242424; font-size: 22px; margin: -5px" class="bi bi-phone box-info pull-left"></i> --}}
+                                                            
                                                             <i style="font-size: 19px" class="fa-solid fa-mobile-screen-button"></i>
                                                         </span>
                                                     <input type="phone" maxlength="10" class="form-control"  name="cliente_celular" id="cliente_celular" placeholder="Celular" required autocomplete="off" >
@@ -128,9 +125,9 @@
                                                     <label for="">DEPARTAMENTO</label>
                                                     <select class="js-example-basic js-states form-control" name="departamento_id" onclick="consultarMunicipio()" id="departamentoSelect" autocomplete="off">
                                                         <option value="13">HUILA</option>
-                                                        @foreach ($departamentos as $departamento)
-                                                        <option value="{{ $departamento->departamento_id }}">{{$departamento->departamento_nombre}}</option>
-                                                        @endforeach
+                                                        <?php $__currentLoopData = $departamentos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $departamento): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($departamento->departamento_id); ?>"><?php echo e($departamento->departamento_nombre); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                     </select>
                                                 </div>
@@ -152,16 +149,16 @@
                                         </div>
                                                  <!-- Button  modal -->
                                                  <button title="BUSCAR" data-toggle="tooltip" data-placement="bottom" style=" border: none;  margin: 10px" type="button" class="btn btn-secondary btn-fill  pull-right " data-toggle="modal" data-target="#md-buscaCliente" onclick="showModal()"  >
-                                                    {{-- <i style="color: #ffffff; font-size: 18px" class="bi bi-search "></i> --}}
+                                                    
                                                     <i style="font-size: 19px" class="fa-solid fa-magnifying-glass"></i>
                                                     <span  style="font-size: 16px">Buscar Cliente</span>
                                                  </button>
 
                                                  <div id="btn-update">
                                                     <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom" style="border: none; margin: 10px" type="button" class="btn btn-info btn-fill pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
-                                                        {{-- <i style="color: #ffffff; font-size: 18px" class="bi bi-save pull-left"></i> --}}
+                                                        
                                                         <i style="font-size: 20px" class="fas fa-save"></i>
-                                                        {{-- <i class="fa-light fa-floppy-disk"></i> --}}
+                                                        
                                                         <span style="font-size: 16px" > Guardar Cliente</span>
                                                     </button>
                                                 </div>
@@ -212,7 +209,7 @@
 
                                                         </div>
                                                         <button title="AGREGAR DEPENDENCIA" data-toggle="tooltip" data-placement="bottom"  style="margin-left: 15%; margin: -5px; border: none; outline:none; text-decoration: none" type="submits" class="btn btn-success btn-fill " id="btnGuardarUsuarioEmpresa" onclick="guardarUsuarioEmpresa()" >
-                                                            {{-- <i style="color: #ffffff; font-size: 21px; margin: -5px" class="bi bi-plus box-info pull-left"></i> --}}
+                                                            
                                                             <i style="font-size: 16px" class="fa-solid fa-user-plus"></i>
 
                                                         </button>
@@ -247,9 +244,9 @@
 
                                                     <select class="js-example-basic-multiple js-states xl-form form-control" id="tipoEquipoSelect" >
                                                         <option  value="">-SELECCIONAR-</option>
-                                                        @foreach ($tipoEquipo as $tipoEquipo)
-                                                        <option value="{{ $tipoEquipo->nombre_tipo_equipo }}">{{$tipoEquipo->nombre_tipo_equipo}}</option>
-                                                        @endforeach
+                                                        <?php $__currentLoopData = $tipoEquipo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tipoEquipo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($tipoEquipo->nombre_tipo_equipo); ?>"><?php echo e($tipoEquipo->nombre_tipo_equipo); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </select>
                                                 </div>
                                                 <input  type="text" class="form-control" id="equipo_tipo" placeholder="CREAR EQUIPO"  required autocomplete="off" style="text-transform: uppercase; display: none" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
@@ -335,12 +332,12 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">SERVICIOS</label>
-                                                            {{-- <select class="select " multiple id="servicio" required> --}}
-                                                                {{-- <select class="mdb-select md-form" multiple id="servicio" required> --}}
+                                                            
+                                                                
                                                                 <select class="js-example-basic-multiple js-states xl-form form-control" id="servicio" name="states[]" multiple="multiple">
-                                                                    @foreach ($servicios as $servicio)
-                                                                    <option value="{{ $servicio->nombre_servicio }}">{{$servicio->nombre_servicio}}</option>
-                                                                    @endforeach
+                                                                    <?php $__currentLoopData = $servicios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $servicio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <option value="<?php echo e($servicio->nombre_servicio); ?>"><?php echo e($servicio->nombre_servicio); ?></option>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                                 </select>
                                                         </div>
@@ -385,9 +382,9 @@
                                                         <label for="">TECNICO</label>
                                                         <select class="js-example-basic js-states form-control" id="tecnicoSelect" required>
                                                                     <option value="">-SELECCIONAR-</option>
-                                                                    @foreach ($user as $users)
-                                                                     <option value="{{ $users->id }}">{{$users->name}}</option>
-                                                                    @endforeach
+                                                                    <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $users): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                     <option value="<?php echo e($users->id); ?>"><?php echo e($users->name); ?></option>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
                                                         </div>
                                                 </div>
@@ -408,20 +405,22 @@
     </div>
 </div>
 
-@include('modulos.ordenServicio.modal.modal_buscar_cliente')
+<?php echo $__env->make('modulos.ordenServicio.modal.modal_buscar_cliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@section('js')
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="{!! url('js/jquery.min.js') !!}""></script>
+<?php $__env->startSection('js'); ?>
+    
+    <script src="<?php echo url('js/jquery.min.js'); ?>""></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="{!! url('js/crearorden.js') !!}""></script>
-    <script src="{!! url('assets/js/toastr.min.js') !!}""></script>
+    <script src="<?php echo url('js/crearorden.js'); ?>""></script>
+    <script src="<?php echo url('assets/js/toastr.min.js'); ?>""></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
-@endsection
+    
+<?php $__env->stopSection(); ?>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('plantilla', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/modulos/ordenServicio/crearordenservicio.blade.php ENDPATH**/ ?>

@@ -1,17 +1,16 @@
-@extends('plantilla')
-@section('content')
-@section('css')
+<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('css'); ?>
     <style>
 
     </style>
-    <link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet" />
+    <link href="<?php echo url('assets/js/toastr.min.css'); ?>" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="{!! url('fontawesome/css/all.css" rel="stylesheet') !!}"/>
-    <link href="{!! url('assets/js/toastr.min.css') !!}" rel="stylesheet" />
+    <link href="<?php echo url('fontawesome/css/all.css" rel="stylesheet'); ?>"/>
+    <link href="<?php echo url('assets/js/toastr.min.css'); ?>" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 <div class="wrapper">
 
@@ -19,7 +18,7 @@
 
         <div class="content" style="font-family: Verdana, sans-serif" >
 
-            <body style="background-image: url( {!! url('assets/img/background.jpg') !!}">
+            <body style="background-image: url( <?php echo url('assets/img/background.jpg'); ?>">
 
                 <div class="container-fluid">
 
@@ -29,7 +28,7 @@
 
                             <div class="card "  >
                                 <div class="header" style="background-color: #06419f">
-                                    <h3 class="title text-center" style="color: #ffffff ; padding-bottom :8px;"><strong>ORDEN DE SERVICIO N° {{ $arrayData->id_orden }} - ORDEN GENERAL</strong></h3>
+                                    <h3 class="title text-center" style="color: #ffffff ; padding-bottom :8px;"><strong>ORDEN DE SERVICIO N° <?php echo e($arrayData->id_orden); ?> - ORDEN GENERAL</strong></h3>
                                 </div>
                             </div>
 
@@ -39,8 +38,8 @@
 
 
                                 <div class="header">
-                                    <input disabled id="idOrden" value="{{ $arrayData->id_orden }}" hidden>
-                                    <input disabled id="totalValorRepuestos" value="{{ $totalValorRepuestos }}" hidden>
+                                    <input disabled id="idOrden" value="<?php echo e($arrayData->id_orden); ?>" hidden>
+                                    <input disabled id="totalValorRepuestos" value="<?php echo e($totalValorRepuestos); ?>" hidden>
                                 </div>
                                 <div class="content">
 
@@ -56,7 +55,7 @@
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-alt"></i><strong>&nbsp;FECHA INGRESO</strong></label>
 
                                                     <h4 style="width: 83%" class="caja"
-                                                    id="fecha_creacion_orden"> {{ $arrayData->fecha_creacion_orden }}</h4>
+                                                    id="fecha_creacion_orden"> <?php echo e($arrayData->fecha_creacion_orden); ?></h4>
 
                                             </div>
                                         </div>
@@ -65,7 +64,7 @@
                                             <div class="form-group">
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-day"></i><strong>&nbsp;FECHA ESTIMADA</strong></label>
                                                 <h4 style="width: 83%" class="caja"
-                                                id="fecha_estimada"> {{ $arrayData->fecha_estimada_orden}}</h4>
+                                                id="fecha_estimada"> <?php echo e($arrayData->fecha_estimada_orden); ?></h4>
 
                                              </div>
 
@@ -74,12 +73,12 @@
                                             <div class="form-group">
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar"></i><strong style="font-size: 11px">FECHA DIAGNOSTICO</strong></label>
 
-                                                    @if(isset($arrayData->fecha_diagnostico_orden))
-                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico">{{$arrayData->fecha_diagnostico_orden }}</h4>
+                                                    <?php if(isset($arrayData->fecha_diagnostico_orden)): ?>
+                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico"><?php echo e($arrayData->fecha_diagnostico_orden); ?></h4>
 
-                                                    @else
+                                                    <?php else: ?>
                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico">- <br> -</h4>
-                                                    @endif
+                                                    <?php endif; ?>
 
 
                                             </div>
@@ -89,12 +88,12 @@
                                             <div class="form-group">
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-week"></i><strong style="font-size: 11px">&nbsp;FECHA REPARACION</strong></label>
 
-                                            @if(isset($arrayData->fecha_reparacion_orden))
-                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">{{$arrayData->fecha_reparacion_orden }}</h4>
+                                            <?php if(isset($arrayData->fecha_reparacion_orden)): ?>
+                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e($arrayData->fecha_reparacion_orden); ?></h4>
 
-                                           @else
+                                           <?php else: ?>
                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">- <br> -</h4>
-                                           @endif
+                                           <?php endif; ?>
                                         </div>
 
                                         </div>
@@ -102,12 +101,12 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                             <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-check"></i><strong style="font-size: 11px">&nbsp;FECHA ENTREGA</strong></label>
-                                            @if(isset($arrayData->fecha_entrega_orden))
-                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">{{$arrayData->fecha_entrega_orden }}</h4>
+                                            <?php if(isset($arrayData->fecha_entrega_orden)): ?>
+                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e($arrayData->fecha_entrega_orden); ?></h4>
 
-                                           @else
+                                           <?php else: ?>
                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">- <br> -</h4>
-                                           @endif
+                                           <?php endif; ?>
                                         </div>
                                         </div>
 
@@ -129,17 +128,17 @@
                                                     <th width=""
                                                         style=" height: 40px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1.5px solid">
                                                         &nbsp;<strong><label>Nit o C.C: &nbsp; </label>
-                                                        {{ $arrayData->cliente_documento }}</strong>
+                                                        <?php echo e($arrayData->cliente_documento); ?></strong>
                                                     </th>
                                                     <th colspan="2"
                                                         style="font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                         &nbsp; <strong>
                                                             <label>Nombre:&nbsp;</label>
-                                                    {{ $arrayData->cliente_nombres }}</strong> </th>
+                                                    <?php echo e($arrayData->cliente_nombres); ?></strong> </th>
                                                     <th width=""
                                                         style="font-size: 11px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                         &nbsp;<strong><label>E-Mail:&nbsp;</label>
-                                                        {{ $arrayData->cliente_correo }}</strong>
+                                                        <?php echo e($arrayData->cliente_correo); ?></strong>
                                                     </th>
 
                                                 </tr>
@@ -147,49 +146,50 @@
                                                 <tr>
                                                     <th width="20%"
                                                         style="font-size: 12px ;height: 40px;font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                        &nbsp;<strong><label>Ciudad:&nbsp;</label>{{ $arrayData->municipio_nombre }}
-                                                        - {{ $arrayData->departamento_nombre }}</strong>
+                                                        &nbsp;<strong><label>Ciudad:&nbsp;</label><?php echo e($arrayData->municipio_nombre); ?>
+
+                                                        - <?php echo e($arrayData->departamento_nombre); ?></strong>
 
                                                     </th>
                                                     <th width="20%"
                                                         style="font-size: 12px ; font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                        &nbsp;<strong><label>Telefono:&nbsp;</label>{{ $arrayData->cliente_telefono }}</strong>
+                                                        &nbsp;<strong><label>Telefono:&nbsp;</label><?php echo e($arrayData->cliente_telefono); ?></strong>
 
                                                     </th>
                                                     <th width="20%"
                                                         style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                        &nbsp;<strong><label>Celular:&nbsp;</label>{{ $arrayData->cliente_celular }}</strong>
+                                                        &nbsp;<strong><label>Celular:&nbsp;</label><?php echo e($arrayData->cliente_celular); ?></strong>
 
                                                     </th>
                                                     <th width="40%"
                                                         style="font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                        &nbsp;<strong><label>Direccion:&nbsp;</label>{{ $arrayData->cliente_direccion }}</strong>
+                                                        &nbsp;<strong><label>Direccion:&nbsp;</label><?php echo e($arrayData->cliente_direccion); ?></strong>
 
                                                     </th>
 
                                                 </tr>
-                                                @isset($arrayData->usuario_dependencia)
+                                                <?php if(isset($arrayData->usuario_dependencia)): ?>
                                                     <tr>
                                                         <th
                                                             style="height: 38px;font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                             &nbsp; <strong><label>Dependencia:
-                                                                    &nbsp;</label>{{ $arrayData->usuario_dependencia }}</strong>
+                                                                    &nbsp;</label><?php echo e($arrayData->usuario_dependencia); ?></strong>
 
                                                         </th>
                                                         <th colspan="2"
                                                             style="font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                             &nbsp;<strong><label>Usuario:&nbsp;</label>
-                                                            {{ $arrayData->usuario_nombre }}</strong>
+                                                            <?php echo e($arrayData->usuario_nombre); ?></strong>
 
                                                         </th>
                                                         <th
                                                             style="font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                             &nbsp;<strong><label>Celular Usuario:&nbsp;</label>
-                                                            {{ $arrayData->usuario_celular }}</strong>
+                                                            <?php echo e($arrayData->usuario_celular); ?></strong>
 
                                                         </th>
                                                     </tr>
-                                                @endisset
+                                                <?php endif; ?>
 
                                             </table>
                                         </div>
@@ -222,24 +222,26 @@
                                                 <th width="20%"
                                                     style=" font-size: 12px ;font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                                     &nbsp;<label><strong>Equipo:
-                                                            &nbsp;</label>{{ $arrayData->equipo_tipo }}</strong>
+                                                            &nbsp;</label><?php echo e($arrayData->equipo_tipo); ?></strong>
 
                                                 </th>
                                                 <th width="30%"
                                                     style="font-size: 12px ; font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                    &nbsp;<strong><label>Marca:&nbsp;</label>{{ $arrayData->equipo_marca }}
+                                                    &nbsp;<strong><label>Marca:&nbsp;</label><?php echo e($arrayData->equipo_marca); ?>
+
                                                     </strong>
 
                                                 </th>
                                                 <th width="30%"
                                                     style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
-                                                    &nbsp;<strong><label>Referencia:&nbsp;</label>{{ $arrayData->equipo_referencia }}
+                                                    &nbsp;<strong><label>Referencia:&nbsp;</label><?php echo e($arrayData->equipo_referencia); ?>
+
                                                     </strong>
 
                                                 </th>
                                                 <th width="20%"
                                                     style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1px solid">
-                                                    &nbsp;<strong><label>Serial:&nbsp;</label>{{ $arrayData->equipo_serial }}</strong>
+                                                    &nbsp;<strong><label>Serial:&nbsp;</label><?php echo e($arrayData->equipo_serial); ?></strong>
 
                                                 </th>
                                             </tr>
@@ -250,9 +252,10 @@
                                         <div class="col-md-5">
                                             <div class="form-group" style="margin: 0%">
                                                 <label><strong>Garantia:</strong></label>
-                                                {{$arrayData->garantia_orden}} <br>
+                                                <?php echo e($arrayData->garantia_orden); ?> <br>
                                                 <label><strong>Contrato:</strong></label>
-                                                {{$arrayData->contrato_orden}}
+                                                <?php echo e($arrayData->contrato_orden); ?>
+
 
                                              </div>
                                         </div>
@@ -260,7 +263,8 @@
                                         <div class="col-md-5">
                                             <div class="form-group" style="margin: 0%">
                                                 <label><strong>Servicio:</strong></label> <br>
-                                                {{ $arrayData->servicio_orden }}
+                                                <?php echo e($arrayData->servicio_orden); ?>
+
                                              </div>
                                         </div>
                                     </div>
@@ -270,52 +274,57 @@
                                         <div class="col-md-5">
                                             <div class="form-group" style="margin: 0%">
                                                 <label><strong>Accesorios:</strong></label> <br>
-                                                {{ $arrayData->accesorios_orden }}
-                                                @if( $arrayData->serial_adaptador_orden <> null)
+                                                <?php echo e($arrayData->accesorios_orden); ?>
+
+                                                <?php if( $arrayData->serial_adaptador_orden <> null): ?>
 
                                                 <div style=" ">
                                                 <label ><strong>Adaptador Serial N°:</strong></label>
-                                                {{ $arrayData->serial_adaptador_orden}}
+                                                <?php echo e($arrayData->serial_adaptador_orden); ?>
+
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
                                              </div>
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-5">
                                             <div class="form-group" style="margin: 0%">
                                                 <label><strong>Caracteristicas Equipo:</strong></label> <br>
-                                                {{ $arrayData->caracteristicas_equipo_orden }}
+                                                <?php echo e($arrayData->caracteristicas_equipo_orden); ?>
+
                                              </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div>
                                         <label><strong> Daño Equipo: </strong></label> <br>
-                                        {{ $arrayData->descripcion_dano_orden }}
+                                        <?php echo e($arrayData->descripcion_dano_orden); ?>
+
                                     </div>
                                     <hr>
                                     <div>
                                         <label><strong> REPORTE TECNICO: </strong></label>
-                                        @if(auth()->user()->rol == "ADMINISTRATIVO" &&  $arrayData->estadoOrden == 2)
+                                        <?php if(auth()->user()->rol == "ADMINISTRATIVO" &&  $arrayData->estadoOrden == 2): ?>
                                         <button style="border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Editar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditarReporte" onclick="reporteTecnicoEdit()" >
                                             <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-pencil-fill box-info pull-left"></i>
                                         </button>
-                                        @endif
+                                        <?php endif; ?>
                                         <button style="display: none; border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Guardar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsaveReporte" onclick="reporteTecnicoSave()" >
                                             <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
                                         </button>
                                          <br>
                                          <div class="col-md-13">
                                             <div class="form-group">
-                                                <textarea rows="4" id="editReporte" class="form-control" maxlength="1500" placeholder="" autocomplete="off" style="display: none ; text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" >{{ $arrayData->reporte_tecnico_orden }}</textarea>
+                                                <textarea rows="4" id="editReporte" class="form-control" maxlength="1500" placeholder="" autocomplete="off" style="display: none ; text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" ><?php echo e($arrayData->reporte_tecnico_orden); ?></textarea>
                                             </div>
                                         </div>
                                         <div id="reporteTecnicoDiv">
-                                            {{ $arrayData->reporte_tecnico_orden }}
+                                            <?php echo e($arrayData->reporte_tecnico_orden); ?>
+
 
                                         </div>
                                         <br><br>
-                                        <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label>{{$arrayData->name}} </div>
+                                        <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label><?php echo e($arrayData->name); ?> </div>
 
                                     </div>
                                     <hr>
@@ -325,19 +334,19 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="form-group">
-                                                @if(isset($Arraydiagnostico->descripcion_observacion))
-                                                <div class="caja" style="text-align: left"> {{$Arraydiagnostico->descripcion_observacion}}</div>
+                                                <?php if(isset($Arraydiagnostico->descripcion_observacion)): ?>
+                                                <div class="caja" style="text-align: left"> <?php echo e($Arraydiagnostico->descripcion_observacion); ?></div>
 
-                                                @else
+                                                <?php else: ?>
                                                 <div class="caja"></div>
 
-                                                @endif
+                                                <?php endif; ?>
 
                                             </div>
                                         </div>
 
                                     </div>
-                                    @if($arrayData->estadoOrden != 3)
+                                    <?php if($arrayData->estadoOrden != 3): ?>
                                     <div class="row">
                                         <div class="col-md-1">
 
@@ -364,8 +373,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
-                                    @if (sizeOf($anotacion) != 0)
+                                    <?php endif; ?>
+                                    <?php if(sizeOf($anotacion) != 0): ?>
                                         <div class="table-responsive-xl">
 
                                             <table class="table table-striped" width="100%"
@@ -392,29 +401,32 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($anotacion as $comentario)
+                                                    <?php $__currentLoopData = $anotacion; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comentario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
                                                             <th width="20%"
                                                                 style="font-size: 12px ;font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp;{{ $comentario->created_at_observacion }}
+                                                                &nbsp;<?php echo e($comentario->created_at_observacion); ?>
+
 
                                                             </th>
                                                             <th width="50%"
                                                                 style="font-size: 12px ; font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp; {{ $comentario->descripcion_observacion }}
+                                                                &nbsp; <?php echo e($comentario->descripcion_observacion); ?>
+
 
                                                             </th>
                                                             <th width="30%"
                                                                 style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp;{{ $comentario->user_observacion }}
+                                                                &nbsp;<?php echo e($comentario->user_observacion); ?>
+
                                                             </th>
 
                                                         </tr>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </tbody>
                                             </table>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                     <hr>
                                     <div class="table-responsive-xl">
                                         <table style="font-family: Verdana, sans-serif" class="table" width="100%" style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 50px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(0, 0, 0, 0) 1.5px solid">
@@ -436,46 +448,48 @@
                                                     style="border-top-right-radius: 0.5rem;font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid">
                                                     &nbsp;<strong>$ Total</strong>
 
-                                                    @if($arrayData->estadoOrden == 2 && auth()->user()->rol == "ADMINISTRATIVO")
+                                                    <?php if($arrayData->estadoOrden == 2 && auth()->user()->rol == "ADMINISTRATIVO"): ?>
                                                     <button style="border: none; outline:none; text-decoration: none; margin: -1px" type="button" title="Editar valor Servicio" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditvalorServicio" onclick="valorServicioEdit()" >
                                                         <i style="color: #ffffff; font-size: 18px; margin: -7px" class="bi bi-pencil-fill box-info pull-left"></i>
                                                     </button>
                                                     <button style="display: none; border: none; outline:none; text-decoration: none; margin: -1px" type="button" title="Guardar valor Servicio" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsavevalorServicio" onclick="changePrice()" >
                                                         <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
                                                     </button>
-                                                    @endif
+                                                    <?php endif; ?>
                                                 </th>
 
                                             </tr>
-                                            @if(sizeOf($repuesto) != 0)
-                                                @foreach ($repuesto as $repuestos)
+                                            <?php if(sizeOf($repuesto) != 0): ?>
+                                                <?php $__currentLoopData = $repuesto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repuestos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr style=" font-size: 13px " class="table-striped">
                                                         <th width=""
                                                             style="font-size: 16px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;{{ $repuestos->cantidad_repuesto }}
+                                                            &nbsp;<?php echo e($repuestos->cantidad_repuesto); ?>
+
                                                         </th>
                                                         <th width="" style="font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                        &nbsp;{{ $repuestos->nombre_repuesto }}
+                                                        &nbsp;<?php echo e($repuestos->nombre_repuesto); ?>
+
                                                         </th>
-                                                        @if($repuestos->estado_repuesto == 1)
+                                                        <?php if($repuestos->estado_repuesto == 1): ?>
                                                         <th width="" colspan="2"
                                                             style="color: red; font-size: 13px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
                                                             &nbsp; Pendiente de Autorizacion
                                                         </th>
-                                                        @else
+                                                        <?php else: ?>
                                                         <th width=""
                                                             style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
-                                                            &nbsp;<strong>${{number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')   }}</strong>
+                                                            &nbsp;<strong>$<?php echo e(number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')); ?></strong>
                                                         </th>
                                                         <th width=""
                                                             style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;<strong>${{number_format($repuestos->valor_total_repuesto, 0, ',', '.') }}</strong>
+                                                            &nbsp;<strong>$<?php echo e(number_format($repuestos->valor_total_repuesto, 0, ',', '.')); ?></strong>
                                                         </th>
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                     </tr>
-                                                @endforeach
-                                            @endif
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
 
                                             <tr style=" font-size: 13px;text-align: center ">
                                                 <th width=""
@@ -490,7 +504,7 @@
                                                 </th>
                                                 <th width=""
                                                     style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                    &nbsp;<strong>${{number_format($totalValorRepuestos, 0, ',', '.')}}</strong>
+                                                    &nbsp;<strong>$<?php echo e(number_format($totalValorRepuestos, 0, ',', '.')); ?></strong>
                                                 </th>
 
                                             </tr>
@@ -510,10 +524,10 @@
                                                 </th>
                                                 <th width=""
                                                     style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                    <strong id="labelValorServicio">${{number_format($arrayData->valor_servicio_orden, 0, ',', '.')}}</strong>
+                                                    <strong id="labelValorServicio">$<?php echo e(number_format($arrayData->valor_servicio_orden, 0, ',', '.')); ?></strong>
 
                                                     <input style=" font-weight:bold ;display: none; margin-top: -1%;text-align: right; " type="text"
-                                                        class="form-control number" name="valorservicio" id="valorservicio" value="{{$arrayData->valor_servicio_orden}}"
+                                                        class="form-control number" name="valorservicio" id="valorservicio" value="<?php echo e($arrayData->valor_servicio_orden); ?>"
                                                         placeholder="" autocomplete="off" >
                                                 </th>
 
@@ -528,19 +542,15 @@
                                                 <th width=""
                                                     style=" background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid">
                                                     &nbsp;<strong style=" line-height: 30px">IVA 19%</strong>
-                                                    {{-- <select class="js-example-basic js-states form-control" id="verificacion_funcionamiento" style="float: right; width: 40%" >
-                                                        {{-- <option value="" >Seleccione..</option>
-                                                        <option value="SI">SI</option>
-                                                        <option value="NO" >NO</option>
-                                                    </select> --}}
-                                                    @if($arrayData->estadoOrden == 2 && $arrayData->iva_orden == 0)
+                                                    
+                                                    <?php if($arrayData->estadoOrden == 2 && $arrayData->iva_orden == 0): ?>
                                                     <input checked disabled style="width: 20px; height: 20px; border-radius: 1em" title="SIN IVA" data-toggle="tooltip" data-placement="top"  class="form-check-input" type="checkbox" value="" id="checkSinIva"  autocomplete="off" onchange="calcularValores()">
-                                                    @elseif($arrayData->estadoOrden == 2)
+                                                    <?php elseif($arrayData->estadoOrden == 2): ?>
                                                     <input style="width: 20px; height: 20px; border-radius: 1em" title="SIN IVA" data-toggle="tooltip" data-placement="top"  class="form-check-input" type="checkbox" value="" id="checkSinIva"  autocomplete="off" onchange="calcularValores()">
-                                                    @endif
+                                                    <?php endif; ?>
                                                 </th>
                                                 <th width=""
-                                                    style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid"><strong><div class="" style="text-align: right ; margin: 0%" id="iva">${{number_format($arrayData->iva_orden, 0, ',', '.')}}</div></strong>
+                                                    style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid"><strong><div class="" style="text-align: right ; margin: 0%" id="iva">$<?php echo e(number_format($arrayData->iva_orden, 0, ',', '.')); ?></div></strong>
                                                 </th>
 
                                             </tr>
@@ -560,7 +570,7 @@
                                                 </th>
                                                 <th width="" id="valorTotalOrden"
                                                 style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                <strong><div style="text-align: right " id="valorTotalOrde">${{number_format($arrayData->valor_total_orden, 0, ',', '.')}}</div></strong>
+                                                <strong><div style="text-align: right " id="valorTotalOrde">$<?php echo e(number_format($arrayData->valor_total_orden, 0, ',', '.')); ?></div></strong>
                                                 </th>
 
                                             </tr>
@@ -580,7 +590,7 @@
                                                 </th>
                                                 <th width=""
                                                 style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
-                                                &nbsp;<strong>{{$arrayData->factura_numero_orden}}</strong>
+                                                &nbsp;<strong><?php echo e($arrayData->factura_numero_orden); ?></strong>
                                             </th>
 
                                             </tr>
@@ -591,28 +601,28 @@
 
 
                                     <br><br>
-                                    @if($arrayData->estadoOrden == 2)
+                                    <?php if($arrayData->estadoOrden == 2): ?>
                                         <button style="margin: 5px" class="btn btn-success btn-fill pull-right" id="btnTerminarOrden"
-                                            @if (sizeOf($diagnostico) != 1)
+                                            <?php if(sizeOf($diagnostico) != 1): ?>
                                             disabled title="PENDIENTE DE DIAGNOSTICO"
-                                            @endif
+                                            <?php endif; ?>
 
-                                                @foreach ($repuesto as $repuestos)
-                                                    @if($repuestos->estado_repuesto == 1)
+                                                <?php $__currentLoopData = $repuesto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repuestos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($repuestos->estado_repuesto == 1): ?>
                                                         disabled  title="PENDIENTE DE AUTORIZAR REPUESTO"
-                                                    @endif
-                                                @endforeach
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         onclick="entregarOrden()">ENTREGAR Y ENVIAR ORDEN</button>
-                                    @endif
-                                    <a href="{{ url('OrdenEntrada', encrypt($arrayData->id_orden)  ) }}">
+                                    <?php endif; ?>
+                                    <a href="<?php echo e(url('OrdenEntrada', encrypt($arrayData->id_orden)  )); ?>">
                                         <button   class="btn btn-secondary btn-fill pull-left" style="margin: 5px; padding: 8px"><i style="font-size: 28px" class="fas fa-file-pdf"></i> ORDEN DE ENTRADA</button>
                                     </a>
-                                    @if($arrayData->estadoOrden == 3)
-                                    <a href="{{ url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', $arrayData->id_orden  ) }}">
+                                    <?php if($arrayData->estadoOrden == 3): ?>
+                                    <a href="<?php echo e(url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', $arrayData->id_orden  )); ?>">
                                         <button   class="btn btn-secondary btn-fill pull-left" style="margin: 5px; padding: 8px"><i style="font-size: 28px" class="fas fa-file-pdf"></i> ORDEN DE SALIDA</button>
 
                                     </a>
-                                    @endif
+                                    <?php endif; ?>
                                     <div class="clearfix"></div>
 
                                 </div>
@@ -625,15 +635,17 @@
 </div>
 
 
-@section('js')
-    <script src="{!! url('js/jquery.min.js') !!}"></script>
-    <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
-    <script src="{!! url('js/editOrden.js') !!}"></script>
-    <script src="{!! url('js/entregarOrden.js') !!}"></script>
-    <script src="{!! url('js/ordenGeneral.js') !!}"></script>
+<?php $__env->startSection('js'); ?>
+    <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
+    <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
+    <script src="<?php echo url('js/editOrden.js'); ?>"></script>
+    <script src="<?php echo url('js/entregarOrden.js'); ?>"></script>
+    <script src="<?php echo url('js/ordenGeneral.js'); ?>"></script>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('plantilla', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/modulos/ordenServicio/verOrdenGeneral.blade.php ENDPATH**/ ?>

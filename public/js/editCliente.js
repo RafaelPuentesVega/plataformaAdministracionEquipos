@@ -32,6 +32,8 @@ $(document).ready(function() {
         responsive: true,
         autoWidth: false,
         lengthMenu:[[3,5,10,],[3,5,10,]],
+        "ordering": true,
+        "order": [[ 1, 'desc' ]],
         "language": idioma_espanol
 
     });

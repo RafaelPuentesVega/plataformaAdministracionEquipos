@@ -2,7 +2,7 @@ numeroOrden = '';
 function facturaNumero(id) {
     showModal();
     $.ajax({
-        url: '../facturaNumero',
+        url: 'facturaNumero',
         data: {
             id: id
         },
@@ -76,7 +76,7 @@ function guardarNumeroFactura() {
     }
 
     $.ajax({
-        url: '../guardarNumeroFactura',
+        url: 'guardarNumeroFactura',
         data: {
             numeroOrden:numeroOrden,
             numeroFactura:numeroFactura
@@ -106,6 +106,6 @@ function showModal() {
     $('#md-facturaNumero').modal('show'); // abrir
 }
 function CloseModal() {
-    $('#md-facturaNumero').modal('hide'); // abrir
+    $('#md-facturaNumero').modal('hide'); // Cerrar
 
 }

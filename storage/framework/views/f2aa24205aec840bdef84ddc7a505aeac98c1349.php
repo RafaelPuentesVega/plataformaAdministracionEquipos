@@ -1,29 +1,112 @@
-<header class="main-panel">
+<nav  style="margin-bottom: -500px ;height: 60px; box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <button style="background-color: gray" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
 
-     <nav class=" navbar-default navbar-fixed">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div style="background-color:rgba(6, 107, 240, 0.295);">
+    <!-- Topbar Navbar -->
+    <ul style="list-style:none;" class="navbar-nav ml-auto">
 
-                     <!-- desplegar menu Responsive-->
-                     
-                    </a>
+        <li  class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div style="border: none" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 style="margin-top: -1px; font-size: 12px; text-align: center" class="dropdown-header">
+                    Notificaciones
+                </h6>
+                <a style="height: 80px" class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span style="font-family: 'Times New Roman', Times, serif" class="font-weight-bold">A new monthly report is ready to download!</span>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i style="font-size: 15px" class="fas fa-donate text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                            <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 2, 2019</div>
+                        Spending Alert: We've noticed unusually high spending for your account.
+                    </div>
+                </a>
+            </div>
+        </li>
 
 
+        <div  class="topbar-divider d-none d-sm-block"></div>
+        <li  class="nav-item dropdown no-arrow" >
+            <a style="font-size: 13px ; font-style: italic" class="nav-link dropdown-toggle"  id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(0, 0, 0, 0.397)" class="">
+                     <?php echo e(auth()->user()->rol); ?></span>
+                </a>
 
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+        </li>
+        <div  class="topbar-divider d-none d-sm-block"></div>
 
 
-                </div>
+        <!-- Nav Item - User Information -->
+        <li  class="nav-item dropdown no-arrow" >
+            <a class="nav-link dropdown-toggle"  id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(0, 0, 0, 0.514)" class="">
+                     <?php echo e(auth()->user()->name); ?></span>
+                <img style="width: 35px; height: 35px;" class="img-profile rounded-circle"
+                    src="<?php echo url('assets/img/myAvatar.png'); ?>">
+                </a>
+            <!-- Dropdown - User Information -->
+            <div style="font-size: 14px; .a hover{text-decoration:none}" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Perfil
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Privacidad
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"
+                class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <form method="POST" id="logout-form" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
+
+                </form>
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar Sesion
+                </a>
+            </div>
+        </li>
 
 
-        </div>
-    </nav>
-</header>
+    </ul>
 
+</nav>
 <?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/modulos/cabecera.blade.php ENDPATH**/ ?>

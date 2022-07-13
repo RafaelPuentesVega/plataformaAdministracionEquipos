@@ -72,15 +72,6 @@
                     <p>PRIVACIDAD</p>
                 </a>
             </li>
-            <a href="{{route('logout')}}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"  class="btn btn-danger btn-fill  btn-flat" style="" > Cerrar Sesion </a>
-                    <form method="POST" id="logout-form" action="{{route('logout')}}">
-                     @csrf
-
-                    </form>
-                </a>
-                <span style="font-size: 12px"><strong>{{auth()->user()->name }}</strong></span>
-                <span style="font-size: 12px"><strong>{{auth()->user()->rol }}</strong></span>
 
         </ul>
     </div>

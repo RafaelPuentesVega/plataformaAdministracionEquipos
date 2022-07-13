@@ -2403,10 +2403,10 @@ a {
     color: #1DC7EA;
 }
 
-a:hover, a:focus {
+/* a:hover, a:focus {
     color: #42d0ed;
     text-decoration: none;
-}
+} */
 
 a:focus, a:active,
 button::-moz-focus-inner,
@@ -2755,7 +2755,7 @@ input:focus {
 }
 
 .main-panel > .content {
-    padding: 30px 15px;
+    /* padding: 30px 15px; */
     min-height: calc(100% - 123px);
 }
 
@@ -3950,6 +3950,7 @@ fieldset[disabled] .btn-neutral.active {
 .nav > li > a:hover,
 .nav > li > a:focus {
     background-color: transparent;
+    text-decoration:none !important;
 }
 
 .navbar {
@@ -6116,7 +6117,7 @@ fieldset[disabled] .btn-neutral.active {
         float: none;
         width: auto;
         margin-top: 0;
-        background-color: transparent;
+        background-color: white !important;
         border: 0;
         -webkit-box-shadow: none;
         box-shadow: none;
