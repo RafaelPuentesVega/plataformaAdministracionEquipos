@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
         <title>Plataforma</title>
-        <link rel="shortcut icon" href="<?php echo url('assets/img/logo.ico'); ?>" type="image/x-icon">
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
             <link href="<?php echo url('fontawesome/css/all.css'); ?>" rel="stylesheet"/>
+            <link rel="shortcut icon" href="<?php echo url('assets/img/logo.ico'); ?>" type="image/x-icon">
 
             <link href="<?php echo url('css/sb-admin-2.css'); ?>" rel="stylesheet" />
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
-
+        
+        
+        
         <link href="<?php echo url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
         <link href="<?php echo url('bootstrap/preloader.css'); ?>" rel="stylesheet" />
         <link href="<?php echo url('assets/css/light-bootstrap-dashboard.css?v=1.4.0'); ?>" rel="stylesheet"/>
@@ -88,9 +88,12 @@
            <script src="<?php echo url('assets/js/light-bootstrap-dashboard.js?v=1.4.0'); ?>"></script>
             <script src="<?php echo url('assets/js/demo.js'); ?>"></script>
             <script src="<?php echo url('js/preloader.js'); ?>"></script>
+            <script src="<?php echo url('js/global.js'); ?>"></script>
             <script src="<?php echo url('assets/js/bootstrap.min.js" type="text/javascript'); ?>"></script>
+            <script src="<?php echo url('sweetalert2/sweetalert2.js" type="text/javascript'); ?>"></script>
             
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
+            
+
             <?php if(!!!Auth::guest()): ?>
             <script src="<?php echo url('js/sesionInactividad.js'); ?>"></script>
             <?php endif; ?>

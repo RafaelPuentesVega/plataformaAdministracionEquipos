@@ -1,7 +1,9 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startSection('css'); ?>
     <style>
-
+    hr{
+     border: 0.01px solid #bababa3f !important;
+    }
     </style>
     <link href="<?php echo url('assets/js/toastr.min.css'); ?>" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -18,7 +20,7 @@
 
         <div class="content" style="font-family: Verdana, sans-serif" >
 
-            <body style="background-image: url( <?php echo url('assets/img/background.jpg'); ?>">
+            <body style="background-color: #d8d8d892">
 
                 <div class="container-fluid">
 
@@ -33,7 +35,7 @@
                             </div>
 
 
-                            <div class="card ">
+                            <div class="card " style="border-radius: 10px 10px 10px 10px">
 
 
 
@@ -55,7 +57,7 @@
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-alt"></i><strong>&nbsp;FECHA INGRESO</strong></label>
 
                                                     <h4 style="width: 83%" class="caja"
-                                                    id="fecha_creacion_orden"> <?php echo e($arrayData->fecha_creacion_orden); ?></h4>
+                                                    id="fecha_creacion_orden"> <?php echo e(date("Y-m-d h:i:s a",strtotime($arrayData->fecha_creacion_orden))); ?></h4>
 
                                             </div>
                                         </div>
@@ -64,7 +66,7 @@
                                             <div class="form-group">
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-day"></i><strong>&nbsp;FECHA ESTIMADA</strong></label>
                                                 <h4 style="width: 83%" class="caja"
-                                                id="fecha_estimada"> <?php echo e($arrayData->fecha_estimada_orden); ?></h4>
+                                                id="fecha_estimada"> <?php echo e(date("Y-m-d h:i:s a",strtotime($arrayData->fecha_estimada_orden))); ?></h4>
 
                                              </div>
 
@@ -74,7 +76,7 @@
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar"></i><strong style="font-size: 11px">FECHA DIAGNOSTICO</strong></label>
 
                                                     <?php if(isset($arrayData->fecha_diagnostico_orden)): ?>
-                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico"><?php echo e($arrayData->fecha_diagnostico_orden); ?></h4>
+                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico"><?php echo e(date("Y-m-d h:i:s a",strtotime($arrayData->fecha_diagnostico_orden))); ?></h4>
 
                                                     <?php else: ?>
                                                     <h4 style="width: 83%"  class="caja" id="fecha_diagnostico">- <br> -</h4>
@@ -89,7 +91,7 @@
                                                 <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-week"></i><strong style="font-size: 11px">&nbsp;FECHA REPARACION</strong></label>
 
                                             <?php if(isset($arrayData->fecha_reparacion_orden)): ?>
-                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e($arrayData->fecha_reparacion_orden); ?></h4>
+                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e(date("Y-m-d h:i:s a",strtotime($arrayData->fecha_reparacion_orden))); ?></h4>
 
                                            <?php else: ?>
                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">- <br> -</h4>
@@ -102,7 +104,7 @@
                                             <div class="form-group">
                                             <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-check"></i><strong style="font-size: 11px">&nbsp;FECHA ENTREGA</strong></label>
                                             <?php if(isset($arrayData->fecha_entrega_orden)): ?>
-                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e($arrayData->fecha_entrega_orden); ?></h4>
+                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden"><?php echo e(date("Y-m-d h:i:s a",strtotime($arrayData->fecha_entrega_orden))); ?></h4>
 
                                            <?php else: ?>
                                            <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">- <br> -</h4>
@@ -247,7 +249,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <hr>
+                                    <hr style="border: 1px solid">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group" style="margin: 0%">
@@ -328,6 +330,8 @@
 
                                     </div>
                                     <hr>
+                                      <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label style=" font-size: 9px">Recibido Por:</label><?php if(isset($arrayData->user_created)): ?> <?php echo e($arrayData->user_created); ?><?php else: ?> N/A  <?php endif; ?></i> </div>
+                                    <br>
                                     <div class="row">
                                         <div class="col-md-2">
                                         <label><strong>DIAGNOSTICO</strong></label>
@@ -385,17 +389,17 @@
                                                         style="background-color: rgba(226, 226, 226, 0.295);; height: 38px">
                                                         <th width="16%"
                                                             style=" font-size: 12px ;font-weight:normal; text-align: center ; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;<strong>FECHA </strong>
+                                                            <strong>FECHA </strong>
 
                                                         </th>
                                                         <th width="64%"
                                                             style="font-size: 12px ; font-weight:normal;text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;<strong> NOVEDADES</strong>
+                                                            <strong> NOVEDADES</strong>
 
                                                         </th>
                                                         <th width="20%" style="font-size: 12px ;font-weight:normal;  text-align: center
                                                         ; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;<strong>USUARIO</strong>
+                                                            <strong>USUARIO</strong>
 
                                                         </th>
                                                     </tr>
@@ -405,19 +409,19 @@
                                                         <tr>
                                                             <th width="20%"
                                                                 style="font-size: 12px ;font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp;<?php echo e($comentario->created_at_observacion); ?>
+                                                               <?php echo e($comentario->created_at_observacion); ?>
 
 
                                                             </th>
                                                             <th width="50%"
                                                                 style="font-size: 12px ; font-weight:normal;text-align: left; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp; <?php echo e($comentario->descripcion_observacion); ?>
+                                                                <?php echo e($comentario->descripcion_observacion); ?>
 
 
                                                             </th>
                                                             <th width="30%"
                                                                 style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.116) 1px solid">
-                                                                &nbsp;<?php echo e($comentario->user_observacion); ?>
+                                                               <?php echo e($comentario->user_observacion); ?>
 
                                                             </th>
 
@@ -599,30 +603,50 @@
                                     </div>
 
 
+                                    <div class="row" required>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label style="font-size: 12px"><strong ><i class="fa-solid fa-print"></i>ORDEN DE ENTRADA</strong></label> <br>
+                                                <a href="<?php echo e(url('OrdenEntrada', encrypt($arrayData->id_orden)  )); ?>">
+                                                    <button   class="btn btn-secondary  " style=" "><i style="font-size: 30px;color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
+                                                </a>
 
-                                    <br><br>
-                                    <?php if($arrayData->estadoOrden == 2): ?>
-                                        <button style="margin: 5px" class="btn btn-success btn-fill pull-right" id="btnTerminarOrden"
-                                            <?php if(sizeOf($diagnostico) != 1): ?>
-                                            disabled title="PENDIENTE DE DIAGNOSTICO"
-                                            <?php endif; ?>
+                                            </div>
+                                        </div>
 
-                                                <?php $__currentLoopData = $repuesto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repuestos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($repuestos->estado_repuesto == 1): ?>
-                                                        disabled  title="PENDIENTE DE AUTORIZAR REPUESTO"
-                                                    <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        onclick="entregarOrden()">ENTREGAR Y ENVIAR ORDEN</button>
-                                    <?php endif; ?>
-                                    <a href="<?php echo e(url('OrdenEntrada', encrypt($arrayData->id_orden)  )); ?>">
-                                        <button   class="btn btn-secondary btn-fill pull-left" style="margin: 5px; padding: 8px"><i style="font-size: 28px" class="fas fa-file-pdf"></i> ORDEN DE ENTRADA</button>
-                                    </a>
-                                    <?php if($arrayData->estadoOrden == 3): ?>
-                                    <a href="<?php echo e(url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', $arrayData->id_orden  )); ?>">
-                                        <button   class="btn btn-secondary btn-fill pull-left" style="margin: 5px; padding: 8px"><i style="font-size: 28px" class="fas fa-file-pdf"></i> ORDEN DE SALIDA</button>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <?php if($arrayData->estadoOrden == 3): ?>
+                                                <label style="font-size: 12px"><strong><i class="fa-solid fa-print"></i> ORDEN DE SALIDA</strong></label> <br>
+                                                <a href="<?php echo e(url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', ['email' =>'NO' ,'idOrden' => $arrayData->id_orden] )); ?>">
+                                                    <button   class="btn btn-secondary pull-left" style="    padding: 8px; text-decoration: none; :hover border-color:white"><i style="font-size: 30px; color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
 
-                                    </a>
-                                    <?php endif; ?>
+                                                </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <br>
+                                                <?php if($arrayData->estadoOrden == 2): ?>
+                                                    <input type="button" style="margin: 5px;padding: 9px 15px;" class="btn btn-success pull-right" id="btnTerminarOrden"
+                                                        <?php $__currentLoopData = $repuesto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repuestos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php if($repuestos->estado_repuesto == 1): ?>
+                                                                    disabled  title="PENDIENTE DE AUTORIZAR REPUESTO"
+                                                                <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    onclick="entregarOrden(event)"  value= "ENTREGAR EQUIPO">
+                                                <?php endif; ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                     <div class="clearfix"></div>
 
                                 </div>
@@ -639,7 +663,7 @@
     <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
     <script src="<?php echo url('js/editOrden.js'); ?>"></script>
-    <script src="<?php echo url('js/entregarOrden.js'); ?>"></script>
+    <script src="<?php echo url('js/entregarOrden.js?v=1.1'); ?>"></script>
     <script src="<?php echo url('js/ordenGeneral.js'); ?>"></script>
 
 

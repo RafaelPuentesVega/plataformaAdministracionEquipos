@@ -131,6 +131,7 @@
                                                 <strong>REGISTRADO</strong></th>
                                             <th scope="col" class="text-center" style="font-size: 15px;color:#16172C">
                                                 <strong>ESTADO</strong></th>
+                                           <th scope="col" class="text-center"  style="font-size: 15px;color:#16172C"><strong>ULTIMO LOGIN</strong></th>
                                            <th scope="col" class="text-center"  style="font-size: 15px;color:#16172C"></th>
 
                                        </tr>
@@ -138,18 +139,19 @@
                                    <tbody>
                                        @foreach ($usuario as $usuarios)
                                            <tr style="height: 50px">
-                                               <td width="24%" class="text-center">{{$usuarios->name}}</td>
-                                               <td width="24%" class="text-center">{{$usuarios->email}}
+                                               <td width="20%" class="text-center">{{$usuarios->name}}</td>
+                                               <td width="20%" class="text-center">{{$usuarios->email}}
                                                </td>
-                                               <td width="10%" class="text-center">{{$usuarios->telefono}}</td>
-                                               <td width="15%" class="text-center">{{$usuarios->rol}}</td>
-                                               <td width="15%" class="text-center">{{$usuarios->created_at}}</td>
+                                               <td width="7%" class="text-center">{{$usuarios->telefono}}</td>
+                                               <td width="10%" class="text-center">{{$usuarios->rol}}</td>
+                                               <td width="10%" class="text-center">{{$usuarios->created_at}}</td>
                                                @if($usuarios->state == 1)
                                                <td width="10%" class="text-center">ACTIVO</td>
                                                @else
                                                <td width="10%" class="text-center">INACTIVO</td>
                                                @endif
 
+                                               <td width="10%" class="text-center">{{$usuarios->last_login}}</td>
 
                                                <td width="5%">
 

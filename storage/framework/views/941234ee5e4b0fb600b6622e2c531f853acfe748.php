@@ -81,6 +81,12 @@
                     <p>INFORMES</p>
                 </a>
             </li>
+            <li <?php if(Request::url() == route('privacidad')): ?> class="active" <?php endif; ?>>
+                <a href="<?php echo e(url('privacidad')); ?>">
+                    <i class="pe-7s-add-user"></i>
+                    <p>USUARIOS</p>
+                </a>
+            </li>
 
 
 

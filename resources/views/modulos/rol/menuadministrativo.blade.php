@@ -80,6 +80,12 @@
                     <p>INFORMES</p>
                 </a>
             </li>
+            <li @if (Request::url() == route('privacidad')) class="active" @endif>
+                <a href="{{ url('privacidad') }}">
+                    <i class="pe-7s-add-user"></i>
+                    <p>USUARIOS</p>
+                </a>
+            </li>
 
 
 

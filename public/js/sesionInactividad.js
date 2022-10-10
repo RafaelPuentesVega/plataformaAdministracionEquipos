@@ -12,10 +12,10 @@ function resetTimer(){
  // idleLogout is used to Actual navigate to logout
 function idleLogout(){
     // window.location.href = '';
-    swal({
+    Swal.fire({
         title: "¡Inactividad!",
         text: "Cierre de sesion por inactividad",
-        type: "warning",
+        icon: 'warning',
         allowOutsideClick: false,
     }).then(function () {
 

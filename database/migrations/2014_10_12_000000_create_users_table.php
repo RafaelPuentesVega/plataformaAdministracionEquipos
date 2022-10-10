@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('rol');
             $table->rememberToken();
             $table->timestamps();
+            $table->dateTime('last_login')->nullable();
         });
     }
 

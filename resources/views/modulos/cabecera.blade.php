@@ -8,6 +8,29 @@
 
     <!-- Topbar Navbar -->
     <ul style="list-style:none;" class="navbar-nav ml-auto">
+        <li  class="nav-item dropdown no-arrow" >
+            <a class="nav-link dropdown-toggle"  id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(67, 67, 67, 0.514)" class="">
+                    <i class="fa-solid fa-print " ></i>
+                    Orden en blanco</span>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div style="font-size: 14px; .a hover{text-decoration:none}" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <a class="dropdown-item"  onclick="ordenblanco('entrada')">
+                    <i class="fa-regular fa-file-lines fa-sm fa-fw mr-3 text-gray-400"></i>
+                    Orden de Ingreso
+                </a>
+                <a class="dropdown-item"  onclick="ordenblanco('salida')">
+                    <i class="fa-solid fa-file-lines fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Orden de Salida
+                </a>
+
+            </div>
+        </li>
+        <div  class="topbar-divider d-none d-sm-block"></div>
+
 
         <li  class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -87,7 +110,7 @@
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Perfil
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#md-cambiarClave" onclick="">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Privacidad
                 </a>
@@ -109,3 +132,5 @@
     </ul>
 
 </nav>
+{{-- @include('modulos.modal.cambiarClaveModal') --}}
+

@@ -29,8 +29,6 @@ Route::get('/login', function () {
      return view('modulos.ingresar');
 });
 Route::get('home', function () {
-    //  return view('register');
-     //  return route('modulos.inicio');
      return redirect()->route('home');
   });
 Route::get('/register', function () {
@@ -58,15 +56,13 @@ Route::POST('facturaNumero',[OrdenServicioController::class, 'facturaNumero']);
 Route::POST('guardarNumeroFactura',[OrdenServicioController::class, 'guardarNumeroFactura']);
 Route::POST('editarReporteTecnico',[OrdenServicioController::class, 'editarReporteTecnico']);
 Route::POST('changePrice',[OrdenServicioController::class, 'changePrice']);
-
+Route::POST('update/password', 'PrivacidadController@update');
 //Post Subtmit
 Route::post('actualizarCliente/{id}',[ClientesController::class, 'update'])->name('actualizarCliente');
 ///Pdf ordenes
 Route::GET('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI{idOrden}TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',[OrdenServicioController::class, 'ordenEntradaEmailAndPDF'])->name('ordenEntradaEmailyPDF');
 Route::GET('OrdenEntrada/{idOrden}',[OrdenServicioController::class, 'ordenEntradaPDF'])->name('OrdenEntradaPDF');
-Route::GET('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW/{idOrden}',[OrdenServicioController::class, 'ordenSalidaPdf'])->name('ordenSalidaPDFyEmail');
-
-
+Route::GET('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW/{email}/{idOrden}',[OrdenServicioController::class, 'ordenSalidaPdf'])->name('ordenSalidaPDFyEmail');
 Route::GET('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFilesPDF'])->name('ordenEntrada');
 Route::POST('entregarOrden',[OrdenServicioController::class, 'entregarOrden']);
 
@@ -75,11 +71,7 @@ Route::get('correo', function(){
 
 });
 
-
-//--
-
 Auth::routes();
-
 
 Route::get('',[InicioController::class, 'index'])->name('home');
 Route::get('inicio',[InicioController::class, 'index'])->name('home');
@@ -91,12 +83,9 @@ Route::get('crear_orden_servicio',[OrdenServicioController::class, 'index']) ->n
 Route::get('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFilesPDF'])->name('ordenEntrada');
 Route::post('crear_orden_servicio',[ClientesController::class, 'store']);
 Route::get('orden_salida',[BuscarOrdenController::class, 'index']) ->name('searchOrden');
+Route::get('imprimir_orden_blanco/{event}',[OrdenServicioController::class, 'ordenBlanco']);
 //Requerimiento interno
 Route::get('requerimiento',[RequerimientoInternoController::class, 'index']) ->name('requerimientos');
-
-
-
-
 Route::get('clientes',[ClientesController::class, 'index']) ->name('clientes');
 Route::get('clienteEdit/{idcliente}',[ClientesController::class, 'editCliente'])->name('clienteEdit') ;
 Route::get('crear_cliente',[ClientesController::class, 'create']);
@@ -111,13 +100,3 @@ Route::get('privacidad',[PrivacidadController::class, 'index']) ->name('privacid
 Route::get('parametros',[ParametroController::class, 'index']) ->name('parametros');
 Route::post('parametros',[ParametroController::class, 'store']);
 
-
-// Route::get('consultorios',[ConsultoriosController::class, 'index']);
-// Route::post('consultorios',[ConsultoriosController::class, 'store']);
-// Route::put('consultorio/{id}',[ConsultoriosController::class, 'update']);
-
-##Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-//Ruta Select2
-//Route::get('select2', Select2::class);

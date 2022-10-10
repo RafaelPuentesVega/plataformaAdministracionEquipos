@@ -383,7 +383,17 @@
                                                         <select class="js-example-basic js-states form-control" id="tecnicoSelect" required>
                                                                     <option value="">-SELECCIONAR-</option>
                                                                     <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $users): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                     <option value="<?php echo e($users->id); ?>"><?php echo e($users->name); ?></option>
+                                                                     <option value="<?php echo e($users->id); ?>"><?php echo e($users->name); ?>
+
+                                                                        <?php $__currentLoopData = $ordenServicio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <?php if($item['tecnico'] == $users->id ): ?>
+                                                                        &nbsp &nbsp &nbsp -> &nbsp<?php echo e($item['cantidad']); ?>  &nbsp ordenes.
+
+                                                                        <?php break; ?>
+                                                                         <?php endif; ?>
+
+                                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                    </option>
                                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
                                                         </div>

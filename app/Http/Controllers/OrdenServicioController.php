@@ -13,6 +13,7 @@ use App\Models\Departamentos;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Auth;
 //use Mail;
 //use EmailPdf;
 use App\Mail\EmailPdf as MailEmailPdf;
@@ -37,7 +38,13 @@ class OrdenServicioController extends Controller
     public function index()
     {
 
-        $consultorios = OrdenServicio::all();//consultorios es igual a orden de servicio
+        //$ordenServicio = OrdenServicio::all();//consultorios es igual a orden de servicio
+        $ordenServicio = OrdenServicio:://DB::table('orden_servicio as orden')
+        whereNull('fecha_entrega_orden' )
+        ->where('estadoOrden','1')
+        ->groupBy('id_tecnico_orden')
+        ->select(DB::raw(' id_tecnico_orden as tecnico,count(*) as cantidad'))
+        ->get()->toArray();
         $user = User::where('rol','Tecnico')
         ->orWhere('rol', 'Coordinador Técnico')->get();
         $servicios = Parametro::all();
@@ -45,10 +52,11 @@ class OrdenServicioController extends Controller
         $departamentos = Departamentos::all();
         $tipoEquipo = TipoEquipo::all();
 
+
         return view('modulos.ordenServicio.crearordenservicio')
         ->with('user',$user)
         ->with('servicios',$servicios)
-        ->with('consultorios',$consultorios)
+        ->with('ordenServicio',$ordenServicio)
         ->with('departamentos',$departamentos)
         ->with('clientes' ,$clientes)
         ->with('tipoEquipo',$tipoEquipo);
@@ -221,6 +229,7 @@ class OrdenServicioController extends Controller
         $idOrden = $request->idOrden;
         $estadoOrden = 3 ; // Colocamos estado 3 (1-Recien ingresa - 2-Terminada , 3-Entregada)
         $fechaActual = new \DateTime();
+        $enviarEmail = $request->enviarEmail;
 
         $arrayOrden  = DB::table('orden_servicio')
         ->where('id_orden', '=', $idOrden)->get();
@@ -243,6 +252,7 @@ class OrdenServicioController extends Controller
             'fecha_entrega_orden' => $fechaActual ] );
 
             $response = Array('mensaje' => 'ok'   );
+            $pdfOrden =  OrdenServicioController::ordenSalidaPdf( $enviarEmail ,$idOrden);
             return json_encode($response);
     }
     public function ordenGeneral($id_cliente)
@@ -305,17 +315,12 @@ class OrdenServicioController extends Controller
      * @param  \App\Models\consultorios  $consultorios
      * @return \Illuminate\Http\Response
      */
-    public function ordenSalidaPdf($idOrden)
+    public static function ordenSalidaPdf($rsemail ,$idOrden)
     {
-
-
-        // $dataArray = OrdenServicio::latest('id_orden')->first();
-        //  $id = $dataArray['id_orden'];
+        $sendEmail = $rsemail;
         $dataArray = DB::table('orden_servicio')
         ->where('id_orden', '=', $idOrden)->get()->toArray();
         $dataArray = $dataArray[0];
-
-
                 $pdfData = DB::table('orden_servicio as orden')
                 ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
                 ->join('equipo', 'orden.id_equipo_orden', '=', 'equipo.equipo_id')
@@ -375,37 +380,15 @@ class OrdenServicioController extends Controller
                 ->whereRaw("orden.id_orden = $idOrden")
                 ->get()->toArray(); ;
 
+
             $emailSend = $array->emailSend;
 
             $pdf = PDF::loadView('modulos.pdf.ordenSalida', $data ,  compact('repuesto')  );
-
-            if($emailSend != 2){
-                $arrayDatos = [
-                    'correo'=> $array->cliente_correo,
-                    'orden' => $array->id_orden
-                ];
-
-             //  dd($arrayDatos['orden']);
-
-                Mail::send('modulos.email.email',["datos"=>$arrayDatos] , function($message) use ($arrayDatos,$pdf){
-                    $numeroOrden = $arrayDatos['orden'];
-                    $correoCliente = $arrayDatos['correo'];
-                    $message->from('contabilidad@bygsistemas.com');
-                    $message->to($correoCliente);
-                    $message->subject('ByG Sistemas - Orden de ingreso N°'.$numeroOrden);
-                    //Attach PDF doc
-                    $message->attachData($pdf->output(),'Orden entrada N°' .($numeroOrden).' .pdf');
-                });
-                    DB::table('orden_servicio')
-                    ->where('id_orden', $idOrden)
-                    ->update(
-                        [
-                        'emailSend' => 2 //Cambiamos de estado el envio de EMAIL , para evitar que se siga enviando el correo
-                        ]
-                        );
-                }
-                $numeroOrden = $array->id_orden ;
-            return $pdf->stream('Orden entrada N° ' .($numeroOrden).' .pdf');
+            if($sendEmail == 'SI'){
+                $SendEmail =  sendEmail::ordenSalidaEmail($pdf, $array);
+            }
+            $numeroOrden = $array->id_orden ;
+            return $pdf->stream('Orden entrada Numero ' .($numeroOrden).'.pdf');
 
 
 
@@ -422,6 +405,7 @@ class OrdenServicioController extends Controller
             $diasVencimiento = 3 ;
             $fechaVencimiento = '';
             $fechaVencimiento = date("Y-m-d G:i:s");
+            $userCreated =  Auth()->user()->name;
             //REALIZAMOS EL CONTEO DE LOS DIA HABILES
             $dia = date("w", strtotime($fechaVencimiento));
             // Solo analizas si es día inhábil
@@ -465,6 +449,7 @@ class OrdenServicioController extends Controller
         $ordenServicio->contrato_orden = $request->contrato;
         $ordenServicio->emailSend = $emailSend;
         $ordenServicio->estadoOrden = $estadoOrden;
+        $ordenServicio->user_created = $userCreated;
         $ordenServicio->save();
         $response = Array('mensaje' => 'save'   );
         $response['dataOrden'] =$ordenServicio->toArray();//Devolvemos a la vista el array del cliente recien registrado
@@ -593,23 +578,7 @@ class OrdenServicioController extends Controller
             $pdf = PDF::loadView('modulos.pdf.ordenIngreso', $data );
 
             if($emailSend != 2){
-                $arrayDatos = [
-                    'correo'=> $array->cliente_correo,
-                    'orden' => $array->id_orden,
-                    'nombre' => $array->cliente_nombres
-                ];
 
-                //dd($arrayDatos['orden']);
-
-                Mail::send('modulos.email.email',["datos"=>$arrayDatos] , function($message) use ($arrayDatos,$pdf){
-                    $numeroOrden = $arrayDatos['orden'];
-                    $correoCliente = $arrayDatos['correo'];
-                    $message->from('contabilidad@bygsistemas.com');
-                    $message->to($correoCliente);
-                    $message->subject('ByG Sistemas - Orden de ingreso N°'.$numeroOrden);
-                    //Attach PDF doc
-                    $message->attachData($pdf->output(),'Orden entrada N°' .($numeroOrden).' .pdf');
-                });
                     DB::table('orden_servicio')
                     ->where('id_orden', $idOrden)
                     ->update(
@@ -617,6 +586,8 @@ class OrdenServicioController extends Controller
                         'emailSend' => 2 //Cambiamos de estado el envio de EMAIL , para evitar que se siga enviando el correo
                         ]
                         );
+                $SendEmail =  sendEmail::ordenEntradaEmail($pdf, $array);
+
                 }
                 $numeroOrden = $array->id_orden ;
             return $pdf->stream('Orden entrada N° ' .($numeroOrden).' .pdf');
@@ -794,5 +765,56 @@ public function changePrice(Request $request)
     $response = Array('mensaje' => 'update' );
     return json_encode($response);
 }
+public function ordenBlanco($event)
+{
+    $data = [
+        'orden' => '',
+        'fecha_ingreso' =>  '',
+        'fecha_reparacion' =>  '',
+        'fecha_entrega' =>  '',
+        'fecha_ingreso' =>'',
+        'fecha_estimada' => '',
+        'tipoCliente' => '',
+        'nombre' => '',
+        'documento' => '',
+        'correo'=> '',
+        'telefono' => '',
+        'celular' => '',
+        'departamento' => '',
+        'municipio' =>'',
+        'direccion' =>'',
+        'celular_usuario' => '',
+        'dependencia' => '',
+        'usuario' => '',
+        'equipo' => '',
+        'marca' => '',
+        'referencia' => '',
+        'serial' => '',
+        'verficoFuncionamiento' => '',
+        'servicio' => '',
+        'accesorios' => '',
+        'adaptador' => '',
+        'caracteristicas' => '',
+        'dano' => '',
+        'tecnico' => str_repeat ("_", 38),
+        'garantia' => '',
+        'contrato' => '',
+        'subTotal' => 0,
+        'valorServicio' => 0,
+        'iva' => 0,
+        'totalOrden' => 0,
+        'reporteTecnico' => ''
+        ];
+        $repuesto = [];
+        if($event == 'entrada'){
+            $pdf = PDF::loadView('modulos.pdf.ordenIngreso', $data );
+        }else if($event == 'salida'){
+            $pdf = PDF::loadView('modulos.pdf.ordenSalida', $data, compact('repuesto') );
+        }
+
+        return $pdf->stream('Orden ' .($event).' en blanco.pdf');
+
+}
+
 
 }

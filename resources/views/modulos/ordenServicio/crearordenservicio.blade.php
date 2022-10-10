@@ -386,7 +386,16 @@
                                                         <select class="js-example-basic js-states form-control" id="tecnicoSelect" required>
                                                                     <option value="">-SELECCIONAR-</option>
                                                                     @foreach ($user as $users)
-                                                                     <option value="{{ $users->id }}">{{$users->name}}</option>
+                                                                     <option value="{{ $users->id }}">{{$users->name}}
+                                                                        @foreach ($ordenServicio as $item)
+                                                                        @if($item['tecnico'] == $users->id )
+                                                                        &nbsp &nbsp &nbsp -> &nbsp{{$item['cantidad']}}  &nbsp ordenes.
+
+                                                                        @break
+                                                                         @endif
+
+                                                                        @endforeach
+                                                                    </option>
                                                                     @endforeach
                                                         </select>
                                                         </div>

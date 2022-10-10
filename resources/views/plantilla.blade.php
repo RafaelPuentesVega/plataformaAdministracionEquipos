@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Plataforma</title>
-        <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
             <link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
+            <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
 
             <link href="{!! url('css/sb-admin-2.css') !!}" rel="stylesheet" />
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/>
-
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css"/> --}}
+        {{-- <link rel="stylesheet" href="{!! url('sweetalert2/sweetalert2.min.css') !!}"> --}}
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.22/sweetalert2.css"/> --}}
         <link href="{!! url('assets/css/bootstrap.min.css') !!}" rel="stylesheet" />
         <link href="{!! url('bootstrap/preloader.css') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/light-bootstrap-dashboard.css?v=1.4.0') !!}" rel="stylesheet"/>
@@ -106,9 +106,12 @@
            <script src="{!! url('assets/js/light-bootstrap-dashboard.js?v=1.4.0') !!}"></script>
             <script src="{!! url('assets/js/demo.js') !!}"></script>
             <script src="{!! url('js/preloader.js') !!}"></script>
+            <script src="{!! url('js/global.js') !!}"></script>
             <script src="{!! url('assets/js/bootstrap.min.js" type="text/javascript') !!}"></script>
-            {{-- <script src="{!! url('sweetalert2/sweetalert2.js" type="text/javascript') !!}"></script> --}}
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
+            <script src="{!! url('sweetalert2/sweetalert2.js" type="text/javascript') !!}"></script>
+            {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script> --}}
+            {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.23/sweetalert2.all.js" integrity="sha512-LfOY+aB6HZ6FbLZlt2S4c+/aa0HHvh7noXwDm9wFPIzYZzeudQ/mGwDTASYfzf0lHDBOr5HB2/Zzau08kX5HmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
             @if (!!!Auth::guest())
             <script src="{!! url('js/sesionInactividad.js') !!}"></script>
             @endif

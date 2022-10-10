@@ -1,62 +1,62 @@
 <!-- Modal AUTORIZAR -->
 <div class="modal fade " id="md-autorizarRepuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="border-radius: 10px 10px 10px 10px">
         <div class="modal-content">
-            <div class="card "  >
+            <div class="card "  style="border-radius: 10px 10px 10px 10px" >
                 <div class="header" style="background-color: #06419f">
                     <h3 class="title text-center" style="font-size: 20px; color: #ffffff ; padding-bottom :8px;"><strong>AUTORIZAR</strong></h3>
                 </div>
             </div>
             <div class="modal-header">
-                <table id="clients" class="table table-striped" >
-                    <thead style="background:#aed6f18a" class="thead">
+                <table id="clients" class="table" style="border-collapse: collapse;border-radius: 8px;box-shadow: inset 0 0 0 1px #0000001f; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
+                    <thead style="background-color: rgba(98, 40, 233, 0.852)">
                         <tr>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>CLIENTE</strong></th>
-                            <th scope="col" class="text-center" style="height: 1px; color:#16172C"><strong>DOCUMENTO</strong></th>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>NOMBRES</strong></th>
+                            <th scope="col" class="text-center" style="border-radius: 10px 0 0 0 ; color:white"><strong>CLIENTE</strong></th>
+                            <th scope="col" class="text-center" style="height: 1px; color:white"><strong>DOCUMENTO</strong></th>
+                            <th scope="col" class="text-center" style="border-radius: 0 10px 0 0 ;color:white"><strong>NOMBRES</strong></th>
                         </tr>
                     </thead>
                     <tbody>
                     </tr>
-                    <th id="clienteTipo" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                    <th id="clienteTipo" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 1.5px solid">
                         &nbsp;<label><strong></strong></label>
 
                     </th>
-                    <th id="clienteDocumento" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                    <th id="clienteDocumento" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 1.5px solid">
                     &nbsp;<label><strong id="nombreCliente"></strong></label>
                     </th>
 
-                    <th id="clienteNombre" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                    <th id="clienteNombre" width="33%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 1.5px solid">
                         &nbsp;<label><strong></strong></label>
                     </th>
                 </tr>
                     </tbody>
                 </table>
-                <table id="clients" class="table table-striped" >
-                    <thead style="background:#aed6f18a" class="thead">
-                        <tr>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>EQUIPO</strong></th>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>MARCA</strong></th>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>REFERENCIA</strong></th>
-                            <th scope="col" class="text-center" style="color:#16172C"><strong>SERIAL</strong></th>
+                <table id="clients" class="table" style="border-collapse: collapse;border-radius: 8px;box-shadow: inset 0 0 0 1px #0000001f; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
+                    <thead  class="">
+                        <tr style="background-color: rgba(98, 40, 233, 0.852); ">
+                            <th scope="col" class="text-center" style="color: white;border-radius: 10px 0 0 0;"><strong>EQUIPO</strong></th>
+                            <th scope="col" class="text-center" style="color: white"><strong>MARCA</strong></th>
+                            <th scope="col" class="text-center" style="color: white"><strong>REFERENCIA</strong></th>
+                            <th scope="col" class="text-center" style="color: white ;border-radius: 0 10px 0 0;"><strong>SERIAL</strong></th>
 
-                        </tr>
+                        </tr >
                     </thead>
-                    <tbody>
-                        </tr>
-                            <th id="equipoRepuesto" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                    <tbody style="border: rgb(0, 0, 0) 1.5px solid">
+                        <tr >
+                            <th id="equipoRepuesto" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                             &nbsp;<label><strong></strong></label>
 
                             </th>
-                            <th id="equipoMarca" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                            <th id="equipoMarca" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                 &nbsp;<label><strong></strong></label>
 
                             </th>
-                            <th id="equipoReferencia" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                            <th id="equipoReferencia" width="25%" style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                                 &nbsp;<label><strong></strong></label>
                             </th>
-                            <th id="equipoSerial" width="25%"style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                            <th id="equipoSerial" width="25%"style="font-size: 12px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 1.5px solid">
                             &nbsp;<label><strong></strong></label>
                             </th>
                         </tr>

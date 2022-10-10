@@ -63,10 +63,10 @@
             <li @if (Request::url() == route('privacidad')) class="active" @endif>
                 <a href="{{ url('privacidad') }}">
                     <i class="pe-7s-add-user"></i>
-                    <p>EMPLEADOS</p>
+                    <p>USUARIOS</p>
                 </a>
             </li>
-            
+
 
         </ul>
     </div>
