@@ -301,7 +301,6 @@ if (event.keyCode == 13 ){
 }
 $( "#valorservicio" ).blur(function() {
     calcularValores();
-
 });
 }
 

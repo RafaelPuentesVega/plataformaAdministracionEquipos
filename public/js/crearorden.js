@@ -1,14 +1,248 @@
+//Variables globales
 var cliente_id = '';
 var equipo_id = '';
 var usuario_empresa = '' ;
 var id = '';
+var emailQuestion = '';
+var contrato = '';
+var garantia = '';
+var btnguardar = '';
+var serialAdaptatador = '';
+var verifica_funcionamiento = '';
+var accesorios = '';
+var servicio = '';
+var caracteristicas_equipo = '';
+var descripcion_dano = '';
+var tecnico = '';
+var tipocliente = '';
+$('#btnGuardarOrden').on('click', function(){
+     btnguardar = document.getElementById('btnGuardarCliente');
+     serialAdaptatador = $("#serialAdaptador").val();
+     verifica_funcionamiento = $("#verificacion_funcionamiento").val();
+     accesorios = $("#accesorios").val();
+     servicio = $("#servicio").val();
+     caracteristicas_equipo = $("#caracteristicas_equipo").val();
+     descripcion_dano = $("#descripcion_dano").val();
+     tecnico = $("#tecnicoSelect").val();
+     tipocliente = $("#tipocliente").val();
+
+    if (cliente_id.length == 0 || cliente_id.length == '') {
+        toastr["warning"]("<h6>Seleccionar un Cliente </h6>")
+        return true;
+    }
+    if(tipocliente == 'EMPRESA'){
+
+        if (usuario_empresa.length < 1 || usuario_empresa.length == '') {
+            toastr["warning"]("<h6>Seleccionar O guardar una Dependencia</h6>")
+            return true;
+        }
+    }
+
+    if (equipo_id.length == 0 || equipo_id.length == '') {
+        toastr["warning"]("<h6>Seleccionar un Equipo </h6>")
+        return true;
+    }
+
+    if (document.getElementById('checkcontrato').checked) {
+        contrato = 'SI';
+    }
+    if (!document.getElementById('checkcontrato').checked) {
+        contrato = 'NO';
+    }
+    if (document.getElementById('checkgarantia').checked) {
+        garantia = 'SI';
+    }
+    if (!document.getElementById('checkgarantia').checked) {
+        garantia = 'NO';
+    }
+    if (document.getElementById('checkadaptador').checked) {
+        if (serialAdaptatador.length < 1) {
+            toastr["warning"]("<h6>Digitar Serial Adaptador</h6>")
+            $("#serialAdaptador").focus();
+            return;
+        }
+        if (serialAdaptatador.length < 6) {
+            toastr["warning"]("<h6>El serial debe contener 6 digitos</h6>")
+            $("#serialAdaptador").focus();
+            return;
+        }
+    }
+    if (!document.getElementById('checkadaptador').checked) {
+        serialAdaptatador = '';
+    }
+    if (verifica_funcionamiento.length < 1) {
+        toastr["warning"]("<h6>Seleccionar Verificacion de funcionamiento</h6>")
+        $("#verificacion_funcionamiento").focus();
+        return;
+    }
+    if (accesorios.length < 1) {
+        toastr["warning"]("<h6>Diligenciar accessorios</h6>")
+        $("#accesorios").focus();
+        return;
+    }
+    if (servicio.length < 1) {
+        toastr["warning"]("<h6>Seleccionar un servicio</h6>")
+        $("#servicio").focus();
+        return;
+    }
+    if (caracteristicas_equipo.length < 1) {
+        toastr["warning"]("<h6>Diligenciar Caracteristicas del equipo</h6>")
+        $("#caracteristicas_equipo").focus();
+        return;
+    }
+    if (descripcion_dano.length == 0) {
+        toastr["warning"]("<h6>Diligenciar el daño del equipo </h6>")
+        $("#descripcion_dano").focus();
+        return;
+    }
+    if (tecnico.length < 1) {
+        toastr["warning"]("<h6>Seleccionar un Tecnico</h6>")
+        $("#tecnico").focus();
+        return;
+    }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+      })
+    swalWithBootstrapButtons.fire({
+        title: 'Enviar Correo al cliente?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        reverseButtons: false
+
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+             emailQuestion = 'SI';
+             guardarOrdenServicio()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            emailQuestion = 'NO';
+            guardarOrdenServicio()
+
+            }
+        })
+});
+$(document).ready(function() {
+    $('#equipo_referencia').on('keyup', function() {
+        var referencia = $('#equipo_referencia').val();
+	$.ajax({
+            type: "POST",
+            url: "referenciaEquipoAjax",
+            data: {referencia : referencia} ,
+            success: function(data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $('#suggestionsReferencia').fadeIn(1000).html(data);
+                //Al hacer click en algua de las sugerencias
+                $(document).on('click', function(){
+                    $('#suggestionsReferencia').fadeOut(1000);
+                    return true;
+                });
+                $('.suggest-element').on('click', function(){
+                        //Obtenemos la id unica de la sugerencia pulsada
+                        var id = $(this).attr('id');
+                        //Editamos el valor del input con data de la sugerencia pulsada
+                        $('#equipo_referencia').val(id);
+                        //Hacemos desaparecer el resto de sugerencias
+                        $('#suggestionsReferencia').fadeOut(1000);
+                        return true;
+                });
+            }
+        });
+    });
+    //Autocomplete cedula
+    $('#cliente_documento').on('keyup', function() {
+        var documento = $('#cliente_documento').val();
+	$.ajax({
+            type: "POST",
+            url: "cedulaClienteAjax",
+            data: {documento : documento} ,
+            success: function(data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $('#suggestionsCedula').fadeIn(1000).html(data);
+                //Al hacer click en algua de las sugerencias
+                $(document).on('click', function(){
+                    $('#suggestionsCedula').fadeOut(1000);
+                    return true;
+                });
+                $('.suggest-element').on('click', function(){
+                        //Obtenemos la id unica de la sugerencia pulsada
+                        var id = $(this).attr('id');
+                        //Editamos el valor del input con data de la sugerencia pulsada
+                        $('#cliente_documento').val(id);
+                        //Hacemos desaparecer el resto de sugerencias
+                        $('#suggestionsCedula').fadeOut(1000);
+                        consultarClienteEnter()
+                        return true;
+                });
+            }
+        });
+    });
+    $('#equipo_marca').on('keyup', function() {
+        var marca = $('#equipo_marca').val();
+	$.ajax({
+            type: "POST",
+            url: "marcaEquipoAjax",
+            data: {marca : marca} ,
+            success: function(data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $('#suggestionsMarca').fadeIn(1000).html(data);
+                //Si damos click en otro lado
+                $(document).on('click', function(){
+                    $('#suggestionsMarca').fadeOut(1000);
+                    return true;
+                });
+                                //Al hacer click en algua de las sugerencias
+
+                $('.suggest-element').on('click', function(){
+                        //Obtenemos la id unica de la sugerencia pulsada
+                        var id = $(this).attr('id');
+                        //Editamos el valor del input con data de la sugerencia pulsada
+                        $('#equipo_marca').val(id);
+                        //Hacemos desaparecer el resto de sugerencias
+                        $('#suggestionsMarca').fadeOut(1000);
+                        return true;
+                });
+            }
+        });
+    });
+    //Autocomplete Caracteristicas del equipo
+    $('#caracteristicas_equipo').on('keyup', function() {
+        var caracteristicas = $('#caracteristicas_equipo').val();
+	$.ajax({
+            type: "POST",
+            url: "caracteristicaEquipoAjax",
+            data: {caracteristicas : caracteristicas} ,
+            success: function(data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $('#suggestionsCaracteristicas').fadeIn(1000).html(data);
+                //Al hacer click en algua de las sugerencias
+                $(document).on('click', function(){
+                    $('#suggestionsCaracteristicas').fadeOut(1000);
+                    return true;
+                });
+                $('.suggest-element').on('click', function(){
+                        //Obtenemos la id unica de la sugerencia pulsada
+                        var id = $(this).attr('id');
+                        //Editamos el valor del input con data de la sugerencia pulsada
+                        $('#caracteristicas_equipo').val(id);
+                        //Hacemos desaparecer el resto de sugerencias
+                        $('#suggestionsCaracteristicas').fadeOut(1000);
+                        return true;
+                });
+            }
+        });
+    });
+});
 $(window).on('load', function () {
     showpreloader()
     setTimeout(function () {
         hidepreloader()
 }, 700);
-
-
 });
 
 $.ajaxSetup({
@@ -23,7 +257,6 @@ function showModal() {
     $('#md-buscarCliente').modal('show'); // abrir
 }
 function guardarEquipoOrden() {
-
     btnguardar = document.getElementById('btnGuardarEquipo');
     let tipoEmpresa = $("#tipocliente").val();
     let equipo_tipo = $("#equipo_tipo").val();
@@ -109,14 +342,9 @@ function guardarEquipoOrden() {
 
                 }, 800);
                 toastr["success"]("<h6>Se guardo correctamente el equipo</h6>", "GUARDADO")
-
-
                 //btnguardar.disabled = true;
                 btnguardar.style.display = "none";
-
                 equipo_id = json.dataEquipo.id;
-
-
             }
         },
         error: function (xhr, status) {
@@ -190,10 +418,8 @@ function consultarEquipo() {
         complete: function (xhr, status) {
         }
     });
-
 }
 function guardarCliente() {
-
     emailval = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
     btnguardar = document.getElementById('btnGuardarCliente');
     let cliente_tipo = $("#tipocliente").val();
@@ -205,7 +431,6 @@ function guardarCliente() {
     let cliente_telefono = $("#cliente_telefono").val();
     let departamento_id = $("#departamentoSelect").val();
     let municipio_id = $("#municipioSelect").val();
-
     if (cliente_tipo.length == 0) {
         toastr["warning"]("<h5>Diligenciar Tipo de cliente</h5>")
         $("#tipocliente").focus();
@@ -671,96 +896,12 @@ function consultarClienteEnter() {
         }
     });
 }
+function validarCamposGuardarOrden(){
+
+}
 function guardarOrdenServicio() {
-    let contrato = '';
-    let garantia = '';
-    btnguardar = document.getElementById('btnGuardarCliente');
-    let serialAdaptatador = $("#serialAdaptador").val();
-    let verifica_funcionamiento = $("#verificacion_funcionamiento").val();
-    let accesorios = $("#accesorios").val();
-    let servicio = $("#servicio").val();
-    let caracteristicas_equipo = $("#caracteristicas_equipo").val();
-    let descripcion_dano = $("#descripcion_dano").val();
-    let tecnico = $("#tecnicoSelect").val();
-    let tipocliente = $("#tipocliente").val();
 
-
-    if (cliente_id.length == 0 || cliente_id.length == '') {
-        toastr["warning"]("<h6>Seleccionar un Cliente </h6>")
-        return;
-    }
-    if(tipocliente == 'EMPRESA'){
-
-        if (usuario_empresa.length < 1 || usuario_empresa.length == '') {
-            toastr["warning"]("<h6>Seleccionar O guardar una Dependencia</h6>")
-            return;
-        }
-    }
-
-    if (equipo_id.length == 0 || equipo_id.length == '') {
-        toastr["warning"]("<h6>Seleccionar un Equipo </h6>")
-        return;
-    }
-
-    if (document.getElementById('checkcontrato').checked) {
-        contrato = 'SI';
-    }
-    if (!document.getElementById('checkcontrato').checked) {
-        contrato = 'NO';
-    }
-    if (document.getElementById('checkgarantia').checked) {
-        garantia = 'SI';
-    }
-    if (!document.getElementById('checkgarantia').checked) {
-        garantia = 'NO';
-    }
-    if (document.getElementById('checkadaptador').checked) {
-        if (serialAdaptatador.length < 1) {
-            toastr["warning"]("<h6>Digitar Serial Adaptador</h6>")
-            $("#serialAdaptador").focus();
-            return;
-        }
-        if (serialAdaptatador.length < 6) {
-            toastr["warning"]("<h6>El serial debe contener 6 digitos</h6>")
-            $("#serialAdaptador").focus();
-            return;
-        }
-    }
-    if (!document.getElementById('checkadaptador').checked) {
-        serialAdaptatador = '';
-    }
-
-    if (verifica_funcionamiento.length < 1) {
-        toastr["warning"]("<h6>Seleccionar Verificacion de funcionamiento</h6>")
-        $("#verificacion_funcionamiento").focus();
-        return;
-    }
-    if (accesorios.length < 1) {
-        toastr["warning"]("<h6>Diligenciar accessorios</h6>")
-        $("#accesorios").focus();
-        return;
-    }
-    if (servicio.length < 1) {
-        toastr["warning"]("<h6>Seleccionar un servicio</h6>")
-        $("#servicio").focus();
-        return;
-    }
-    if (caracteristicas_equipo.length < 1) {
-        toastr["warning"]("<h6>Diligenciar Caracteristicas del equipo</h6>")
-        $("#caracteristicas_equipo").focus();
-        return;
-    }
-    if (descripcion_dano.length == 0) {
-        toastr["warning"]("<h6>Diligenciar el daño del equipo </h6>")
-        $("#descripcion_dano").focus();
-        return;
-    }
-    if (tecnico.length < 1) {
-        toastr["warning"]("<h6>Seleccionar un Tecnico</h6>")
-        $("#tecnico").focus();
-        return;
-    }
-
+    validarCamposGuardarOrden()
     $.ajax({
         // la URL para la petición
         url: 'guardarOrden',
@@ -790,7 +931,7 @@ function guardarOrdenServicio() {
                 setTimeout(function(){
                 }, 2000);
                // window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',"ventana1","width=120,height=300,scrollbars=NO" );
-               window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI',"Orden Ingreso","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=600,left = 390,top = 50" );
+               window.open ('imprimir_ordeningreso/TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI'+ id +'TBydUpOeWRoeTJjNUE9PSIsInZhbHVlI?email='+emailQuestion,"Orden Ingreso","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=800,height=600,left = 390,top = 50" );
 
                 location.reload();
             }

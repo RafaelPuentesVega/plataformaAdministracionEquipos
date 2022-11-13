@@ -55,10 +55,11 @@
                                             <td width="24%" class="text-center"><strong>{{ $equipo->equipo_serial }}</strong>
                                             </td>
                                             <td width="4%">
-
+                                            <a href="{{ url('equipoEdit', encrypt($equipo->equipo_id) ) }}">
                                                 <button style="border: none; outline:none; text-decoration: none; margin: 0%" type="button" title="Datos de equipo" data-toggle="tooltip" data-placement="left"  class="btn btn-info btn-fill  pull-right " id="btnGuardarCliente" onclick="guardarCliente()" >
                                                     <i style="color: #ffffff; font-size: 20px; margin: -5px" class="bi bi-pc-display-horizontal box-info pull-left"></i>
                                                 </button>
+                                            </a>
                                             </td>
                                         </tr>
                                     @endforeach

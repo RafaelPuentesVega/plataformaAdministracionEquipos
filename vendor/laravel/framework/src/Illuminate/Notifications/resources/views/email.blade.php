@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Hola!')
 @endif
 @endif
 
@@ -15,7 +15,10 @@
 {{ $line }}
 
 @endforeach
-
+<div style="text-align: center">
+    <img   width="10%" height="100%" src="https://www.bygsistemas.com.co/plataformabyg/public/assets/img/contrasena-email.png" class="logo" alt="Logo">
+</div>
+<br>
 {{-- Action Button --}}
 @isset($actionText)
 <?php
@@ -43,7 +46,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>
+@lang('Saludos'),<br>
 {{ config('app.name') }}
 @endif
 
@@ -51,8 +54,8 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    "Si tiene problemas para hacer clic en el botón \":actionText\", Copie y pegue la URL a continuación\n".
+    'en su navegador web:',
     [
         'actionText' => $actionText,
     ]

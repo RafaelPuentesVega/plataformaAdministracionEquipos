@@ -1,5 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startSection('css'); ?>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
 
 
@@ -9,6 +10,32 @@
 <style type="text/css">
     table { border-color: #CDCDD8; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
     .card label { color: rgba(0, 0, 0, 0.416); font-weight: bold}
+    #suggestionsReferencia
+    ,#suggestionsMarca
+    ,#suggestionsCedula
+    ,#suggestionsCaracteristicas {
+    box-shadow: 2px 2px 8px 0 rgba(0,0,0,.2);
+    height: auto;
+    position: absolute;
+    top: 61px;
+    z-index: 9999;
+    width: 90% ;
+    }
+    #suggestionsMarca
+    .suggest-element,
+    #suggestionsReferencia
+    .suggest-element
+    ,#suggestionsCaracteristicas
+    .suggest-element
+    ,#suggestionsCedula
+    .suggest-element{
+        background-color: #f8f8f8;
+        border-top: 1px solid #f0eded;
+        cursor: pointer;
+        padding: 8px;
+        width: 100%;
+        float: left;
+    }
 
     </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
@@ -61,6 +88,7 @@
                                                     <label>Cedula / Nit</label>
                                                     <input type="number" id="cliente_documento" name="cliente_documento" class="form-control" placeholder="Numero Documento" autocomplete="off" >
                                                 </div>
+                                                <div  id="suggestionsCedula"></div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -203,7 +231,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="form-group">
-                                                    <label style="margin-bottom: 12px" >Agregar</label>
+                                                    <label style="margin-bottom: 12px" >&nbsp;</label>
                                                     <div class="btn-save">
                                                         <div class="btnUpdate">
 
@@ -258,12 +286,14 @@
                                                     <label>MARCA</label>
                                                         <input type="text" class="form-control" id="equipo_marca" placeholder="Marca"  required autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                             </div>
+                                            <div  id="suggestionsMarca"></div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>RFERENCIA</label>
                                                         <input type="text" class="form-control" id="equipo_referencia" placeholder="Referencia" required autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                                 </div>
+                                                <div  id="suggestionsReferencia"></div>
                                             </div>
 
                                              <div class="col-md-2">
@@ -285,7 +315,7 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div class="form-group">
-                                                        <label id="saveequi" >Save</label>
+                                                        <label id="saveequi" ></label>
                                                                <button id="btnGuardarEquipo" class="btn btn-info btn-fill" onclick="guardarEquipoOrden()">Guardar </button>
                                                     </div>
                                                  </div>
@@ -350,6 +380,7 @@
                                                     <label>CARACTERISTICAS DEL EQUIPO</label>
                                                     <textarea rows="3" id="caracteristicas_equipo" maxlength="240" class="form-control" placeholder="Caracteristicas Fisicas del equipo" autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" ></textarea>
                                                 </div>
+                                                <div  id="suggestionsCaracteristicas"></div>
                                             </div>
 
 
@@ -387,10 +418,10 @@
 
                                                                         <?php $__currentLoopData = $ordenServicio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <?php if($item['tecnico'] == $users->id ): ?>
-                                                                        &nbsp &nbsp &nbsp -> &nbsp<?php echo e($item['cantidad']); ?>  &nbsp ordenes.
+                                                                        ( <?php echo e($item['cantidad']); ?>  Asginadas)
 
                                                                         <?php break; ?>
-                                                                         <?php endif; ?>
+                                                                        <?php endif; ?>
 
                                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                     </option>
@@ -402,13 +433,14 @@
                                             </div>
                                     </div>
                                 </div>
+
+                                <button id="btnGuardarOrden"  class="btn btn-success btn-fill pull-right" ><strong style="font-size: 14px">GUARDAR Y ENVIAR</strong></button>
+                                <div class="clearfix"></div>
                                 </div>
 
 
                         </div>
                     </div>
-                    <button  class="btn btn-success btn-fill pull-right" onclick="guardarOrdenServicio()"><strong style="font-size: 15px">GUARDAR Y ENVIAR</strong></button>
-                                <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -418,14 +450,15 @@
 <?php echo $__env->make('modulos.ordenServicio.modal.modal_buscar_cliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->startSection('js'); ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
     <script src="<?php echo url('js/jquery.min.js'); ?>""></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="<?php echo url('js/crearorden.js'); ?>""></script>
-    <script src="<?php echo url('assets/js/toastr.min.js'); ?>""></script>
+    <script src="<?php echo url('js/crearorden.js'); ?>"></script>
+    <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
 <?php $__env->stopSection(); ?>

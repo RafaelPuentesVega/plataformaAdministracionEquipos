@@ -39,6 +39,7 @@ class PrivacidadController extends Controller
         $user->password = $password; // Rellene el usuario con el nuevo password ya encriptado
         $user->save(); // Guarde el usuario
 
+        Session::flash('message','Creado Exitosamente');
         // Por ultimo, redirigir al usuario, por ejemplo al formulario anterior, con un mensaje de que el password fue actualizado
         return redirect()->back()->withSuccess('Password actualizado');
     }

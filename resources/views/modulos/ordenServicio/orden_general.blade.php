@@ -307,6 +307,14 @@
                         </div>
                     </div>
                     <div class="row ">
+                        <div class="col-md-11">
+                        </div>
+                        <div class="col-md-1">
+                           <button onclick="exportExcel('excel')" style="border-inline: none" data-toggle="tooltip" title="Exportar a Excel" class="btn btn-success"><i style="font-size: 20px; padding: 0px; margin: -3px" class="fas fa-file-excel"></i></button>
+                        </div>
+
+                    </div>
+                    <div class="row ">
                         <div class="col-md-8">
                             <label>Mostrar
                                 <select style="width: 66px; display: inline-block; position: relative;"
@@ -529,6 +537,63 @@
     <script src="{!! url('js/ordenGeneralFiltro.js') !!}"></script>
     <script src="{!! url('js/moment.min.js') !!}"></script>
     <script src="{!! url('js/daterangepicker.min.js') !!}"></script>
+    <script>
+
+
+    function exportExcel(btn){
+
+    showpreloader();
+    const exportar = btn
+    var URLactual = window.location;
+    var arrayUrl = URLactual.toString().split('&');
+    var QuestionArrayUrl = URLactual.toString().split('?');
+    posicion = arrayUrl.length - 1;
+    questionpaginate = arrayUrl[posicion].toString().split('=');
+    if (questionpaginate[0] == 'export') {
+        var res = '';
+        //Validacion para colocar paginate despues de un filtro
+        for (i = 0; i < posicion; i++) {
+            if (i > 0) {
+                res = res + '&' + arrayUrl[i];
+            } else {
+                res = res + arrayUrl[i];
+            }
+        }
+        location.href = res + '&export=' + exportar;
+
+    } else if (QuestionArrayUrl.length == 1)  {
+        location.href = '?export=' + exportar;
+    }else{
+    location.href = URLactual + '&export=' + exportar;
+    }
+    setTimeout(hidepreloader, 1500);
+
+            // showpreloader();
+
+    //     $.ajax({
+    //         url: 'excellaravel',
+    //         data: {
+    //             btn : btn
+    //         } ,
+    //         type: 'POST',
+    //         dataType: 'json',
+    //     success: function (json) {
+    //         if (json.mensaje === "ok") {
+    //             if (json.data.length > 0) {
+
+
+    //             }
+
+    //         };
+    //     },
+    //     error: function (xhr, status) {
+    //         alert('Disculpe, existió un problema en el servidor');
+    //     },
+    //     complete: function (xhr, status) {
+    //     }
+    // });
+    }
+    </script>
 @endsection
 
 

@@ -8,7 +8,7 @@
 
     <!-- Topbar Navbar -->
     <ul style="list-style:none;" class="navbar-nav ml-auto">
-        <li  class="nav-item dropdown no-arrow" >
+        <li  class="orden-blanco nav-item dropdown no-arrow" >
             <a class="nav-link dropdown-toggle"  id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(67, 67, 67, 0.514)" class="">
@@ -83,7 +83,7 @@
 
 
         <div  class="topbar-divider d-none d-sm-block"></div>
-        <li  class="nav-item dropdown no-arrow" >
+        <li  class="nav-cargo nav-item dropdown no-arrow" >
             <a style="font-size: 13px ; font-style: italic" class="nav-link dropdown-toggle"  id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(0, 0, 0, 0.397)" class="">
@@ -106,6 +106,21 @@
             <!-- Dropdown - User Information -->
             <div style="font-size: 14px; .a hover{text-decoration:none}" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
+                <div style="display: none" class="responsive-cel">
+                    <span style="" class="dropdown-item">
+                        <i class="fa-solid fa-print " ></i>
+                        Orden en blanco</span>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item"  onclick="ordenblanco('entrada')">
+                                <i class="fa-regular fa-file-lines fa-sm fa-fw mr-3 text-gray-400"></i>
+                                Orden de Ingreso
+                            </a>
+                            <a class="dropdown-item"  onclick="ordenblanco('salida')">
+                                <i class="fa-solid fa-file-lines fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Orden de Salida
+                            </a>
+                            <div class="dropdown-divider"></div>
+                </div>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Perfil

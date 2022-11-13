@@ -109,7 +109,7 @@ class SendEmailTecnico extends Command
                     ] );
                     $array = $ordenServicio[$i];
                 //Llamamos la funcion de enviar la orden de servicio
-                $SendEmail =  sendEmail::notificacionTecnico( $array);
+               // $SendEmail =  sendEmail::notificacionTecnico( $array);
 
             }elseif($fechaActual > $fechaSumDaysNotificacion){
                 //Actualizamos la observacion de la orden
@@ -128,8 +128,10 @@ class SendEmailTecnico extends Command
                     ] );
                     $array = $ordenServicio[$i];
                     //Llamamos la funcion de enviar la orden de servicio
-                $SendEmail =  sendEmail::notificacionTecnico( $array);
+               /// $SendEmail =  sendEmail::notificacionTecnico( $array);
             }
         }
+        Log::info('Finalizo Cron de notificacion tecnico Correctamente');
+
     }
 }

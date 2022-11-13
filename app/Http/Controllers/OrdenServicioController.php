@@ -462,7 +462,7 @@ class OrdenServicioController extends Controller
             //$pasarPdf =  $this->generateFilesPDF($idOrden);
    }
 
-   public function ordenEntradaEmailAndPDF($idOrden)
+   public function ordenEntradaEmailAndPDF(Request $request , $idOrden  )
    {
 
 
@@ -574,7 +574,10 @@ class OrdenServicioController extends Controller
             ];
             }
             $emailSend = $array->emailSend;
-
+            //CAMBIAMOS ESTA, SI DECIDE NO ENVIAR POR CORREO LA ORDEN
+            if( $request->get("email") == 'NO') {
+                $emailSend = 2;
+            }
             $pdf = PDF::loadView('modulos.pdf.ordenIngreso', $data );
 
             if($emailSend != 2){

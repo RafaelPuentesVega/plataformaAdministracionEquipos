@@ -37,6 +37,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if(empty($repuestoAutorizar->toarray()))
+                                        <tr>
+
+                                        <td class="text-center" colspan="5"> <img style="  width:30%;
+                                            height:30%;" src="{!! url('assets/img/alDia.jpg') !!}" alt=""></td>
+                                        </tr>
+
+                                        <tr>
+                                        <td style="background-color: #dedede48; color: gray" colspan="5" class="text-center">*No hay repuestos pendientes de autorizar</td>
+
+                                        </tr>
+                                        @else
                                         @foreach($repuestoAutorizar as $repuestoAutoriza)
                                             <tr style="height: 50px">
                                                 <td width="10%" class="text-center">{{$repuestoAutoriza->cantidad_repuesto}}<strong></strong></td>
@@ -52,6 +64,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
 

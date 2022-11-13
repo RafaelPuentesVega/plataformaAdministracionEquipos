@@ -31,7 +31,7 @@
             </div>
 
             <div class="card">
-                <form action="{{route('actualizarCliente', $dataCliente->cliente_id)}}" method="POST">
+                <form id="form-update-cliente" action="{{route('actualizarCliente', $dataCliente->cliente_id)}}" method="POST">
                     @csrf
                 <div class="container-fluid">
 
@@ -179,7 +179,7 @@
                                 <div id="btn-update">
                                     <button title="GUARDAR" data-toggle="tooltip" data-placement="bottom"
                                         style="padding: 5px;border: none; outline:none; text-decoration: none; margin: 10px"
-                                        type="submit" class="btn btn-info  pull-right "
+                                        type="button" class="btn btn-info  pull-right "
                                         id="btnGuardarCliente" >
                                         <i style="font-size: 19px" class="fa-solid fa-user-pen"></i>
                                         <span style="font-size: 16px; margin-block-start: 15%">Actualizar</span>
@@ -208,17 +208,17 @@
                                 <input type="radio" class="btn-check" name="btnradio" id="btnEquipo"
                                     autocomplete="off">
                                 <label class="btn btn-outline-secondary arrays " for="btnEquipo"
-                                    style="font-size: 14px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Equipos</label>
+                                    style="font-size: 13px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Equipos</label>
 
                                 <input type="radio" class="btn-check" name="btnradio" id="btnOrden"
                                     autocomplete="off">
                                 <label class="btn btn-outline-secondary arrays" for="btnOrden"
-                                style="font-size: 14px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Orden de servicio</label>
+                                style="font-size: 13px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Orden de servicio</label>
                                 @if ($dataCliente->cliente_tipo == 'EMPRESA' || $dataCliente->cliente_tipo == 'empresa')
                                     <input type="radio" class="btn-check" name="btnradio" id="btnUsuarioEmpresa"
                                         autocomplete="off">
                                     <label class="btn  btn-outline-secondary arrays" for="btnUsuarioEmpresa"
-                                    style="font-size: 14px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Usuarios</label>
+                                    style="font-size: 13px;border: rgb(186, 186, 186) 1.5px solid;border-radius: 10px ;border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; ">Usuarios</label>
                                 @endif
 
                             </div>
@@ -227,7 +227,7 @@
                             {{-- Tabla Orden Servicio --}}
 
                             <div class="table-responsive-xl" id="ordenServicio" style="display: none">
-                                <table id="tableOrdenServicio" class="table table-striped table-hover"
+                                <table id="tableOrdenServicio" class="table table-hover"
                                     style="webkit-font-smoothing: antialiased;
                                     font-family: Roboto,Helvetica Neue,Arial,sans-serif">
                                     <thead class="thead-light">
@@ -250,12 +250,11 @@
                                             <th scope="col" class="text-center" style="color:#16172C">
                                                 <strong>Valor
                                                     total</strong></th>
-                                            <th scope="col" class="text-center" style="color:#16172C"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($arrayOrden as $orden)
-                                            <tr style="font-size: 12px;height: 50px">
+                                            <tr style="cursor: pointer; font-size: 11px" onclick="window.location.href='../ordenGeneral/{{ encrypt($orden->id_orden) }}'" style="font-size: 12px;height: 50px">
 
 
                                                 <td class="text-center" style="font-size: 18px">
@@ -267,25 +266,10 @@
                                                 <td class="text-center">
                                                     <strong>{{ $orden->fecha_entrega_orden }}</strong>
                                                 </td>
-                                                <td class="text-center"><strong>{{ $orden->equipo_tipo }} -
-                                                        {{ $orden->equipo_marca }} -
-                                                        {{ $orden->equipo_referencia }}</strong></td>
+                                                <td class="text-center"><strong>{{ $orden->equipo_tipo }} - {{ $orden->equipo_marca }} - {{ $orden->equipo_referencia }}</strong></td>
                                                 <td class="text-center"><strong>{{ $orden->name }}</strong></td>
-                                                <td class="text-center">
-                                                    <strong>{{ $orden->valor_total_orden }}</strong>
+                                                <td class="text-center"><strong>@if(!isset($orden->valor_total_orden)) {{-- Vacio --}}   @else ${{ number_format($orden->valor_total_orden, 0, ',', '.')  }} @endif</strong>
                                                 </td>
-                                                <td>
-                                                    <button
-                                                        style="border: none; outline:none; text-decoration: none; margin: 0%"
-                                                        type="button" title="Datos de cliente" data-toggle="tooltip"
-                                                        data-placement="left"
-                                                        class="btn btn-info btn-fill  pull-right "
-                                                        id="btnGuardarCliente">
-                                                        <i style="color: #ffffff; font-size: 20px; margin: -5px"
-                                                            class="bi bi-person-lines-fill box-info pull-left"></i>
-                                                    </button>
-                                                </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -295,7 +279,7 @@
                             {{-- Tabla Equipo --}}
 
                             <div class="table-responsive-xl" id="equipoCliente" style="display: none">
-                                <table id="tableEquipoCliente" class="table table-striped table-hover"
+                                <table id="tableEquipoCliente" class="table  table-hover"
                                     style="webkit-font-smoothing: antialiased;
                                     font-family: Roboto,Helvetica Neue,Arial,sans-serif;">
                                     <thead class="thead-light">
@@ -312,12 +296,11 @@
                                             <th scope="col" class="text-center" style="color:#16172C">
                                                 <strong>Serial</strong>
                                             </th>
-                                            <th scope="col" class="text-center" style="color:#16172C"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($arrayEquipo as $equipo)
-                                            <tr style="font-size: 12px;height: 50px">
+                                            <tr  style="font-size: 12px;height: 45px;cursor: pointer; font-size: 11px" onclick="window.location.href='../equipoEdit/{{ encrypt($equipo->equipo_id) }}'" >
 
 
                                                 <td class="text-center"><strong>{{ $equipo->equipo_tipo }}</strong>
@@ -329,17 +312,6 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <strong>{{ $equipo->equipo_serial }}</strong>
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        style="border: none; outline:none; text-decoration: none; margin: 0%"
-                                                        type="button" title="Datos de cliente" data-toggle="tooltip"
-                                                        data-placement="left"
-                                                        class="btn btn-info btn-fill  pull-right "
-                                                        id="btnGuardarCliente">
-                                                        <i style="color: #ffffff; font-size: 20px; margin: -5px"
-                                                            class="bi bi-person-lines-fill box-info pull-left"></i>
-                                                    </button>
                                                 </td>
 
                                             </tr>
@@ -364,7 +336,6 @@
                                             <th scope="col" class="text-center" style="color:#16172C">
                                                 <strong>Celular</strong>
                                             </th>
-                                            <th scope="col" class="text-center" style="color:#16172C"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -381,19 +352,6 @@
                                                 <td class="text-center">
                                                     <strong>{{ $usuarioEmpresa->usuario_celular }}</strong>
                                                 </td>
-                                                <td>
-
-                                                    <button
-                                                        style="border: none; outline:none; text-decoration: none; margin: 0%"
-                                                        type="button" title="Datos de cliente" data-toggle="tooltip"
-                                                        data-placement="left"
-                                                        class="btn btn-info btn-fill  pull-right "
-                                                        id="btnGuardarCliente">
-                                                        <i style="color: #ffffff; font-size: 20px; margin: -5px"
-                                                            class="bi bi-person-lines-fill box-info pull-left"></i>
-                                                    </button>
-                                                </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>

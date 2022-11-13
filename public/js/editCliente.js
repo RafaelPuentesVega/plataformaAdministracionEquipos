@@ -1,3 +1,18 @@
+$(document).on("click",  "#btnGuardarCliente", function() {
+    Swal.fire({
+    title: 'Seguro desea guardar los cambios?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Actualizar',
+    cancelButtonText: 'Cancelar'
+    }).then((result) => {
+    if (result.isConfirmed) {
+        $( "#form-update-cliente" ).submit();
+    }
+    })
+    })
 function showContent() {
     ordenServicio = document.getElementById("ordenServicio");
     equipoCliente = document.getElementById("equipoCliente");

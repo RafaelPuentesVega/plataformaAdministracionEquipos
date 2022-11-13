@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <style>
+
+        @media only screen and (max-width: 575px){
+            .orden-blanco{
+                display: none !important;
+            }
+            .nav-cargo{
+                display: none !important;
+            }
+            .responsive-cel{
+                display: block !important;
+            }
+
+        }
+        </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -23,8 +38,7 @@
         {{-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'> --}}
         <link href="{!! url('assets/css/pe-icon-7-stroke.css') !!}" rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" type="text/css"
-        href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+        <link rel="stylesheet" type="text/css" href="{!! url('assets/css/bootstrap-extended.min.css') !!}">
 
 
         {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> --}}

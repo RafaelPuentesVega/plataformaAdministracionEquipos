@@ -10,7 +10,29 @@ class sendEmail extends Controller
 {
     public static function ordenSalidaEmail($pdf , $array )
     {
-      
+
+        $arrayDatos = [
+            'correo'=> $array->cliente_correo,
+            'orden' => $array->id_orden,
+            'nombre' => $array->cliente_nombres,
+            'equipo' => $array->equipo_tipo,
+            'marca' => $array->equipo_marca,
+            'referencia' => $array->equipo_referencia,
+            'serial'=>$array->equipo_serial
+        ];
+
+        Mail::send('modulos.email.emailOrdenSalida',["datos"=>$arrayDatos] , function($message) use ($arrayDatos,$pdf){
+            $numeroOrden = $arrayDatos['orden'];
+            $correoCliente = $arrayDatos['correo'];
+            $message->from('contabilidad@bygsistemas.com');
+            $message->to($correoCliente);
+            $message->subject('ByG Sistemas - Orden de entrega Orden Numero '.$numeroOrden);
+            $message->attachData($pdf->output(),'Orden Salida Numero ' .($numeroOrden).' .pdf');
+        });
+    }
+    public static function restablecerContraseñaEmail($url )
+    {
+
         $arrayDatos = [
             'correo'=> $array->cliente_correo,
             'orden' => $array->id_orden,

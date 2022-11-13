@@ -8,10 +8,12 @@ use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\PrivacidadController;
 use App\Http\Controllers\ParametroController;
 use App\Http\Controllers\BuscarOrdenController;
+use App\Http\Controllers\InformeController;
 use App\Http\Controllers\MunicipiosController;
 use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\RequerimientoInternoController;
 use App\Http\Controllers\RepuestoController;
+use App\Http\Controllers\AutocompleteController;
 use App\Mail\EmailPdf as MailEmailPdf;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,6 +30,10 @@ Route::get('/login', function () {
   //  return view('register');
      return view('modulos.ingresar');
 });
+Route::get('/login-alternativo', function () {
+    //  return view('register');
+       return view('auth.login-alternativo');
+  });
 Route::get('home', function () {
      return redirect()->route('home');
   });
@@ -65,14 +71,9 @@ Route::GET('OrdenEntrada/{idOrden}',[OrdenServicioController::class, 'ordenEntra
 Route::GET('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW/{email}/{idOrden}',[OrdenServicioController::class, 'ordenSalidaPdf'])->name('ordenSalidaPDFyEmail');
 Route::GET('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFilesPDF'])->name('ordenEntrada');
 Route::POST('entregarOrden',[OrdenServicioController::class, 'entregarOrden']);
-
-
 Route::get('correo', function(){
-
 });
-
 Auth::routes();
-
 Route::get('',[InicioController::class, 'index'])->name('home');
 Route::get('inicio',[InicioController::class, 'index'])->name('home');
 //Rutas Vistas formularios
@@ -84,18 +85,25 @@ Route::get('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFi
 Route::post('crear_orden_servicio',[ClientesController::class, 'store']);
 Route::get('orden_salida',[BuscarOrdenController::class, 'index']) ->name('searchOrden');
 Route::get('imprimir_orden_blanco/{event}',[OrdenServicioController::class, 'ordenBlanco']);
+Route::post('referenciaEquipoAjax',[AutocompleteController::class, 'BuscarReferencia']) ->name('referenciaEquipoAjax');
+Route::post('marcaEquipoAjax',[AutocompleteController::class, 'BuscarMarca']) ->name('marcaEquipoAjax');
+Route::post('caracteristicaEquipoAjax',[AutocompleteController::class, 'BuscarCaracteristicaEquipo']) ->name('caracteristicaEquipoAjax');
+Route::post('cedulaClienteAjax',[AutocompleteController::class, 'BuscarCedulaCliente']) ->name('cedulaClienteAjax');
 //Requerimiento interno
 Route::get('requerimiento',[RequerimientoInternoController::class, 'index']) ->name('requerimientos');
 Route::get('clientes',[ClientesController::class, 'index']) ->name('clientes');
 Route::get('clienteEdit/{idcliente}',[ClientesController::class, 'editCliente'])->name('clienteEdit') ;
 Route::get('crear_cliente',[ClientesController::class, 'create']);
 Route::post('crear_cliente',[ClientesController::class, 'store']);
-
 //Equipos
 Route::get('equipos',[EquiposController::class, 'index']) ->name('equipos');
+Route::get('equipoEdit/{idequipo}',[EquiposController::class, 'equipoEdit'])->name('equipoEdit') ;
 Route::post('equipos',[EquiposController::class, 'store']);
+Route::post('actualizarEquipo/{id}',[EquiposController::class, 'update'])->name('actualizarEquipo');
 //Privacidad
 Route::get('privacidad',[PrivacidadController::class, 'index']) ->name('privacidad');
+//Informes
+Route::get('informes',[InformeController::class, 'index']) ->name('informes');
 //Parametros
 Route::get('parametros',[ParametroController::class, 'index']) ->name('parametros');
 Route::post('parametros',[ParametroController::class, 'store']);

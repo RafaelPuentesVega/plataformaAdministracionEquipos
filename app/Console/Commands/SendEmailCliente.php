@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\OrdenServicio;
 use App\Http\Controllers\sendEmail;
 use App\Models\NotificacionesEmail;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -44,6 +45,7 @@ class SendEmailCliente extends Command
 
     public function handle()
     {
+        Log::info('Ejecuto Cron de notificacion tecnico Correctamten');
         $ordenServicio = OrdenServicio::
         join('cliente', 'id_cliente_orden', '=', 'cliente.cliente_id')
         ->join('equipo', 'id_equipo_orden', '=', 'equipo.equipo_id')
@@ -111,5 +113,7 @@ class SendEmailCliente extends Command
                     // $SendEmail =  sendEmail::notificacionCliente( $array);
              }
          }
+         Log::info('Finalizo Cron de notificacion tecnico Correctamente');
+
     }
 }

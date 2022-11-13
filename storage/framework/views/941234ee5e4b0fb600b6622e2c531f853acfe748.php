@@ -75,8 +75,8 @@
                      <p>SERVICIOS</p>
                  </a>
              </li>
-             <li>
-                <a href="">
+             <li <?php if(Request::url() == route('informes')): ?> class="active" <?php endif; ?>>
+                <a href="<?php echo e(url('informes')); ?>">
                     <i class="pe-7s-news-paper"></i>
                     <p>INFORMES</p>
                 </a>

@@ -10,6 +10,32 @@
 <style type="text/css">
     table { border-color: #CDCDD8; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
     .card label { color: rgba(0, 0, 0, 0.416); font-weight: bold}
+    #suggestionsReferencia
+    ,#suggestionsMarca
+    ,#suggestionsCedula
+    ,#suggestionsCaracteristicas {
+    box-shadow: 2px 2px 8px 0 rgba(0,0,0,.2);
+    height: auto;
+    position: absolute;
+    top: 61px;
+    z-index: 9999;
+    width: 90% ;
+    }
+    #suggestionsMarca
+    .suggest-element,
+    #suggestionsReferencia
+    .suggest-element
+    ,#suggestionsCaracteristicas
+    .suggest-element
+    ,#suggestionsCedula
+    .suggest-element{
+        background-color: #f8f8f8;
+        border-top: 1px solid #f0eded;
+        cursor: pointer;
+        padding: 8px;
+        width: 100%;
+        float: left;
+    }
 
     </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"/>
@@ -64,6 +90,7 @@
                                                     <label>Cedula / Nit</label>
                                                     <input type="number" id="cliente_documento" name="cliente_documento" class="form-control" placeholder="Numero Documento" autocomplete="off" >
                                                 </div>
+                                                <div  id="suggestionsCedula"></div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -206,7 +233,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="form-group">
-                                                    <label style="margin-bottom: 12px" >Agregar</label>
+                                                    <label style="margin-bottom: 12px" >&nbsp;</label>
                                                     <div class="btn-save">
                                                         <div class="btnUpdate">
 
@@ -261,12 +288,14 @@
                                                     <label>MARCA</label>
                                                         <input type="text" class="form-control" id="equipo_marca" placeholder="Marca"  required autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                             </div>
+                                            <div  id="suggestionsMarca"></div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>RFERENCIA</label>
                                                         <input type="text" class="form-control" id="equipo_referencia" placeholder="Referencia" required autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                                                 </div>
+                                                <div  id="suggestionsReferencia"></div>
                                             </div>
 
                                              <div class="col-md-2">
@@ -288,7 +317,7 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div class="form-group">
-                                                        <label id="saveequi" >Save</label>
+                                                        <label id="saveequi" ></label>
                                                                <button id="btnGuardarEquipo" class="btn btn-info btn-fill" onclick="guardarEquipoOrden()">Guardar </button>
                                                     </div>
                                                  </div>
@@ -353,6 +382,7 @@
                                                     <label>CARACTERISTICAS DEL EQUIPO</label>
                                                     <textarea rows="3" id="caracteristicas_equipo" maxlength="240" class="form-control" placeholder="Caracteristicas Fisicas del equipo" autocomplete="off" style="text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" ></textarea>
                                                 </div>
+                                                <div  id="suggestionsCaracteristicas"></div>
                                             </div>
 
 
@@ -389,10 +419,10 @@
                                                                      <option value="{{ $users->id }}">{{$users->name}}
                                                                         @foreach ($ordenServicio as $item)
                                                                         @if($item['tecnico'] == $users->id )
-                                                                        &nbsp &nbsp &nbsp -> &nbsp{{$item['cantidad']}}  &nbsp ordenes.
+                                                                        ( {{$item['cantidad']}}  Asginadas)
 
                                                                         @break
-                                                                         @endif
+                                                                        @endif
 
                                                                         @endforeach
                                                                     </option>
@@ -404,13 +434,14 @@
                                             </div>
                                     </div>
                                 </div>
+
+                                <button id="btnGuardarOrden"  class="btn btn-success btn-fill pull-right" ><strong style="font-size: 14px">GUARDAR Y ENVIAR</strong></button>
+                                <div class="clearfix"></div>
                                 </div>
 
 
                         </div>
                     </div>
-                    <button  class="btn btn-success btn-fill pull-right" onclick="guardarOrdenServicio()"><strong style="font-size: 15px">GUARDAR Y ENVIAR</strong></button>
-                                <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -421,13 +452,13 @@
 
 @section('js')
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
-    <script src="{!! url('js/jquery.min.js') !!}""></script>
+    <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="{!! url('js/crearorden.js') !!}""></script>
-    <script src="{!! url('assets/js/toastr.min.js') !!}""></script>
+    <script src="{!! url('js/crearorden.js?v=2') !!}"></script>
+    <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
 @endsection

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\OrdenServicio;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExcelExportOrdenGeneral;
 
 class BuscarOrdenController extends Controller
 {
@@ -23,8 +25,13 @@ class BuscarOrdenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function exportFile($data)
+    {
+        return Excel::download(new ExcelExportOrdenGeneral($data), 'OrdenGeneral '.date('Y-m-d H:i:s').'.xlsx');
+    }
     public function index(Request $request)
     {
+        $btnExport = $request->get("export");
         setlocale(LC_ALL, 'es_ES');
 
         $tecnico  = User::where('rol','Tecnico')
@@ -103,6 +110,11 @@ class BuscarOrdenController extends Controller
             $requestFechafinentrega = $arrafechaentregafin[1].'/'.$arrafechaentregafin[2].'/'.$arrafechaentregafin[0];
 
         }
+        if($request->get("export")){
+            //Descargamos el Excel
+            $data = $ordenServicio->get();
+            return $this->exportFile($data);
+        }
         $totalCount = count($ordenServicio->get());
         if($request->get("paginate")) {
             if($request->get("paginate") == 'all'){
@@ -131,8 +143,6 @@ class BuscarOrdenController extends Controller
          ->with('numpaginate',  $this->numpaginate)
          ->with('totalCount',  $totalCount)
          ->with('dataRequest',  $dataRequest);
-
-
     }
 
     /**

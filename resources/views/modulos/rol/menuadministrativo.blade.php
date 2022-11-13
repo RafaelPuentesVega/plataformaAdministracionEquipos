@@ -74,8 +74,8 @@
                      <p>SERVICIOS</p>
                  </a>
              </li>
-             <li>
-                <a href="">
+             <li @if (Request::url() == route('informes')) class="active" @endif>
+                <a href="{{ url('informes') }}">
                     <i class="pe-7s-news-paper"></i>
                     <p>INFORMES</p>
                 </a>

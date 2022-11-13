@@ -67,9 +67,28 @@ class EquiposController extends Controller
      * @param  \App\Models\Equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipos $equipos)
+    public function equipoEdit($id)
     {
-        //
+        $idEquipo =  decrypt($id);
+
+        $dataEquipo = DB::table('equipo')
+        ->where('equipo_id', '=', $idEquipo)->get()->first();
+
+        $arrayOrden = DB::table('orden_servicio')
+        ->leftJoin('users', 'orden_servicio.id_tecnico_orden', '=', 'users.id')
+        ->leftJoin('equipo', 'orden_servicio.id_equipo_orden', '=', 'equipo.equipo_id')
+        ->select('orden_servicio.*', 'users.name','equipo.*')
+        ->where('equipo.equipo_id', '=', $idEquipo)
+        ->orderBy('orden_servicio.id_orden', 'desc')
+        ->get()->toArray();
+
+        $arrayCliente = DB::table('cliente')
+        ->where('cliente_id', '=', $dataEquipo->equipo_cliente_id)->get()->first();
+
+        return view('modulos.equipo.edit-equipo')
+        ->with('dataEquipo' ,$dataEquipo)
+        ->with('arrayCliente' ,$arrayCliente)
+        ->with('arrayOrden' ,$arrayOrden);
     }
 
     /**
@@ -90,9 +109,20 @@ class EquiposController extends Controller
      * @param  \App\Models\Equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipos $equipos)
+    public function update(Request $request, $id)
     {
-        //
+        $datos = request();
+
+        DB::table('equipo')
+        ->where('equipo_id', $id)
+        ->update(
+            [
+            'equipo_tipo'=>$datos['equipo_tipo'],
+            'equipo_marca'=>$datos['equipo_marca'],
+            'equipo_referencia'=>$datos['equipo_referencia'],
+        ]);
+
+        return redirect()->back();
     }
 
     /**

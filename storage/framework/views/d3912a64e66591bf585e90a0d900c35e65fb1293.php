@@ -1,111 +1,131 @@
-<?php $__env->startSection('css'); ?>
-<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/vendor/bootstrap/css/bootstrap.min.css'); ?>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/fonts/iconic/css/material-design-iconic-font.min.css'); ?>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/vendor/animate/animate.css'); ?>">
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/vendor/animsition/css/animsition.min.css'); ?>">
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/css/util.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo url('login1/css/main.css'); ?>">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 
-<!--===============================================================================================-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('contenido'); ?>
+    <title>Plataforma ByG</title>
+    <link rel="shortcut icon" href="<?php echo url('assets/img/logo.ico'); ?>" type="image/x-icon">
 
-<div class="container-login100" style="background-image: url(' <?php echo url('login1/images/background.jpg'); ?> ');" >
-    <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-        <form class="login100-form validate-form" method="POST" action="<?php echo e(route('login')); ?>">
-        <?php echo csrf_field(); ?>
-            <span class="login100-form-title p-b-37">
-                INICIAR SESION
-            </span>
+    <!-- Custom fonts for this template-->
+    <link href="<?php echo url('fontawesome/css/all.min.css" rel="stylesheet" type="text/css'); ?>">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-            <div class="wrap-input100 validate-input m-b-20" data-validate="Ingresar Correo">
-                <input class="input100" type="text" name="email" placeholder="Correo">
-                <span class="focus-input100"></span>
-            </div>
+    <!-- Custom styles for this template-->
+    <link href="<?php echo url('css/sb-admin-2.min.css" rel="stylesheet'); ?>">
 
-            <div class="wrap-input100 validate-input m-b-25" data-validate = "Ingresar Contraseña">
-                <input class="input100" type="password" name="password" placeholder="Contraseña">
-                <span class="focus-input100"></span>
-            </div>
+</head>
 
-            <br>
-            <?php $__errorArgs = ['email'];
+<body class="" style="background: linear-gradient(39deg, rgba(42,41,144,1) 6%, rgba(91,144,222,1) 50%, rgba(31,37,131,1) 94%);">
+
+    <?php if(Request::get('resetPassword') == 'true'): ?>
+        <?php echo $__env->make('auth.reset-password', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php else: ?>
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div id="login" class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block"><img style="width: 500px ; height: 600px;" src="<?php echo url('assets/img/fondo-inicio-sesion.png'); ?>" alt=""></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2"><strong>Bienvenido!</strong></h1>
+                                    </div>
+                                    <div class="text-center">
+                                        <img style="width: 20%; margin: 3%" class="" src="<?php echo url('assets/img/iniciar-sesion.png'); ?>" alt="">
+                                    </div>
+                                    <br>
+                                    <form class="user" method="POST" action="<?php echo e(route('login')); ?>">
+                                        <?php echo csrf_field(); ?>
+                                        <div class="form-group">
+                                            <input  type="email" value="<?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>Correo no registrado</strong> </h3> </li> </ul><br></div> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> <?php echo e(old('email')); ?> <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
-            <?php $__errorArgs = ['password'];
+unset($__errorArgs, $__bag); ?>"  name="email" class="form-control form-control-user"
+                                                id="email" aria-describedby="emailHelp"
+                                                placeholder="Ingresar correo" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input autocomplete="none-password" type="password" name="password" id="password" class="form-control form-control-user"
+                                                 placeholder="Contraseña" required>
+                                        </div>
+                                        <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>Contraseña incorrecta</strong> </h3> </li> </ul><br></div> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li style="list-style: none"> <h6> <strong>Correo no registrado</strong> </h6> </li> </ul><br></div> <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-            <?php $__errorArgs = ['state'];
+                                        <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li> <h3> <strong>USUARIO INACTIVO</strong> </h3> </li> </ul><br></div> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li style="list-style: none"> <h6> <strong>Contraseña incorrecta</strong> </h6> </li> </ul><br></div> <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                        <?php $__errorArgs = ['state'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <div style="color: brown ; text-align: center"> <ul> <li style="list-style: none"> <h6> <strong>Usuario INACTIVO</strong> </h6> </li> </ul><br></div> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        <br>
+                                        <button type="submit" id="btn-ingresar" style="font-size: 14px" class="btn btn-primary btn-user btn-block">
+                                            Ingresar
+                                        </button>
+                                    </form>
+                                    <br>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="login?resetPassword=true">Olvido su contraseña?</a>
+                                    </div>
+                                    <br><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-            <div class="container-login100-form-btn">
-                <button type="submit" class="login100-form-btn">
-                    Iniciar Sesion
-                </button>
             </div>
 
-
-
-        </form>
-
+        </div>
 
     </div>
-</div>
+    <?php endif; ?>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo url('vendor/jquery/jquery.min.js'); ?>"></script>
+    <script src="<?php echo url('vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
 
-<?php $__env->stopSection(); ?>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo url('vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
 
-<?php $__env->startSection('js'); ?>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo url('js/sb-admin-2.min.js'); ?>"></script>
 
-<!--===============================================================================================-->
-<script src="<?php echo url('login1/vendor/jquery/jquery-3.2.1.min.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/vendor/animsition/js/animsition.min.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/vendor/bootstrap/js/popper.js'); ?>"></script>
-	<script src="<?php echo url('login1/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/vendor/select2/select2.min.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/vendor/daterangepicker/moment.min.js'); ?>"></script>
-	<script src="<?php echo url('login1/vendor/daterangepicker/daterangepicker.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/vendor/countdowntime/countdowntime.js'); ?>"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo url('login1/js/main.js'); ?>"></script>
+</body>
 
-
-<?php $__env->stopSection(); ?>
-
-
-<?php echo $__env->make('plantilla', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/auth/login.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\xampp\htdocs\cpanelbyg\resources\views/auth/login.blade.php ENDPATH**/ ?>

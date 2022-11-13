@@ -29,6 +29,7 @@ class RequerimientoInternoController extends Controller
 
         $repuestoSinAutorizar = 1; //ESTADO DE REPUESTO - SIN AUTORIZAR -
         $repuestoAutorizar = Repuesto::where('estado_repuesto',$repuestoSinAutorizar)->get();
+        // dd($repuestoAutorizar->toarray());
 
         return view('modulos.requerimiento.requerimientointerno')->with('repuestoAutorizar',$repuestoAutorizar);
     }
