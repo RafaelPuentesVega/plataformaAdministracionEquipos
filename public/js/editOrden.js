@@ -136,6 +136,16 @@ function guardarRepuesto() {
         let idOrden = $("#idOrden").val();
         let valorservicio = $("#valorservicio").val();
         let valorTotalRepuesto = $('#totalValorRepuestos').val();
+        let repuesto = $("#descripcionRepuesto").val();
+        let cantidad = $("#cantidadRepuesto").val();
+        if(repuesto.length >= 1 || cantidad.length >= 1){
+            Swal.fire({
+                icon: 'question',
+                title:'¡Repuesto!',
+                html: '<b><i> Tiene 1 repuesto pendiente de registrar. <br> Primero Guardar el repuesto.</i></b> ',
+              })
+              return true;
+        }
 
 
         if (reporteTecnico.length < 1) {
@@ -332,4 +342,128 @@ $('input.number').keyup(function(event) {
     });
     calcularValores();
     });
+    //Autocomplete Repuestos
+    $('#descripcionRepuesto').on('keyup', function() {
+        var repuesto = $('#descripcionRepuesto').val();
+        $.ajax({
+                type: "POST",
+                url: "../repuestoOrdenAjax",
+                data: {repuesto : repuesto} ,
+                success: function(data) {
+                    //Escribimos las sugerencias que nos manda la consulta
+                    $('#suggestionsRepuesto').fadeIn(1000).html(data);
+                    //Al hacer click en algua de las sugerencias
+                    $(document).on('click', function(){
+                        $('#suggestionsRepuesto').fadeOut(1000);
+                        return true;
+                    });
+                    $('.suggest-element').on('click', function(){
+                            //Obtenemos la id unica de la sugerencia pulsada
+                            var id = $(this).attr('id');
+                            //Editamos el valor del input con data de la sugerencia pulsada
+                            $('#descripcionRepuesto').val(id);
+                            //Hacemos desaparecer el resto de sugerencias
+                            $('#suggestionsRepuesto').fadeOut(1000);
+                            return true;
+                    });
+                }
+        });
+    });
+    $('#btnPendDiag').on('click', function(){
+        Swal.fire({
+            icon: 'info',
+            title:'Oops...',
+            html: '<b><i> Guardar Primero Diagnostico Del Equipo.</i></b> ',
+          })
+          $('#diagnostico').focus();
+    });
+    $('#btnPendRep').on('click', function(){
+        valor = $(this).data('value');
+        if(valor == 1){
+            sustantivo = 'Respuesto Pendiente';
+        }else{
+            sustantivo = 'Respuestos Pendientes';
+        }
+        var text = '</i>' +valor+ '<i>';
+        Swal.fire({
+            icon: 'info',
+            title:'Oops...',
+            html: '<b><i> ¡Tiene '+text+' '+sustantivo+' de Autorizar!. <br> Comunicarse Con El Area Comercial.</i></b>',
+          })
+    });
+    $('#btnTerminarOrden').on('click', function(){
+        terminarOrden()
+    });
+    //Vista agregar repuesto
+    $('#agregarRepuesto').on('click', function(){
+        $('#divAgregarRepuesto').show();
+        $('#TragregarRepuesto').hide();
+    });
+
+    $('.btnEliminarRepuesto').on('click', function(){
+        id = $(this).data('value');
+        Swal.fire({
+            title: 'Seguro Desea Eliminar?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar.',
+            cancelButtonText: 'Cancelar.'
+          }).then((result) => {
+            if (result.isConfirmed) {
+            eliminarRepuesto(id);
+
+            }
+          })
+
+    });
+
+    function eliminarRepuesto(id){
+        showpreloader()
+        $.ajax({
+            url: '../deleteRepuesto',
+            data: { id: id},
+            type: 'POST',
+            dataType: 'json',
+            success: function (json) {
+                if (json.status === "ok") {
+                    hidepreloader();
+                    Swal.fire(
+                    'Eliminado!',
+                    'Se ha eliminado correctamente.',
+                    'success'
+                    ).then(function () {
+                        window.location.reload();
+                    })
+                }else if(json.status === "error"){
+                    let message = json.message;
+                    hidepreloader();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error...',
+                        html: 'Ocurrio un error en la eliminacion del repuesto. <br> '+message,
+                      }).then(function () {
+                        window.location.reload();
+                    })
+                }
+            },
+            error: function (xhr, status) {
+                hidepreloader();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error...',
+                    text: 'Ocurrio un error en la eliminacion del repuesto.',
+                  }).then(function () {
+                    window.location.reload();
+                })
+            },
+            complete: function (xhr, status) {
+                hidepreloader();
+            }
+        });
+
+    }
+
 

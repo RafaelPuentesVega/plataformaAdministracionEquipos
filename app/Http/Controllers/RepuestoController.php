@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Repuesto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 
 class RepuestoController extends Controller
@@ -56,6 +57,26 @@ class RepuestoController extends Controller
 
         $response = Array('mensaje' => 'update');
          return json_encode($response);
+
+    }
+    public function delete(Request $request)
+    {
+        try {
+            $repuesto =Repuesto::where('id_repuesto',$request->id);
+            $question = $repuesto->first();
+            if(Auth()->user()->rol != 'ADMINISTRATIVO'){
+                if($question->estado_repuesto == 2){
+                    throw new Exception('El repuesto ya esta autorizado. Informar a el area comercial, para su eliminacion.');
+                }
+            }
+            $repuesto->delete();
+        } catch (Exception $e) {
+            $response['message'] = $e->getMessage();
+            $response['status'] = 'error';
+            return json_encode($response);
+        }
+        $response = Array('status' => 'ok');
+        return json_encode($response);
 
     }
 }

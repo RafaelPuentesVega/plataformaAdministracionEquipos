@@ -9,7 +9,7 @@
 
             <link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
             <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
-            <link href="{!! url('css/sb-admin-2.css') !!}" rel="stylesheet" />
+            <link href="{!! url('css/sb-admin-2.css?version=1.0') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/bootstrap.min.css') !!}" rel="stylesheet" />
         <link href="{!! url('bootstrap/preloader.css') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/light-bootstrap-dashboard.css?v=1.4.0') !!}" rel="stylesheet"/>
@@ -55,7 +55,7 @@
             @yield('js')
            <script src="{!! url('assets/js/light-bootstrap-dashboard.js?v=1.4.0') !!}"></script>
             <script src="{!! url('assets/js/demo.js') !!}"></script>
-            <script src="{!! url('js/preloader.js?v=1') !!}"></script>
+            <script src="{!! url('js/preloader.js?v=1.2') !!}"></script>
             <script src="{!! url('js/global.js') !!}"></script>
             <script src="{!! url('assets/js/bootstrap.min.js" type="text/javascript') !!}"></script>
             <script src="{!! url('sweetalert2/sweetalert2.js" type="text/javascript') !!}"></script>

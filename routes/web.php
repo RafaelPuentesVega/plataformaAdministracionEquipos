@@ -63,6 +63,7 @@ Route::POST('guardarNumeroFactura',[OrdenServicioController::class, 'guardarNume
 Route::POST('editarReporteTecnico',[OrdenServicioController::class, 'editarReporteTecnico']);
 Route::POST('changePrice',[OrdenServicioController::class, 'changePrice']);
 Route::POST('update/password', 'PrivacidadController@update');
+Route::POST('deleteRepuesto',[RepuestoController::class, 'delete']);
 //Post Subtmit
 Route::post('actualizarCliente/{id}',[ClientesController::class, 'update'])->name('actualizarCliente');
 ///Pdf ordenes
@@ -85,10 +86,12 @@ Route::get('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFi
 Route::post('crear_orden_servicio',[ClientesController::class, 'store']);
 Route::get('orden_salida',[BuscarOrdenController::class, 'index']) ->name('searchOrden');
 Route::get('imprimir_orden_blanco/{event}',[OrdenServicioController::class, 'ordenBlanco']);
+//Autocomplete
 Route::post('referenciaEquipoAjax',[AutocompleteController::class, 'BuscarReferencia']) ->name('referenciaEquipoAjax');
 Route::post('marcaEquipoAjax',[AutocompleteController::class, 'BuscarMarca']) ->name('marcaEquipoAjax');
 Route::post('caracteristicaEquipoAjax',[AutocompleteController::class, 'BuscarCaracteristicaEquipo']) ->name('caracteristicaEquipoAjax');
 Route::post('cedulaClienteAjax',[AutocompleteController::class, 'BuscarCedulaCliente']) ->name('cedulaClienteAjax');
+Route::post('repuestoOrdenAjax',[AutocompleteController::class, 'BuscarRepuestoOrden']) ->name('repuestoOrdenAjax');
 //Requerimiento interno
 Route::get('requerimiento',[RequerimientoInternoController::class, 'index']) ->name('requerimientos');
 Route::get('clientes',[ClientesController::class, 'index']) ->name('clientes');

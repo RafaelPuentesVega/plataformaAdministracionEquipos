@@ -1,6 +1,5 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startSection('css'); ?>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
 
 
@@ -450,14 +449,13 @@
 <?php echo $__env->make('modulos.ordenServicio.modal.modal_buscar_cliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->startSection('js'); ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
-    <script src="<?php echo url('js/jquery.min.js'); ?>""></script>
+    <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="<?php echo url('js/crearorden.js'); ?>"></script>
+    <script src="<?php echo url('js/crearorden.js?v=2'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     

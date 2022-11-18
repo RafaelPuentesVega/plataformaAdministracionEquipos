@@ -64,5 +64,19 @@ class AutocompleteController extends Controller
         }
         return  $response;
     }
+    public function BuscarRepuestoOrden(Request $request){
+        $response = '';
+        if(!empty($request->repuesto)){
+            $RepuestoSelect = DB::table('repuesto')
+            ->where('nombre_repuesto', 'like','%'.$request->repuesto. '%')
+            ->select('nombre_repuesto')
+            ->distinct('nombre_repuesto')
+            ->get();
+            foreach ($RepuestoSelect as $key => $value) {
+                $response .= '<div><a style="text-decoration: none; color:#626567" data="'.$value->nombre_repuesto.'" id="'.$value->nombre_repuesto.'" class="suggest-element" >'.$value->nombre_repuesto.'</a></div>';
+                }
+        }
+        return  $response;
+    }
 
 }

@@ -9,7 +9,38 @@
     padding: 5px;
     border: 1px solid #dcdcdc;
     border-radius: 15px;
+    box-shadow: 0 0 11px 4px #0000001f;
 }
+.caja:hover{
+    -webkit-transform:scale(1.08);
+    -moz-transform:scale(1.08);
+    -ms-transform:scale(1.08);
+    -o-transform:scale(1.08);
+    transform:scale(1.08);
+}
+.style:hover{
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
+    outline: none !important;
+    border-color: #ffffff00 !important;
+
+}
+.table-style:hover{
+    -webkit-transform:scale(1.007);
+-moz-transform:scale(1.007);
+-ms-transform:scale(1.007);
+-o-transform:scale(1.007);
+transform:scale(1.007);
+}
+@media only screen and (min-width: 768px) and (max-width: 1500px){
+    .responsive-font{
+        font-size: 11px !important;
+    }
+}
+
 
 .navbar {
   position: relative;

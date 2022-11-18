@@ -9,7 +9,7 @@
 
             <link href="<?php echo url('fontawesome/css/all.css'); ?>" rel="stylesheet"/>
             <link rel="shortcut icon" href="<?php echo url('assets/img/logo.ico'); ?>" type="image/x-icon">
-            <link href="<?php echo url('css/sb-admin-2.css'); ?>" rel="stylesheet" />
+            <link href="<?php echo url('css/sb-admin-2.css?version=1.0'); ?>" rel="stylesheet" />
         <link href="<?php echo url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" />
         <link href="<?php echo url('bootstrap/preloader.css'); ?>" rel="stylesheet" />
         <link href="<?php echo url('assets/css/light-bootstrap-dashboard.css?v=1.4.0'); ?>" rel="stylesheet"/>
@@ -55,7 +55,7 @@
             <?php echo $__env->yieldContent('js'); ?>
            <script src="<?php echo url('assets/js/light-bootstrap-dashboard.js?v=1.4.0'); ?>"></script>
             <script src="<?php echo url('assets/js/demo.js'); ?>"></script>
-            <script src="<?php echo url('js/preloader.js?v=1'); ?>"></script>
+            <script src="<?php echo url('js/preloader.js?v=1.2'); ?>"></script>
             <script src="<?php echo url('js/global.js'); ?>"></script>
             <script src="<?php echo url('assets/js/bootstrap.min.js" type="text/javascript'); ?>"></script>
             <script src="<?php echo url('sweetalert2/sweetalert2.js" type="text/javascript'); ?>"></script>

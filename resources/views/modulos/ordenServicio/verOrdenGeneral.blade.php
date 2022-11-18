@@ -30,13 +30,13 @@
                         <div class="col-md-15">
 
                             <div class="card "  >
-                                <div class="header" style="background-color: #06419f">
+                                <div class="header" style="box-shadow: 0 0 11px 4px #0000001f;background-color: #06419f">
                                     <h3 class="title text-center" style="color: #ffffff ; padding-bottom :8px;"><strong>ORDEN DE SERVICIO N° {{ $arrayData->id_orden }} - ORDEN GENERAL</strong></h3>
                                 </div>
                             </div>
 
 
-                            <div class="card " style="border-radius: 10px 10px 10px 10px">
+                            <div class="card " style="box-shadow: 0 0 11px 4px #0000001f;border-radius: 10px 10px 10px 10px">
 
 
 
@@ -55,7 +55,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
 
-                                                <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-alt"></i><strong>&nbsp;FECHA INGRESO</strong></label>
+                                                <label class="responsive-font" for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-alt"></i><strong>&nbsp;FECHA INGRESO</strong></label>
 
                                                     <h4 style="width: 83%" class="caja"
                                                     id="fecha_creacion_orden"> {{ date("Y-m-d h:i:s a",strtotime($arrayData->fecha_creacion_orden))  }}</h4>
@@ -65,7 +65,7 @@
 
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-day"></i><strong>&nbsp;FECHA ESTIMADA</strong></label>
+                                                <label class="responsive-font" for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 18px" class="fas fa-calendar-day"></i><strong>&nbsp;FECHA ESTIMADA</strong></label>
                                                 <h4 style="width: 83%" class="caja"
                                                 id="fecha_estimada"> {{ date("Y-m-d h:i:s a",strtotime($arrayData->fecha_estimada_orden))}}</h4>
 
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar"></i><strong style="font-size: 11px">FECHA DIAGNOSTICO</strong></label>
+                                                <label class="responsive-font" for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar"></i><strong style="font-size: 10px">FECHA DIAGNOSTICO</strong></label>
 
                                                     @if(isset($arrayData->fecha_diagnostico_orden))
                                                      <h4 style="width: 83%"  class="caja" id="fecha_diagnostico">{{date("Y-m-d h:i:s a",strtotime($arrayData->fecha_diagnostico_orden)) }}</h4>
@@ -89,7 +89,7 @@
 
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-week"></i><strong style="font-size: 11px">&nbsp;FECHA REPARACION</strong></label>
+                                                <label  class="responsive-font" for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-week"></i><strong style="font-size: 11px">&nbsp;FECHA REPARACION</strong></label>
 
                                             @if(isset($arrayData->fecha_reparacion_orden))
                                             <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">{{date("Y-m-d h:i:s a",strtotime($arrayData->fecha_reparacion_orden)) }}</h4>
@@ -103,7 +103,7 @@
 
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                            <label for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-check"></i><strong style="font-size: 11px">&nbsp;FECHA ENTREGA</strong></label>
+                                            <label class="responsive-font" for=""><i style="color: rgba(0, 0, 0, 0.841); font-size: 16px" class="fas fa-calendar-check"></i><strong style="font-size: 11px">&nbsp;FECHA ENTREGA</strong></label>
                                             @if(isset($arrayData->fecha_entrega_orden))
                                             <h4 style="width: 83%"  class="caja" id="fecha_creacion_orden">{{date("Y-m-d h:i:s a",strtotime($arrayData->fecha_entrega_orden)) }}</h4>
 
@@ -118,8 +118,8 @@
 
                                         <div class="table-responsive-xl">
 
-                                            <table class=" table" width="100%"
-                                                style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 8px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(255, 255, 255, 0) 2.5px solid">
+                                            <table class=" table table-style" width="100%"
+                                                style="border-radius: 8px;box-shadow: 0 0 11px 4px #0000001f;  font-size: 13px; border: rgba(255, 255, 255, 0) 2.5px solid">
 
                                                 <tr style=" font-size: 17px;  ">
                                                     <th colspan="4"
@@ -209,8 +209,8 @@
 
                                     <div class="table-responsive-xl">
 
-                                        <table class="" width="100%"
-                                            style="border-collapse: collapse;border-radius: 8px;box-shadow: inset 0 0 0 1px #0000001f; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
+                                        <table class="table-style" width="100%"
+                                            style="border-radius: 8px;box-shadow: 0 0 11px 4px #0000001f; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
                                             <tr>
                                                 <th colspan="4"
                                                     style="border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;background-color: #AED6F1;font-size: 15px; height: 1px;font-weight:normal; text-align: center ; border: rgba(0, 0, 0, 0.089) 1.5px solid">
@@ -291,34 +291,42 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div>
-                                        <label><strong> Daño Equipo: </strong></label> <br>
-                                        {{ $arrayData->descripcion_dano_orden }}
-                                    </div>
-                                    <hr>
-                                    <div>
-                                        <label><strong> REPORTE TECNICO: </strong></label>
-                                        @if(auth()->user()->rol == "ADMINISTRATIVO" &&  $arrayData->estadoOrden == 2)
-                                        <button style="border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Editar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditarReporte" onclick="reporteTecnicoEdit()" >
-                                            <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-pencil-fill box-info pull-left"></i>
-                                        </button>
-                                        @endif
-                                        <button style="display: none; border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Guardar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsaveReporte" onclick="reporteTecnicoSave()" >
-                                            <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
-                                        </button>
-                                         <br>
-                                         <div class="col-md-13">
-                                            <div class="form-group">
-                                                <textarea rows="4" id="editReporte" class="form-control" maxlength="1500" placeholder="" autocomplete="off" style="display: none ; text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" >{{ $arrayData->reporte_tecnico_orden }}</textarea>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <label><strong> Daño Equipo: </strong></label> <br>
+                                                {{ $arrayData->descripcion_dano_orden }}
                                             </div>
                                         </div>
-                                        <div id="reporteTecnicoDiv">
-                                            {{ $arrayData->reporte_tecnico_orden }}
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <label><strong> REPORTE TECNICO: </strong></label>
+                                                @if(auth()->user()->rol == "ADMINISTRATIVO" &&  $arrayData->estadoOrden == 2)
+                                                <button style="border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Editar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-warning btn-fill  pull-right " id="btneditarReporte" onclick="reporteTecnicoEdit()" >
+                                                    <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-pencil-fill box-info pull-left"></i>
+                                                </button>
+                                                @endif
+                                                <button style="display: none; border: none; outline:none; text-decoration: none; margin: -10px" type="button" title="Guardar Reporte" data-toggle="tooltip" data-placement="left"  class="btn btn-success btn-fill  pull-right " id="btnsaveReporte" onclick="reporteTecnicoSave()" >
+                                                    <i style="color: #ffffff; font-size: 18px; margin: -5px" class="bi bi-clipboard box-info pull-left"></i>
+                                                </button>
+                                                <br>
+                                                <div class="col-md-13">
+                                                    <div class="form-group">
+                                                        <textarea rows="4" id="editReporte" class="form-control" maxlength="1500" placeholder="" autocomplete="off" style="display: none ; text-transform: uppercase" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" >{{ $arrayData->reporte_tecnico_orden }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div id="reporteTecnicoDiv">
+                                                    {{ $arrayData->reporte_tecnico_orden }}
 
+                                                </div>
+                                                <br><br>
+                                                <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label>{{$arrayData->name}} </div>
+
+                                            </div>
                                         </div>
-                                        <br><br>
-                                        <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label>{{$arrayData->name}} </div>
-
                                     </div>
                                     <hr>
                                       <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label style=" font-size: 9px">Recibido Por:</label>@if(isset($arrayData->user_created)) {{$arrayData->user_created}}@else N/A  @endif</i> </div>
@@ -333,7 +341,7 @@
                                                 <div class="caja" style="text-align: left"> {{$Arraydiagnostico->descripcion_observacion}}</div>
 
                                                 @else
-                                                <div class="caja"></div>
+                                                <div style="color: red;">*Pendiente diagnostico</div> <br>
 
                                                 @endif
 
@@ -370,10 +378,11 @@
                                     </div>
                                     @endif
                                     @if (sizeOf($anotacion) != 0)
+                                    <br>
                                         <div class="table-responsive-xl">
 
-                                            <table class="table table-striped" width="100%"
-                                                style="text-align: center; border-collapse: collapse;border-radius: 10px;box-shadow: inset 0 0 0 1px #0000001f; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
+                                            <table class="table table-striped table-style " width="100%"
+                                                style=" box-shadow: 0 0 11px 4px #0000001f ;text-align: center; border-radius: 10px; font-size: 13px; border: rgba(0, 0, 0, 0) 2.5px solid">
 
                                                 <thead class="thead-light">
                                                     <tr
@@ -421,10 +430,10 @@
                                     @endif
                                     <hr>
                                     <div class="table-responsive-xl">
-                                        <table style="font-family: Verdana, sans-serif" class="table" width="100%" style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 50px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(0, 0, 0, 0) 1.5px solid">
+                                        <table style="box-shadow: 0 0 11px 4px #0000001f;font-family: Verdana, sans-serif" class="table" width="100%" style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 50px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(0, 0, 0, 0) 1.5px solid">
                                             <tr style=" font-size: 13px ; background-color: #AED6F1">
 
-                                                <th width="10%"
+                                                <th class="text-center" width="10%" colspan="2"
                                                     style="border-top-left-radius: 0.5rem;  height: 1px; font-weight:normal; text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid ">
                                                     &nbsp;<strong>Cantidad </strong>
                                                 </th>
@@ -453,26 +462,38 @@
                                             </tr>
                                             @if(sizeOf($repuesto) != 0)
                                                 @foreach ($repuesto as $repuestos)
-                                                    <tr style=" font-size: 13px " class="table-striped">
-                                                        <th width=""
-                                                            style="font-size: 16px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid">
-                                                            &nbsp;{{ $repuestos->cantidad_repuesto }}
-                                                        </th>
+                                                    <tr style=" font-size: 13px " >
+                                                        @if($arrayData->estadoOrden  == 1 && auth()->user()->rol == "ADMINISTRATIVO")
+                                                            <th width="1%"  style=" height: 1px; font-weight:normal; text-align: center ; border-left: rgba(0, 0, 0, 0) 1px solid">
+                                                                <button style="margin: 0%;padding: 0px 0px;" data-value="{{$repuestos->id_repuesto}}"  title="Eliminar" data-toggle="tooltip" data-placement="bottom"  type="button" class=" btnEliminarRepuesto style btn btn-close" id="btnEliminarRepuesto">
+                                                                    <i style="color: red; font-size: 15px" class="fas fa-trash"></i>
+                                                                </button>
+                                                            </th>
+                                                            <th width="" colspan=""
+                                                                style="font-size: 16px ;font-weight:normal;  text-align: center; border-right: rgba(0, 0, 0, 0.089) 1.5px solid">
+                                                                &nbsp;{{ $repuestos->cantidad_repuesto }}
+                                                            </th>
+                                                        @else
+                                                            <th width="" colspan="2"
+                                                                style="font-size: 16px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                                                                &nbsp;{{ $repuestos->cantidad_repuesto }}
+                                                            </th>
+                                                        @endif
                                                         <th width="" style="font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                         &nbsp;{{ $repuestos->nombre_repuesto }}
                                                         </th>
                                                         @if($repuestos->estado_repuesto == 1)
                                                         <th width="" colspan="2"
                                                             style="color: red; font-size: 13px ;font-weight:normal;  text-align: center; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
-                                                            &nbsp; Pendiente de Autorizacion
+                                                            &nbsp; *Pendiente de Autorizacion
                                                         </th>
                                                         @else
                                                         <th width=""
-                                                            style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
+                                                            style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid" id="valorTotalRepuesto">
                                                             &nbsp;<strong>${{number_format($repuestos->valor_unitario_repuesto, 0, ',', '.')   }}</strong>
                                                         </th>
                                                         <th width=""
-                                                            style="font-size: 14px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
+                                                            style="font-size: 12px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0.089) 1.5px solid">
                                                             &nbsp;<strong>${{number_format($repuestos->valor_total_repuesto, 0, ',', '.') }}</strong>
                                                         </th>
                                                         @endif
@@ -482,7 +503,7 @@
                                             @endif
 
                                             <tr style=" font-size: 13px;text-align: center ">
-                                                <th width=""
+                                                <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1px solid">
                                                 </th>
                                                 <th width=""
@@ -500,7 +521,7 @@
                                             </tr>
 
                                             <tr style=" font-size: 13px ">
-                                                <th width=""
+                                                <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1.5px solid">
                                                     &nbsp;<strong> </strong>
                                                 </th>
@@ -524,7 +545,7 @@
                                             </tr>
 
                                             <tr style=" font-size: 13px ">
-                                                <th width=""
+                                                <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1px solid"></th>
                                                 <th width=""
                                                     style="font-weight:normal;text-align: right; border: rgba(0, 0, 0, 0) 1px solid">
@@ -550,7 +571,7 @@
                                             </tr>
 
                                             <tr style=" font-size: 13px ">
-                                                <th width=""
+                                                <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left ; border: rgba(0, 0, 0, 0) 1.5px solid">
                                                     &nbsp;<strong> </strong>
                                                 </th>
@@ -570,7 +591,7 @@
                                             </tr>
 
                                             <tr style=" font-size: 13px ">
-                                                <th width=""
+                                                <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left">
                                                     &nbsp;<strong> </strong>
                                                 </th>
@@ -596,9 +617,9 @@
                                     <div class="row" required>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label style="font-size: 12px"><strong ><i class="fa-solid fa-print"></i>ORDEN DE ENTRADA</strong></label> <br>
+                                                <label class="responsive-font" style="font-size: 12px"><strong ><i class="fa-solid fa-print"></i>ORDEN DE ENTRADA</strong></label> <br>
                                                 <a href="{{ url('OrdenEntrada', encrypt($arrayData->id_orden)  ) }}">
-                                                    <button   class="btn btn-secondary  " style=" "><i style="font-size: 30px;color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
+                                                    <button   class="btn style btn-secondary  " style=" "><i style="font-size: 30px;color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
                                                 </a>
 
                                             </div>
@@ -609,7 +630,7 @@
                                                 @if($arrayData->estadoOrden == 3)
                                                 <label style="font-size: 12px"><strong><i class="fa-solid fa-print"></i> ORDEN DE SALIDA</strong></label> <br>
                                                 <a href="{{ url('imprimir_ordenSalida/TBydUpOeWncxZz09IiwibWFjIj/o65isMW', ['email' =>'NO' ,'idOrden' => $arrayData->id_orden] ) }}">
-                                                    <button   class="btn btn-secondary pull-left" style="    padding: 8px; text-decoration: none; :hover border-color:white"><i style="font-size: 30px; color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
+                                                    <button   class="btn btn-secondary pull-left style" style="  padding: 8px; text-decoration: none; :hover border-color:white"><i style="font-size: 30px; color: rgb(167, 52, 52)" class="fas fa-file-pdf"></i></button>
 
                                                 </a>
                                                 @endif
@@ -652,8 +673,8 @@
 @section('js')
     <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
-    <script src="{!! url('js/editOrden.js') !!}"></script>
-    <script src="{!! url('js/entregarOrden.js?v=1.1') !!}"></script>
+    <script src="{!! url('js/editOrden.js?version=1.2') !!}"></script>
+    <script src="{!! url('js/entregarOrden.js?v=1.2') !!}"></script>
     <script src="{!! url('js/ordenGeneral.js') !!}"></script>
 
 

@@ -181,14 +181,24 @@ class OrdenServicioController extends Controller
 
         //Consulta para traer el diagnostico de la orden
         $diagnostico = DB::table('observacion')
-        ->where('id_ordenServicio', '=', $id_cliente)->where('tipo_observacion', '=', 1)->get()->toArray();
+        ->where('id_ordenServicio', '=', $id_cliente)->where('tipo_observacion', '=', 1)->get()->first();
         $Arraydiagnostico = '';//Dejamos en array en 0
-        if(sizeOf( $diagnostico) > 0){
-            $Arraydiagnostico = $diagnostico[0];
+        if($diagnostico){
+            $Arraydiagnostico = $diagnostico;
+        }
+        if($diagnostico != null){
+            $diagnostico = 1;//Si Tiene diagnostico
         }
         //Consulta para traer los repuestos de la orden
         $repuesto = DB::table('repuesto')
         ->where('id_orden_servicio_repuesto', '=', $id_cliente)->get()->toArray();
+        $pendAutRep = 0;
+        //Contamos los repuestos pendientes de autorizar
+        foreach ($repuesto as $key => $value) {
+            if ($value->estado_repuesto == 1) {
+                $pendAutRep = $pendAutRep +1;
+            }
+        }
         //Realizamos el conteo del valor total de los repuestos
         $totalValorRepuestos = 0;//Iniciliazamos la variable en 0
         $control = sizeOf($repuesto) ;
@@ -202,8 +212,6 @@ class OrdenServicioController extends Controller
         if(sizeof($dataCliente) == 0){
             return ('ERROR 404');
         }
-        $arrayQuestion = $dataCliente[0];
-            //VALIDAMOS SI EL CLIENTE ES PERSONA O EMPRESA, PARA EVITAR EL ERROR DE NULL
 
             $Data = DB::table('orden_servicio as orden')
             ->join('cliente', 'orden.id_cliente_orden', '=', 'cliente.cliente_id')
@@ -217,10 +225,10 @@ class OrdenServicioController extends Controller
             ->get()->toArray();
             $arrayData = $Data[0];
 
-
+        // dd($pendAutRep);
         return view('modulos.ordenServicio.editarordeservicio')->with('arrayData',$arrayData)
         ->with('diagnostico',$diagnostico)->with('Arraydiagnostico',$Arraydiagnostico)
-        ->with('anotacion',$anotacion)->with('repuesto',$repuesto)->with('totalValorRepuestos',$totalValorRepuestos);
+        ->with('anotacion',$anotacion)->with('pendAutRep',$pendAutRep)->with('repuesto',$repuesto)->with('totalValorRepuestos',$totalValorRepuestos);
 
     }
 
@@ -230,6 +238,7 @@ class OrdenServicioController extends Controller
         $estadoOrden = 3 ; // Colocamos estado 3 (1-Recien ingresa - 2-Terminada , 3-Entregada)
         $fechaActual = new \DateTime();
         $enviarEmail = $request->enviarEmail;
+        $userCreated =  Auth()->user()->name;
 
         $arrayOrden  = DB::table('orden_servicio')
         ->where('id_orden', '=', $idOrden)->get();
@@ -243,13 +252,15 @@ class OrdenServicioController extends Controller
             ->where('id_orden', $idOrden)
             ->update( [
                 'iva_orden' => 0 ,//COLOCAMOS EL IVA EN 0
-                'valor_total_orden' => $valorTotalNew ] );
+                'valor_total_orden' => $valorTotalNew ,
+                'user_entrega' =>$userCreated ] );
         }
         DB::table('orden_servicio')
         ->where('id_orden', $idOrden)
         ->update( [
             'estadoOrden' => $estadoOrden ,
-            'fecha_entrega_orden' => $fechaActual ] );
+            'fecha_entrega_orden' => $fechaActual,
+            'user_entrega' =>$userCreated ] );
 
             $response = Array('mensaje' => 'ok'   );
             $pdfOrden =  OrdenServicioController::ordenSalidaPdf( $enviarEmail ,$idOrden);
