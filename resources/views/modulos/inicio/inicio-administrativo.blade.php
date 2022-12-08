@@ -19,7 +19,7 @@
 
                         <div class="row">
 
-                            <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="table-style col-xl-3 col-md-6 mb-3">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="table-style col-xl-3 col-md-6 mb-3">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="table-style col-xl-3 col-md-6 mb-3">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="table-style col-xl-3 col-md-6 mb-3">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -103,7 +103,7 @@
                         <div class="row">
 
                             <!-- Area Chart -->
-                            <div class="col-xl-8 col-lg-7">
+                            <div class="table-style col-xl-8 col-lg-7">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div
@@ -121,7 +121,7 @@
                             </div>
 
                             <!-- Pie Chart -->
-                            <div class="col-xl-4 col-lg-5">
+                            <div class="table-style col-xl-4 col-lg-5">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div

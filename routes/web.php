@@ -105,6 +105,8 @@ Route::post('equipos',[EquiposController::class, 'store']);
 Route::post('actualizarEquipo/{id}',[EquiposController::class, 'update'])->name('actualizarEquipo');
 //Privacidad
 Route::get('privacidad',[PrivacidadController::class, 'index']) ->name('privacidad');
+Route::post('consultarUsuario',[PrivacidadController::class, 'consultarUsuario']);
+Route::post('updateuser',[PrivacidadController::class, 'updateuser'])->name('updateuser');
 //Informes
 Route::get('informes',[InformeController::class, 'index']) ->name('informes');
 //Parametros

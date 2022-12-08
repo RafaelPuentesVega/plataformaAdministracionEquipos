@@ -11,7 +11,7 @@
 
     <title>Plataforma ByG</title>
     <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
-
+    <link href="{!! url('bootstrap/preloader.css') !!}" rel="stylesheet" />
     <!-- Custom fonts for this template-->
     <link href="{!! url('fontawesome/css/all.min.css" rel="stylesheet" type="text/css') !!}">
     <link
@@ -86,6 +86,26 @@
 
     </div>
     @endif
+    <div id="preloaderId" class="preloader" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(20, 23, 26, 0.503);
+    z-index: 9999;
+    display:none;
+    text-align: center;
+    padding: 20%">
+
+        <div class="lds-ring" style="margin-bottom: -100%">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <p style="margin-top: 100%; margin-left: -10%; color: aliceblue">&nbsp;</p>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{!! url('vendor/jquery/jquery.min.js') !!}"></script>
@@ -96,6 +116,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{!! url('js/sb-admin-2.min.js') !!}"></script>
+    <script src="{!! url('js/preloader.js') !!}"></script>
+    <script>
+        $(document).on("click",  "#btn-ingresar", function(){
+            showpreloader();
+        });
+    </script>
 
 </body>
 

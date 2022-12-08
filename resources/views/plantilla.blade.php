@@ -11,7 +11,7 @@
             <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
             <link href="{!! url('css/sb-admin-2.css?version=1.0') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/bootstrap.min.css') !!}" rel="stylesheet" />
-        <link href="{!! url('bootstrap/preloader.css') !!}" rel="stylesheet" />
+        <link href="{!! url('bootstrap/preloader.css?v=1') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/light-bootstrap-dashboard.css?v=1.4.0') !!}" rel="stylesheet"/>
         <link href="{!! url('assets/css/animate.min.css') !!}" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
@@ -37,15 +37,17 @@
     background: rgba(20, 23, 26, 0.503);
     z-index: 9999;
     display:none;
-">
-<div id="preloader6" style="">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <p style="margin-top: 100%; margin-left: -50%; color: aliceblue">Procesando...</p>
-</div>
-</div>
+    text-align: center;
+    padding: 20%">
+
+        <div class="lds-ring" style="margin-bottom: -100%">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <p style="margin-top: 100%; margin-left: -10%; color: aliceblue">Procesando...</p>
+        </div>
+    </div>
             <script src="{!! url('bower_components/jquery/dist/jquery.min.js') !!}"></script>
             <script src="{!! url('bower_components/jquery-ui/jquery-ui.min.js') !!}"></script>
             <script> $.widget.bridge('uibutton', $.ui.button);</script>
@@ -55,7 +57,7 @@
             @yield('js')
            <script src="{!! url('assets/js/light-bootstrap-dashboard.js?v=1.4.0') !!}"></script>
             <script src="{!! url('assets/js/demo.js') !!}"></script>
-            <script src="{!! url('js/preloader.js?v=1.2') !!}"></script>
+            <script src="{!! url('js/preloader.js?v=1.3') !!}"></script>
             <script src="{!! url('js/global.js') !!}"></script>
             <script src="{!! url('assets/js/bootstrap.min.js" type="text/javascript') !!}"></script>
             <script src="{!! url('sweetalert2/sweetalert2.js" type="text/javascript') !!}"></script>
