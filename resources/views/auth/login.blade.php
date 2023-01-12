@@ -86,7 +86,7 @@
 
     </div>
     @endif
-    <div id="preloaderId" class="preloader" style="
+    <div id="preloaderId" class="" style="
     position: fixed;
     top: 0;
     left: 0;
@@ -119,6 +119,24 @@
     <script src="{!! url('js/preloader.js') !!}"></script>
     <script>
         $(document).on("click",  "#btn-ingresar", function(){
+            var correo  = $('#email').val();
+            var cont  = $('#password').val();
+
+            var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+            if ( !expr.test(correo) ){                                                            //COMPRUEBA MAIL
+                return true;
+            }
+            if ((correo == "") || (cont == "")  ) {  //COMPRUEBA CAMPOS VACIOS
+                return true;
+            }
+            showpreloader();
+        });
+        $(document).on("click",  "#btn-sendEmail", function(){
+            if ( $('#email').val() == ""  ) {  //COMPRUEBA CAMPOS VACIOS
+                return true;
+            }
             showpreloader();
         });
     </script>

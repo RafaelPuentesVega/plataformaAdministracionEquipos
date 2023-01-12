@@ -70,8 +70,8 @@
              </li>
              <li @if (Request::url() == route('parametros')) class="active" @endif>
                  <a href="{{ url('parametros') }}">
-                     <i class="pe-7s-tools"></i>
-                     <p>SERVICIOS</p>
+                     <i class="pe-7s-config"></i>
+                     <p>PARAMETROS</p>
                  </a>
              </li>
              <li @if (Request::url() == route('informes')) class="active" @endif>

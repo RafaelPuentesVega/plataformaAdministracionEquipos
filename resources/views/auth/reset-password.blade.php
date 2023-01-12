@@ -39,7 +39,7 @@
                                     </div>
                                     @endif
                                     <br>
-                                    <button type="submit" id="btn-ingresar" style="font-size: 14px" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" id="btn-sendEmail" style="font-size: 14px" class="btn btn-primary btn-user btn-block">
                                         Enviar Correo.
                                     </button>
                                 </form>

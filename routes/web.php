@@ -14,6 +14,7 @@ use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\RequerimientoInternoController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\AutocompleteController;
+use App\Http\Controllers\NotificacionesEmailController;
 use App\Mail\EmailPdf as MailEmailPdf;
 use Illuminate\Support\Facades\Mail;
 
@@ -64,6 +65,10 @@ Route::POST('editarReporteTecnico',[OrdenServicioController::class, 'editarRepor
 Route::POST('changePrice',[OrdenServicioController::class, 'changePrice']);
 Route::POST('update/password', 'PrivacidadController@update');
 Route::POST('deleteRepuesto',[RepuestoController::class, 'delete']);
+Route::post('notificacionesEmail',[NotificacionesEmailController::class, 'consultarNotificaciones'])->name('notificacionesEmail');
+Route::post('updateNotificacion',[NotificacionesEmailController::class, 'update']);
+Route::post('vencimientOrdenBuscar',[ParametroController::class, 'buscarVencimientOrden']);
+Route::post('updateDiasVencimiento',[ParametroController::class, 'updateDiasVencimiento']);
 //Post Subtmit
 Route::post('actualizarCliente/{id}',[ClientesController::class, 'update'])->name('actualizarCliente');
 ///Pdf ordenes
@@ -111,5 +116,6 @@ Route::post('updateuser',[PrivacidadController::class, 'updateuser'])->name('upd
 Route::get('informes',[InformeController::class, 'index']) ->name('informes');
 //Parametros
 Route::get('parametros',[ParametroController::class, 'index']) ->name('parametros');
-Route::post('parametros',[ParametroController::class, 'store']);
+Route::post('parametro/servicios',[ParametroController::class, 'store']);
+Route::get('parametro/servicios',[ParametroController::class, 'servicioIndex'])->name('servicioIndex');
 

@@ -64,8 +64,40 @@ function consultarUsuario(idUser){
 //Guardar datos
 
 $(document).on("click",  "#update-user", function(){
+    var correo  = $('#mdemail').val();;
+    var nom  = $('#mdname').val();
+    var rol = $('#mdrol').val();
+    var cel = $('#mdcelular').val();
+
+    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+    if ( !expr.test(correo) ){                                                            //COMPRUEBA MAIL
+        return true;
+    }
+
+    if ((correo == "") || (nom == "") || (rol == "")  || (cel == "") ) {  //COMPRUEBA CAMPOS VACIOS
+        return true;
+    }
     showpreloader();
 });
 $(document).on("click",  "#btn-registerUser", function(){
+    var correo  = $('#email').val();;
+    var nom  = $('#name').val();
+    var rol = $('#rol').val();
+    var cont = $('#password').val();
+    var cel = $('#celular').val();
+    var comfcon = $('#password-confirm').val();
+
+    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+    if ( !expr.test(correo) ){                                                            //COMPRUEBA MAIL
+        return true;
+    }
+
+    if ((correo == "") || (nom == "") || (rol == "") || (cont == "") || (cel == "") || (comfcon == "")) {  //COMPRUEBA CAMPOS VACIOS
+        return true;
+    }
     showpreloader();
 });

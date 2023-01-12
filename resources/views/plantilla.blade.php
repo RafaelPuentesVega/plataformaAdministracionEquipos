@@ -28,7 +28,7 @@
     @include('modulos.rol.roles')
 
 
-    <div id="preloaderId" class="preloader" style="
+    <div id="preloaderId" class="" style="
     position: fixed;
     top: 0;
     left: 0;

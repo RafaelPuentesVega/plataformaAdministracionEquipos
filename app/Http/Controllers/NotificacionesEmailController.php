@@ -44,9 +44,18 @@ class NotificacionesEmailController extends Controller
      * @param  \App\Models\NotificacionesEmail  $notificacionesEmail
      * @return \Illuminate\Http\Response
      */
-    public function show(NotificacionesEmail $notificacionesEmail)
+    public function consultarNotificaciones(NotificacionesEmail $notificacionesEmail)
     {
-        //
+        $response = array('message'=>'ok' , 'data' => null);
+        try{
+            $find = NotificacionesEmail::all();
+
+        }catch(\Exception $e){
+            $response['message'] = 'Error';
+            return json_encode($response);
+        }
+        $response['data'] = $find;
+        return json_encode($response);
     }
 
     /**
@@ -69,7 +78,17 @@ class NotificacionesEmailController extends Controller
      */
     public function update(Request $request, NotificacionesEmail $notificacionesEmail)
     {
-        //
+        $response = array('message'=>'ok' );
+        try{
+            $usuario = NotificacionesEmail::findOrFail($request->id);
+            $usuario->dias = $request->dias;
+            $usuario->save();
+
+        }catch(\Exception $e){
+            $response['message'] = 'Error';
+            return json_encode($response);
+        }
+        return json_encode($response);
     }
 
     /**
