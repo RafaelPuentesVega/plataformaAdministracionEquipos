@@ -314,7 +314,11 @@
                                     </div>
                                     <br>
                                     <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO:
-                                            </strong></label>{{ $arrayData->name }} </div>
+                                            </strong></label>{{ $arrayData->name }}
+                                            @if($arrayData->estadoOrden = 1 )
+                                            <button id="btncambiarTecnico" title="Cambiar Tecnico" data-toggle="tooltip" class="btn style"><i style="font-size: 16px" class="fas fa-undo"></i></button>
+                                            @endif
+                                        </div>
                                     <hr>
                                     <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label
                                                 style=" font-size: 9px">Recibido Por:</label>
@@ -712,6 +716,7 @@
         </div>
     </div>
 </div>
+@include('modulos.ordenServicio.modal.mdlCambiarTecnico')
 @section('js')
     <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="{!! url('assets/js/toastr.min.js') !!}"></script>

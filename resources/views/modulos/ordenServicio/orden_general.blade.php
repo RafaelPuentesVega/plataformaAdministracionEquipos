@@ -385,7 +385,7 @@
                                             &nbsp;<strong>Tecnico</strong>
 
                                         </th>
-                                        <th width="11%"
+                                        <th width="8%"
                                             style="font-size: 11px ;font-weight:normal;  text-align: rigth">
                                             &nbsp;<strong>Valor Servicio</strong>
 
@@ -395,9 +395,14 @@
                                             &nbsp;<strong>IVA</strong>
 
                                         </th>
-                                        <th width="10%"
+                                        <th width="8%"
                                             style="font-size: 12px ;font-weight:normal;  text-align: rigth">
                                             &nbsp;<strong>Valor Total</strong>
+
+                                        </th>
+                                        <th width="3%"
+                                        style="font-size: 10px ;font-weight:normal;  text-align: rigth">
+                                        &nbsp;<strong>Numero <br> Factura</strong>
 
                                         </th>
                                         <th width="3%"
@@ -408,73 +413,63 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($ordenServicio as $OrdenServicio)
-                                        <tr style="cursor: pointer;background-color: #ffffff7e">
+                                        <tr onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'" style="cursor: pointer;background-color: #ffffff7e">
                                             {{-- <tr style="background-color: #ffffff7e" > --}}
 
 
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="height: 55px;font-size: 16px ; text-align: center ">
                                                 <strong>{{ $OrdenServicio->id_orden }}</strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 12px ; font-weight:normal;text-align: left">
                                                 <strong>{{ date('Y-m-d h:i:s a', strtotime($OrdenServicio->fecha_creacion_orden)) }}</strong>
 
                                             </th>
 
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 12px ;font-weight:normal; text-align: left ">
                                                 <strong>{{ $OrdenServicio->cliente_documento }}</strong>
 
                                             </th>
 
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 11px ; font-weight:normal;text-align: left">
 
                                                 <strong>{{ $OrdenServicio->cliente_nombres }}</strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 11px ;font-weight:normal;  text-align: left">
                                                 <strong>{{ $OrdenServicio->equipo_tipo }}-
                                                     {{ $OrdenServicio->equipo_marca }} -
                                                     {{ $OrdenServicio->equipo_referencia }}</strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 11px ;font-weight:normal; text-align: left ">
                                                 <strong>{{ $OrdenServicio->name }}</strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 14px ;font-weight:normal; text-align: left ">
                                                 <strong>${{ number_format($OrdenServicio->valor_servicio_orden, 0, ',', '.') }}</strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 14px ; font-weight:normal;text-align: left">
                                                 <strong>
                                                     ${{ number_format($OrdenServicio->iva_orden, 0, ',', '.') }}</strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/{{ encrypt($OrdenServicio->id_orden) }}'"
+                                            <th
                                                 style="font-size: 14px ; font-weight:normal;text-align: left">
                                                 <strong>${{ number_format($OrdenServicio->valor_total_orden, 0, ',', '.') }}</strong>
                                             </th>
+                                            <th width="6%"
+                                                style="font-size: 13px ; font-weight:normal;text-align: left">
+                                                <strong>{{$OrdenServicio->factura_numero_orden}}</strong>
+                                            </th>
 
                                             <th style="font-size: 12px ;font-weight:normal;  text-align: center">
-                                                {{-- VALIDAMOS SI LA ORDEN ESTA ENTREGADA Y NO TIENE FACTURA - PARA HABILIAR EL BOTON DE FACTURA --}}
-                                                @if ($OrdenServicio->estadoOrden == 3 &&
-                                                    $OrdenServicio->factura_numero_orden == null &&
-                                                    auth()->user()->rol == 'ADMINISTRATIVO')
-                                                    <button title="NUMERO DE FACTURA" data-toggle="tooltip"
-                                                        data-placement="left"
-                                                        style="border: none; outline:none; text-decoration: none; margin: 0px; margin-bottom: 10px"
-                                                        type="button" class="btn btn-success btn-fill  pull-right "
-                                                        id="btnGuardarCliente"
-                                                        onclick="facturaNumero('{{ $OrdenServicio->id_orden }}')">
-                                                        <i style="font-size: 19px;  margin: -20px%"
-                                                            class="fas fa-file-invoice-dollar"></i>
-                                                    </button>
-                                                @endif
 
                                                 @if ($OrdenServicio->fecha_estimada_orden <= date('Y-m-d H:i:s') && $OrdenServicio->estadoOrden == 1)
                                                     {{-- {{-- ORDEN VENCIDA --}}
@@ -533,7 +528,6 @@
 @section('js')
     <script src="{!! url('js/jquery.min.js') !!}"></script>
     <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
-    <script src="{!! url('js/facturaNumero.js') !!}"></script>
     <script src="{!! url('js/ordenGeneralFiltro.js') !!}"></script>
     <script src="{!! url('js/moment.min.js') !!}"></script>
     <script src="{!! url('js/daterangepicker.min.js') !!}"></script>

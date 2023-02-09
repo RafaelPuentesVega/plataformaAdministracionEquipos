@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="modal-header">
-                <table style="margin-top: -20px" id="clients" class="table table-striped" bordercolor="#CDCDD8">
+                <table style="" id="clients" class="table table-striped" bordercolor="#CDCDD8">
                     <thead style="background:#25273148" class="thead-light">
                         <tr>
                             <th scope="col"  width="20%" class="text-center" style="color:#16172C"><strong>CLIENTE</strong></th>

@@ -279,12 +279,13 @@ function guardarEquipoOrden() {
             return;
         }
     }
+   // alert(document.getElementById('checkTipoEquipo').checked);
     if (document.getElementById('checkTipoEquipo').checked) {
         checkTipoEquipo = 'SI';
         equipo_tipo_select = '';
         if (equipo_tipo.length < 1) {
             toastr["warning"]("<h6>Digitar Tipo de equipo</h6>")
-            $("#tipoEquipoSelect").focus();
+            $("#equipo_tipo").focus();
             return;
         }
     }
@@ -293,7 +294,7 @@ function guardarEquipoOrden() {
         equipo_tipo = '';
         if (equipo_tipo_select.length < 1) {
             toastr["warning"]("<h6>Seleccionar Tipo Equipo</h6>")
-            $("#equipo_tipo_select").focus();
+            $("#tipoEquipoSelect").focus();
             return;
         }
 
@@ -339,8 +340,14 @@ function guardarEquipoOrden() {
 
                 setTimeout(function(){
                     hidepreloader();
-
                 }, 800);
+                document.getElementById('equipo_marca').disabled = true;
+                document.getElementById('equipo_tipo').disabled = true;
+                document.getElementById('equipo_referencia').disabled = true;
+                document.getElementById('equipo_serial').disabled = true;
+                document.getElementById('checkTipoEquipo').disabled = true;
+                document.getElementById('tipoEquipoSelect').disabled = true;
+
                 toastr["success"]("<h6>Se guardo correctamente el equipo</h6>", "GUARDADO")
                 //btnguardar.disabled = true;
                 btnguardar.style.display = "none";
@@ -735,8 +742,8 @@ function consultarUsuarioEmpresa() {
                 control = json.data.length;
                 var output = "";
                 if (control != 0) {
-                    output += '<table  id="usuarioEmpresa" class="table table-striped table-hover"  >'
-                    output += '<thead style="background:#E9F7EF " class="thead-light">'
+                    output += '<table  id="usuarioEmpresa" style="box-shadow: 0 0 11px 4px #0000001f;border-radius: 10px" class="table table-striped table-hover"  >'
+                    output += '<thead class="thead-light">'
                     output += '<tr >'
                     output += '<th  scope="col" class="text-center" style="height: 5px; color:#16172C"><strong>DEPENDENCIA</strong></th>'
                     output += '<th scope="col" class="text-center" style="color:#16172C"><strong>USUARIO</strong></th>'

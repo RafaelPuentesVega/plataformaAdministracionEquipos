@@ -1,3 +1,6 @@
+$(document).on("click",  "#btnAddFactura", function() {
+    $('#mdlAgregarFactura').modal('show'); // abrir
+});
 numeroOrden = '';
 function facturaNumero(id) {
     showModal();
@@ -67,16 +70,17 @@ function facturaNumero(id) {
 
 function guardarNumeroFactura() {
 
-    numeroFactura = $('#numeroFactura').val();
+    numeroFactura = $('#mdNumeroFactura').val();
+    numeroOrden = $('#idOrden').val();
 
-    if(numeroFactura.length  < 1) {
+    if(numeroFactura.length  < 1 || numeroFactura == "" || numeroFactura == null) {
         toastr["warning"]("<h6>Digitar numero de factura</h6>")
-        $("#numeroFactura").focus();
+        $("#mdNumeroFactura").focus();
         return;
     }
 
     $.ajax({
-        url: 'guardarNumeroFactura',
+        url: '../guardarNumeroFactura',
         data: {
             numeroOrden:numeroOrden,
             numeroFactura:numeroFactura
@@ -86,16 +90,42 @@ function guardarNumeroFactura() {
         success: function (json) {
             if (json.mensaje === "update") {
 
-                toastr["success"]("<h6>Se guardo correctamente</h6>")
-                CloseModal()
-                setTimeout(function(){
-                    window.location.reload();
-                }, 1000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Guardado Correctamente',
+                    showConfirmButton: true,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        CloseModal()
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    }else{
+                        CloseModal()
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    }
+                })
+
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ocurrio un error al guardar.',
+                    footer: 'Recargue la pagina'
+                  })
+
             }
 
         },
         error: function (xhr, status) {
-            alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error con el servidor',
+                footer: 'Recargue la pagina'
+              })
         },
         complete: function (xhr, status) {
         }
@@ -103,9 +133,9 @@ function guardarNumeroFactura() {
 
 }
 function showModal() {
-    $('#md-facturaNumero').modal('show'); // abrir
+    $('#mdlAgregarFactura').modal('show'); // abrir
 }
 function CloseModal() {
-    $('#md-facturaNumero').modal('hide'); // Cerrar
+    $('#mdlAgregarFactura').modal('hide'); // Cerrar
 
 }

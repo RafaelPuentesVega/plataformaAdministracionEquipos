@@ -322,7 +322,12 @@
                                     </div>
                                     <br>
                                     <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO:
-                                            </strong></label><?php echo e($arrayData->name); ?> </div>
+                                            </strong></label><?php echo e($arrayData->name); ?>
+
+                                            <?php if($arrayData->estadoOrden = 1 ): ?>
+                                            <button id="btncambiarTecnico" title="Cambiar Tecnico" data-toggle="tooltip" class="btn style"><i style="font-size: 16px" class="fas fa-undo"></i></button>
+                                            <?php endif; ?>
+                                        </div>
                                     <hr>
                                     <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label
                                                 style=" font-size: 9px">Recibido Por:</label>
@@ -733,10 +738,11 @@
         </div>
     </div>
 </div>
+<?php echo $__env->make('modulos.ordenServicio.modal.mdlCambiarTecnico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->startSection('js'); ?>
     <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
-    <script src="<?php echo url('js/editOrden.js?version=1.0'); ?>"></script>
+    <script src="<?php echo url('js/editOrden.js?version=1.2'); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 

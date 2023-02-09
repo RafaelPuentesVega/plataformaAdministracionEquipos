@@ -1,3 +1,146 @@
+var validaAnotacion = null;
+var changeAnotacion = null;
+$(document).on("click",  "#btncambiarTecnico", function() {
+    let idOrden = $("#idOrden").val();
+    showpreloader();
+    $.ajax({
+        url: '../consultarTecnico',
+        data: {
+            idOrden : idOrden
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (json) {
+            output = '';
+            if (json.state === "ok") {
+                control = json.data.length;
+                output += '<select class="js-example-basic js-states form-control" id="tecnicoSelect" required>';
+                output +='<option  value="">Seleccionar...</option>';
+                for (let i = 0; i < control; i++) {
+                    id = json.data[i].id;
+                    nombre = json.data[i].name;
+                    output +='<option  value="'+id+'*'+nombre+'">'+nombre+'</option>';
+                }
+                output += '</select>';
+                $("#Tecnicos").html(output);
+                $('#mdlcambiarTecnico').modal('show'); // abrir
+                hidepreloader();
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ocurrio un error',
+                    footer: 'Recargue la pagina'
+                })
+                hidepreloader();
+            }
+        },
+        error: function (xhr, status) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error',
+                footer: 'Recargue la pagina'
+            })
+            hidepreloader();
+        },
+        complete: function (xhr, status) {
+            hidepreloader();
+        }
+    });
+});
+
+$(document).on("click",  "#guardarCambioTecnico", function() {
+    if($("#tecnicoSelect").val() == '' || $("#tecnicoSelect").val() == null ){
+        toastr["warning"]("<h6>Seleccionar el Tecnico</h6>")
+        $("#tecnicoSelect").focus();
+        return;
+    }
+    if($("#comentarioCambioTecnico").val() == '' || $("#comentarioCambioTecnico").val() == null){
+        toastr["warning"]("<h6>Diligenciar un comentario </h6>")
+        $("#comentarioCambioTecnico").focus();
+        return;
+    }
+
+    validaAnotacion = 'cambiarEstadoOrden';
+    arrayTecnico  = $("#tecnicoSelect").val().split('*');
+    idTecnico = arrayTecnico[0];
+    tecnicoNuevo = arrayTecnico[1];
+    estadoTecnico = 'SE CAMBIA TECNICO DE "'+$("#tecnicoAntes").val()+'" A "'+tecnicoNuevo+'" - ';
+    changeAnotacion =estadoTecnico + $("#comentarioCambioTecnico").val();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Seguro Desea Cambiar el Tecnico?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        reverseButtons: false
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+            actualizarTecnico(idTecnico);
+            setTimeout(function(){
+                guardarAnotacion();
+            }, 1500);
+        }else{
+            validaAnotacion = null;
+        }
+    });
+
+});
+function actualizarTecnico(id) {
+    idtecnicoNuevo = id;
+    let idOrden = $("#idOrden").val();
+    showpreloader();
+    $.ajax({
+        url: '../updateTecnico',
+        data: {
+            idOrden : idOrden,
+            idtecnicoNuevo : idtecnicoNuevo
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (json) {
+            output = '';
+            if (json.state === "ok") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se Actualizo Correctamente El Tecnico',
+                    showConfirmButton: true,
+                  })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ocurrio un error',
+                    footer: 'Recargue la pagina'
+                })
+                hidepreloader();
+            }
+        },
+        error: function (xhr, status) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error',
+                footer: 'Recargue la pagina'
+            })
+            hidepreloader();
+        },
+        complete: function (xhr, status) {
+            hidepreloader();
+        }
+    });
+}
+
 function guardarDiagnostico() {
     btnguardar = document.getElementById('btnDiagnostico');
     btnTerminarOrden = document.getElementById('btnTerminarOrden');
@@ -41,8 +184,13 @@ function guardarDiagnostico() {
 
 }
 function guardarAnotacion() {
-    btnguardar = document.getElementById('btnAnotacion');
-    let anotacion = $("#anotacion").val();
+    let anotacion = '';
+    if(validaAnotacion == 'cambiarEstadoOrden'){
+         anotacion = changeAnotacion;
+    }else{
+         anotacion = $("#anotacion").val();
+    }
+    validaAnotacion = null;
     let idOrden = $("#idOrden").val();
     if (anotacion.length < 1) {
         toastr["warning"]("<h6>Diligenciar un Comentario </h6>")
@@ -61,20 +209,41 @@ function guardarAnotacion() {
         dataType: 'json',
         success: function (json) {
             if (json.mensaje === "save") {
-                toastr["success"]("<h6>Se registro correctamente</h6>", "GUARDADO")
-                btnguardar.disabled = true;
-
-                setTimeout(function(){
-                    hidepreloader()
-                    window.location.reload();
-                }, 1000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Comentario Guardado Correctamente',
+                    showConfirmButton: true,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    }else{
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    }
+                })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ocurrio un error al guardar.',
+                        footer: 'Recargue la pagina'
+                      })
                 }
         },
         error: function (xhr, status) {
-            alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ocurrio un error al guardar.',
+                    footer: 'Recargue la pagina'
+                })
             hidepreloader();
         },
         complete: function (xhr, status) {
+            hidepreloader();
         }
     });
 }

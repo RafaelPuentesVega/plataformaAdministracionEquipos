@@ -389,7 +389,7 @@
                                             &nbsp;<strong>Tecnico</strong>
 
                                         </th>
-                                        <th width="11%"
+                                        <th width="8%"
                                             style="font-size: 11px ;font-weight:normal;  text-align: rigth">
                                             &nbsp;<strong>Valor Servicio</strong>
 
@@ -399,9 +399,14 @@
                                             &nbsp;<strong>IVA</strong>
 
                                         </th>
-                                        <th width="10%"
+                                        <th width="8%"
                                             style="font-size: 12px ;font-weight:normal;  text-align: rigth">
                                             &nbsp;<strong>Valor Total</strong>
+
+                                        </th>
+                                        <th width="3%"
+                                        style="font-size: 10px ;font-weight:normal;  text-align: rigth">
+                                        &nbsp;<strong>Numero <br> Factura</strong>
 
                                         </th>
                                         <th width="3%"
@@ -412,73 +417,63 @@
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $ordenServicio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $OrdenServicio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr style="cursor: pointer;background-color: #ffffff7e">
+                                        <tr onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'" style="cursor: pointer;background-color: #ffffff7e">
                                             
 
 
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="height: 55px;font-size: 16px ; text-align: center ">
                                                 <strong><?php echo e($OrdenServicio->id_orden); ?></strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 12px ; font-weight:normal;text-align: left">
                                                 <strong><?php echo e(date('Y-m-d h:i:s a', strtotime($OrdenServicio->fecha_creacion_orden))); ?></strong>
 
                                             </th>
 
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 12px ;font-weight:normal; text-align: left ">
                                                 <strong><?php echo e($OrdenServicio->cliente_documento); ?></strong>
 
                                             </th>
 
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 11px ; font-weight:normal;text-align: left">
 
                                                 <strong><?php echo e($OrdenServicio->cliente_nombres); ?></strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 11px ;font-weight:normal;  text-align: left">
                                                 <strong><?php echo e($OrdenServicio->equipo_tipo); ?>-
                                                     <?php echo e($OrdenServicio->equipo_marca); ?> -
                                                     <?php echo e($OrdenServicio->equipo_referencia); ?></strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 11px ;font-weight:normal; text-align: left ">
                                                 <strong><?php echo e($OrdenServicio->name); ?></strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 14px ;font-weight:normal; text-align: left ">
                                                 <strong>$<?php echo e(number_format($OrdenServicio->valor_servicio_orden, 0, ',', '.')); ?></strong>
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 14px ; font-weight:normal;text-align: left">
                                                 <strong>
                                                     $<?php echo e(number_format($OrdenServicio->iva_orden, 0, ',', '.')); ?></strong>
 
                                             </th>
-                                            <th onclick="window.location.href='ordenGeneral/<?php echo e(encrypt($OrdenServicio->id_orden)); ?>'"
+                                            <th
                                                 style="font-size: 14px ; font-weight:normal;text-align: left">
                                                 <strong>$<?php echo e(number_format($OrdenServicio->valor_total_orden, 0, ',', '.')); ?></strong>
                                             </th>
+                                            <th width="6%"
+                                                style="font-size: 13px ; font-weight:normal;text-align: left">
+                                                <strong><?php echo e($OrdenServicio->factura_numero_orden); ?></strong>
+                                            </th>
 
                                             <th style="font-size: 12px ;font-weight:normal;  text-align: center">
-                                                
-                                                <?php if($OrdenServicio->estadoOrden == 3 &&
-                                                    $OrdenServicio->factura_numero_orden == null &&
-                                                    auth()->user()->rol == 'ADMINISTRATIVO'): ?>
-                                                    <button title="NUMERO DE FACTURA" data-toggle="tooltip"
-                                                        data-placement="left"
-                                                        style="border: none; outline:none; text-decoration: none; margin: 0px; margin-bottom: 10px"
-                                                        type="button" class="btn btn-success btn-fill  pull-right "
-                                                        id="btnGuardarCliente"
-                                                        onclick="facturaNumero('<?php echo e($OrdenServicio->id_orden); ?>')">
-                                                        <i style="font-size: 19px;  margin: -20px%"
-                                                            class="fas fa-file-invoice-dollar"></i>
-                                                    </button>
-                                                <?php endif; ?>
 
                                                 <?php if($OrdenServicio->fecha_estimada_orden <= date('Y-m-d H:i:s') && $OrdenServicio->estadoOrden == 1): ?>
                                                     
@@ -540,7 +535,6 @@
 <?php $__env->startSection('js'); ?>
     <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
-    <script src="<?php echo url('js/facturaNumero.js'); ?>"></script>
     <script src="<?php echo url('js/ordenGeneralFiltro.js'); ?>"></script>
     <script src="<?php echo url('js/moment.min.js'); ?>"></script>
     <script src="<?php echo url('js/daterangepicker.min.js'); ?>"></script>

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Clientes;
 use App\Models\Departamentos;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Models\ParametrosDetalle;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Auth;
@@ -64,8 +65,35 @@ class OrdenServicioController extends Controller
 
 
 
-    public function store(Request $request)
+    public function consultarTecnico(Request $request)
     {
+        $response = array('message' => 'Consultado Correctamente' , 'state' => 'ok', 'data' => null);
+        try {
+            $ordenServicio =  OrdenServicio::where('id_orden',$request->idOrden)->first();
+            $tecnicoOrden = $ordenServicio->id_tecnico_orden;
+            $tecnico = User::where('rol','Tecnico')->where('id','!=' ,$tecnicoOrden)->select('id','name')->get()->toArray();
+            $response['data'] = $tecnico;
+        } catch (\Throwable $e) {
+            $response['data'] = [];
+            $response['message'] = 'Ocurrio un error';
+            $response['state'] = 'error';
+        }
+        return json_encode($response);
+
+    }
+    public function updateTecnico(Request $request)
+    {
+        $response = array('message' => 'Actualizado Correctamente' , 'state' => 'ok');
+        try {
+            DB::table('orden_servicio')
+            ->where('id_orden', $request->idOrden)
+            ->update( [
+                'id_tecnico_orden' => $request->idtecnicoNuevo ] );
+        } catch (\Throwable $e) {
+            $response['message'] = 'Ocurrio un error';
+            $response['state'] = 'error';
+        }
+        return json_encode($response);
 
     }
     public function guardarNumeroFactura(Request $request)
@@ -174,6 +202,7 @@ class OrdenServicioController extends Controller
     }
     public function editarOden($id_cliente)
     {
+        try{
         $id_cliente =  decrypt($id_cliente) ;
 
         $dataCliente = DB::table('orden_servicio')
@@ -224,7 +253,10 @@ class OrdenServicioController extends Controller
             ->whereRaw("orden.id_orden = $id_cliente")
             ->get()->toArray();
             $arrayData = $Data[0];
+        } catch (\Throwable $e) {
+            return view('errors.404');
 
+        }
         // dd($pendAutRep);
         return view('modulos.ordenServicio.editarordeservicio')->with('arrayData',$arrayData)
         ->with('diagnostico',$diagnostico)->with('Arraydiagnostico',$Arraydiagnostico)
@@ -268,6 +300,7 @@ class OrdenServicioController extends Controller
     }
     public function ordenGeneral($id_cliente)
     {
+        try{
         $id_cliente = decrypt($id_cliente);
         $dataCliente = DB::table('orden_servicio')
         ->where('id_orden', '=', $id_cliente)->get()->toArray();
@@ -313,7 +346,10 @@ class OrdenServicioController extends Controller
         ->whereRaw("orden.id_orden = $id_cliente")
         ->get()->toArray();
         $arrayData = $Data[0];
+    } catch (\Throwable $e) {
+        return view('errors.404');
 
+    }
         return view('modulos.ordenServicio.verOrdenGeneral')->with('arrayData',$arrayData)
         ->with('diagnostico',$diagnostico)->with('Arraydiagnostico',$Arraydiagnostico)
         ->with('anotacion',$anotacion)->with('repuesto',$repuesto)->with('totalValorRepuestos',$totalValorRepuestos);
@@ -328,6 +364,7 @@ class OrdenServicioController extends Controller
      */
     public static function ordenSalidaPdf($rsemail ,$idOrden)
     {
+        try{
         $sendEmail = $rsemail;
         $dataArray = DB::table('orden_servicio')
         ->where('id_orden', '=', $idOrden)->get()->toArray();
@@ -399,6 +436,10 @@ class OrdenServicioController extends Controller
                 $SendEmail =  sendEmail::ordenSalidaEmail($pdf, $array);
             }
             $numeroOrden = $array->id_orden ;
+        } catch (\Throwable $e) {
+            return view('errors.404');
+
+        }
             return $pdf->stream('Orden entrada Numero ' .($numeroOrden).'.pdf');
 
 
@@ -413,7 +454,9 @@ class OrdenServicioController extends Controller
     public function guardarOrden(Request $request)
     {
             $estadoOrden = 1; //INICIALIZAMOS LA VARIABLE EN EL ESTADO 1 (1-INGRESADO - 2-ORDEN TERMINADA - 3-ORDEN ENTREGADA)
-            $diasVencimiento = 3 ;
+            //Consultamos en parametros, para traer los dias de vencimiento
+            $findVencimiento = ParametrosDetalle::where('nombre' ,'VENCIMIENTO ORDEN')->first();
+            $diasVencimiento = $findVencimiento->valor ;
             $fechaVencimiento = '';
             $fechaVencimiento = date("Y-m-d G:i:s");
             $userCreated =  Auth()->user()->name;
@@ -736,6 +779,27 @@ public function ordenEntradaPDF($idOrden)
 
         //   Mail::to("rafael.puentez@gmail.com")->send(new EmailPdf($datosCorreo));
 
+}
+public function cambiarEstadoOrden(Request $request)
+{
+    try {
+        $response = array('state' => 'save' ,  'message' => 'Guardado Correctamente');
+        $ordenServicio =  OrdenServicio::where('id_orden',$request->idOrden)->first();
+        $newEstado = $ordenServicio->estadoOrden - 1;//Restamos 1 estado.
+        if($newEstado == 0){
+            $response['state'] = 'error';
+            $response['message'] = 'No se puede cambiar estado a "REPARACION"';
+        }else{
+            DB::table('orden_servicio')
+            ->where('id_orden', $request->idOrden)
+            ->update( [
+                'estadoOrden' => $newEstado ] );
+        }
+    } catch (\Throwable $e) {
+        $response['state'] = 'error';
+        $response['message'] = 'Ocurrio un error '.$e;
+    }
+    return json_encode($response);
 }
 
 public function editarReporteTecnico(Request $request)

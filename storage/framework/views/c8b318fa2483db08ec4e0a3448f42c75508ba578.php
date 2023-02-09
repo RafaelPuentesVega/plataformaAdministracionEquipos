@@ -4,6 +4,11 @@
     hr{
      border: 0.01px solid #bababa3f !important;
     }
+    #mdNumeroFactura {
+        border-radius: 10rem !important;
+        height: 4rem !important;
+        padding: 1.5rem 1.5rem !important;
+    }
     </style>
     <link href="<?php echo url('assets/js/toastr.min.css'); ?>" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -332,13 +337,55 @@
 
                                                 </div>
                                                 <br><br>
-                                                <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label><?php echo e($arrayData->name); ?> </div>
+                                                <div style="text-align: right; margin-bottom: -20px"><label><strong>TECNICO: </strong></label><?php echo e($arrayData->name); ?>
+
+                                                    <?php if($arrayData->estadoOrden == 1 ): ?>
+                                                    <button id="btncambiarTecnico" title="Cambiar Tecnico" data-toggle="tooltip" class="btn style"><i style="font-size: 16px" class="fas fa-undo"></i></button>
+                                                    <?php endif; ?>
+                                                </div>
 
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
-                                      <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label style=" font-size: 9px">Recibido Por:</label><?php if(isset($arrayData->user_created)): ?> <?php echo e($arrayData->user_created); ?><?php else: ?> N/A  <?php endif; ?></i> </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div style="text-align: left; margin-top: -5px; font-size: 10px"><i><label style=" font-size: 11px">Estado:</label>
+                                                <?php if($arrayData->fecha_estimada_orden <= date('Y-m-d H:i:s') && $arrayData->estadoOrden == 1): ?>
+                                                
+                                                <span
+                                                    class="badge badge-pill badge-danger">Reparacion</span>
+                                                <?php elseif($arrayData->estadoOrden == 1): ?>
+                                                    
+                                                    <span
+                                                        class="badge badge-pill badge-info">Reparacion</span>
+                                                <?php elseif($arrayData->estadoOrden == 2): ?>
+                                                    
+                                                    <span
+                                                        class="badge badge-pill badge-success">Lista Para
+                                                        Entregar</span>
+                                                <?php elseif($arrayData->estadoOrden == 3 && $arrayData->factura_numero_orden == null): ?>
+                                                    
+                                                    <span
+                                                        class="badge badge-pill badge-warning">Facturacion</span>
+                                                <?php elseif($arrayData->estadoOrden == 3): ?>
+                                                    <span
+                                                        class="badge badge-pill badge-primary">Entregada</span>
+                                                    
+                                                <?php endif; ?>
+
+                                                <?php if($arrayData->estadoOrden > 1 &&  auth()->user()->rol == "ADMINISTRATIVO"): ?>
+                                                <button id="btncambiarEstado" title="Cambiar Estado Orden" data-toggle="tooltip" class="btn style"><i style="font-size: 16px" class="fas fa-undo"></i></button>
+                                                <?php endif; ?>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div style="text-align: right; margin-top: -5px; font-size: 10px"><i><label style=" font-size: 9px">Recibido Por:</label><?php if(isset($arrayData->user_created)): ?> <?php echo e($arrayData->user_created); ?><?php else: ?> N/A  <?php endif; ?></i> </div>
+                                        </div>
+
+                                    </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-md-2">
@@ -442,11 +489,11 @@
                                     <?php endif; ?>
                                     <hr>
                                     <div class="table-responsive-xl">
-                                        <table style="box-shadow: 0 0 11px 4px #0000001f;font-family: Verdana, sans-serif" class="table" width="100%" style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 50px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(0, 0, 0, 0) 1.5px solid">
-                                            <tr style=" font-size: 13px ; background-color: #AED6F1">
+                                        <table style="box-shadow: 0 0 11px 4px #0000001f;font-family: Verdana, sans-serif; border-radius: 10px" class="table" width="100%" style="word-break: break-all;table-layout: fixed;border-collapse: collapse;border-radius: 50px;box-shadow: inset 0 0 0 1px #0000001f;  font-size: 13px; border: rgba(0, 0, 0, 0) 1.5px solid">
+                                            <tr style="  font-size: 13px ; background-color: #AED6F1">
 
                                                 <th class="text-center" width="10%" colspan="2"
-                                                    style="border-top-left-radius: 0.5rem;  height: 1px; font-weight:normal; text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid ">
+                                                    style="border-top-left-radius: 10px;  height: 1px; font-weight:normal; text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid ">
                                                     &nbsp;<strong>Cantidad </strong>
                                                 </th>
                                                 <th width="60%"
@@ -458,7 +505,7 @@
                                                     &nbsp;<strong>$ Unitario</strong>
                                                 </th>
                                                 <th width="15%"
-                                                    style="border-top-right-radius: 0.5rem;font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid">
+                                                    style="border-top-right-radius: 10px;font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0.0) 2px solid">
                                                     &nbsp;<strong>$ Total</strong>
 
                                                     <?php if($arrayData->estadoOrden == 2 && auth()->user()->rol == "ADMINISTRATIVO"): ?>
@@ -600,7 +647,7 @@
                                                 </th>
 
                                             </tr>
-
+                                            <?php if($arrayData->estadoOrden == 3): ?>
                                             <tr style=" font-size: 13px ">
                                                 <th width="" colspan="2"
                                                     style=" height: 1px; font-weight:normal; text-align: left">
@@ -613,13 +660,17 @@
                                                 <th width=""
                                                     style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: left; border: rgba(0, 0, 0, 0) 2px solid">
                                                     &nbsp;<strong>Factura Numero</strong>
+                                                    <?php if(auth()->user()->rol == "ADMINISTRATIVO" && $arrayData->estadoOrden == 3): ?>
+                                                    <button title="Agregar Numero Factura" data-toggle="tooltip" id="btnAddFactura" class="btn style" style="margin: 0%;padding: 0%;  text-decoration: none; :hover border-color:white"><i style="font-size: 18px; color: #2874A6"   class="fas fa-file-invoice-dollar"></i></button>
+                                                    <?php endif; ?>
                                                 </th>
                                                 <th width=""
                                                 style="background: #e0e0e0; font-size: 13px ;font-weight:normal;  text-align: right; border: rgba(0, 0, 0, 0) 2px solid">
                                                 &nbsp;<strong><?php echo e($arrayData->factura_numero_orden); ?></strong>
-                                            </th>
+                                                </th>
 
                                             </tr>
+                                            <?php endif; ?>
 
                                         </table>
                                     </div>
@@ -680,14 +731,16 @@
     </div>
 </div>
 
-
+<?php echo $__env->make('modulos.ordenServicio.modal.mdlAgregarNumeroFactura', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('modulos.ordenServicio.modal.mldCambiarEstadoOrden', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('modulos.ordenServicio.modal.mdlCambiarTecnico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->startSection('js'); ?>
     <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
-    <script src="<?php echo url('js/editOrden.js?version=1.2'); ?>"></script>
+    <script src="<?php echo url('js/editOrden.js?version=1.3'); ?>"></script>
     <script src="<?php echo url('js/entregarOrden.js?v=1.2'); ?>"></script>
-    <script src="<?php echo url('js/ordenGeneral.js'); ?>"></script>
-
+    <script src="<?php echo url('js/ordenGeneral.js?v=1.0'); ?>"></script>
+    <script src="<?php echo url('js/facturaNumero.js?v=1.0'); ?>"></script>
 
 <?php $__env->stopSection(); ?>
 

@@ -1,3 +1,5 @@
+var validaAnotacion = null;
+var changeAnotacion = null;
 function reporteTecnicoEdit() {
     reporteTecnicoDiv = document.getElementById("reporteTecnicoDiv");
     reporteTecnicoInput = document.getElementById("editReporte");
@@ -11,6 +13,92 @@ function reporteTecnicoEdit() {
 
 }
 
+$(document).on("click",  "#btncambiarEstado", function() {
+
+    $('#mdlcambiarEstado').modal('show'); // abrir
+
+});
+
+$(document).on("click",  "#guardarCambioOrden", function() {
+    if($("#comentarioCambioOrden").val() == '' || $("#comentarioCambioOrden").val() == null){
+        toastr["warning"]("<h6>Diligenciar un comentario </h6>")
+        $("#comentarioCambioOrden").focus();
+        return;
+    }
+
+    validaAnotacion = 'cambiarEstadoOrden';
+    estado = 'SE CAMBIA ESTADO DE "'+$("#estadoActual").val()+'" a "'+$("#estadoNuevo").val()+'" - ';
+    changeAnotacion =estado + $("#comentarioCambioOrden").val();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Seguro Desea Cambiar Estado De La Orden?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        reverseButtons: false
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+            cambiarEstadoOrden();
+            setTimeout(function(){
+                guardarAnotacion();
+            }, 1500);
+        }else{
+            validaAnotacion = null;
+        }
+    });
+
+
+
+
+});
+function cambiarEstadoOrden(){
+    let idOrden = $("#idOrden").val();
+    $.ajax({
+        url: '../cambiarEstadoOrden',
+        data: {
+            idOrden : idOrden
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (json) {
+            if (json.state == "save") {
+                $('#mdlcambiarEstado').modal('hide');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se Cambio Correctamente El Estado',
+                    showConfirmButton: true,
+                  })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: json.message,
+                        footer: 'Recargue la pagina'
+                    })
+                }
+        },
+        error: function (xhr, status) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error',
+                footer: 'Recargue la pagina'
+            })
+        },
+        complete: function (xhr, status) {
+        }
+    });
+
+}
 function reporteTecnicoSave() {
     btnSave = document.getElementById('btnsaveReporte');
     let editReporte = $("#editReporte").val();

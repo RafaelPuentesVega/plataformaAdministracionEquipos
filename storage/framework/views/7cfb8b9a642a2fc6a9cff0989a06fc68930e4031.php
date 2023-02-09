@@ -1,6 +1,5 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startSection('css'); ?>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
 
 
 <link href="<?php echo url('bootstrap/bootstrap.css'); ?>" rel="stylesheet"/>

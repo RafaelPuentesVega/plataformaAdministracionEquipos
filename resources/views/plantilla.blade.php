@@ -7,17 +7,17 @@
         <title>Plataforma</title>
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-            <link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
-            <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
-            <link href="{!! url('css/sb-admin-2.css?version=1.0') !!}" rel="stylesheet" />
-        <link href="{!! url('assets/css/bootstrap.min.css') !!}" rel="stylesheet" />
+        <link href="{!! url('fontawesome/css/all.css') !!}" rel="stylesheet"/>
+        <link rel="shortcut icon" href="{!! url('assets/img/logo.ico') !!}" type="image/x-icon">
+        <link href="{!! url('css/sb-admin-2.css?version=1.0') !!}" rel="stylesheet" />
+        <link href="{!! url('assets/css/bootstrap.min.css?v=1') !!}" rel="stylesheet" />
         <link href="{!! url('bootstrap/preloader.css?v=1') !!}" rel="stylesheet" />
         <link href="{!! url('assets/css/light-bootstrap-dashboard.css?v=1.4.0') !!}" rel="stylesheet"/>
         <link href="{!! url('assets/css/animate.min.css') !!}" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link href="{!! url('assets/css/pe-icon-7-stroke.css') !!}" rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" type="text/css" href="{!! url('assets/css/bootstrap-extended.min.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! url('assets/css/bootstrap-extended.min.css?v=1') !!}">
         @yield('css')
     </head>
     <body class="hold-transition skin-blue sidebar-mini login-page">

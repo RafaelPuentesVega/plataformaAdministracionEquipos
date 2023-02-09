@@ -71,8 +71,8 @@
              </li>
              <li <?php if(Request::url() == route('parametros')): ?> class="active" <?php endif; ?>>
                  <a href="<?php echo e(url('parametros')); ?>">
-                     <i class="pe-7s-tools"></i>
-                     <p>SERVICIOS</p>
+                     <i class="pe-7s-config"></i>
+                     <p>PARAMETROS</p>
                  </a>
              </li>
              <li <?php if(Request::url() == route('informes')): ?> class="active" <?php endif; ?>>

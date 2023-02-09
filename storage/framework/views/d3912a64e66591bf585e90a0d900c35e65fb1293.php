@@ -11,7 +11,7 @@
 
     <title>Plataforma ByG</title>
     <link rel="shortcut icon" href="<?php echo url('assets/img/logo.ico'); ?>" type="image/x-icon">
-
+    <link href="<?php echo url('bootstrap/preloader.css'); ?>" rel="stylesheet" />
     <!-- Custom fonts for this template-->
     <link href="<?php echo url('fontawesome/css/all.min.css" rel="stylesheet" type="text/css'); ?>">
     <link
@@ -114,6 +114,26 @@ unset($__errorArgs, $__bag); ?>
 
     </div>
     <?php endif; ?>
+    <div id="preloaderId" class="" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(20, 23, 26, 0.503);
+    z-index: 9999;
+    display:none;
+    text-align: center;
+    padding: 20%">
+
+        <div class="lds-ring" style="margin-bottom: -100%">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <p style="margin-top: 100%; margin-left: -10%; color: aliceblue">&nbsp;</p>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo url('vendor/jquery/jquery.min.js'); ?>"></script>
@@ -124,6 +144,30 @@ unset($__errorArgs, $__bag); ?>
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo url('js/sb-admin-2.min.js'); ?>"></script>
+    <script src="<?php echo url('js/preloader.js'); ?>"></script>
+    <script>
+        $(document).on("click",  "#btn-ingresar", function(){
+            var correo  = $('#email').val();
+            var cont  = $('#password').val();
+
+            var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+            if ( !expr.test(correo) ){                                                            //COMPRUEBA MAIL
+                return true;
+            }
+            if ((correo == "") || (cont == "")  ) {  //COMPRUEBA CAMPOS VACIOS
+                return true;
+            }
+            showpreloader();
+        });
+        $(document).on("click",  "#btn-sendEmail", function(){
+            if ( $('#email').val() == ""  ) {  //COMPRUEBA CAMPOS VACIOS
+                return true;
+            }
+            showpreloader();
+        });
+    </script>
 
 </body>
 

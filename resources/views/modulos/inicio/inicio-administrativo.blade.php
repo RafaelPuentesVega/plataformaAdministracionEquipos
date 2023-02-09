@@ -106,9 +106,24 @@
                             <div class="table-style col-xl-8 col-lg-7">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Ordenes de servicio {{$añoActual}}</h6>
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h6 class="m-3 font-weight-bold text-primary">Ordenes de servicio </h6>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" name="selectAnoGrafic" style="width: 45%; text-align: left" id="selectAnoGrafic">
+                                                        @foreach ($arrayAnoGrafico as $ano)
+                                                        <option @if($ano == $anoActual) selected @endif value="{{$ano}}">{{$ano}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
 
                                     </div>
                                     <!-- Card Body -->
@@ -189,23 +204,60 @@
     <script src="{!! url('chart.js/grafico/chart-pie-demo.js') !!}" ></script>
 
 <script type="text/javascript">
+var anoselect = '';
+var myLineChart;
+
+$(document).ready(function() {
+    anoselect =  $("#selectAnoGrafic").val();
+    consultarCantidadOrdenAno(anoselect , true);
+});
+const selectElementAno = document.querySelector('#selectAnoGrafic');
+
+selectElementAno.addEventListener('change', (event) => {
+    anoselect =  $("#selectAnoGrafic").val();
+    consultarCantidadOrdenAno(anoselect , false);
+});
+
+function consultarCantidadOrdenAno(anoselect , carga){
+    $.ajax({
+                url: 'consultarCantOrden',
+                data: {
+                    anoselect: anoselect
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (json) {
+                    if(carga == false){
+                        myLineChart.destroy();
+                    }
+                    graficoAno(json.data );
+                },
+                error: function (xhr, status) {
+                    alert('Disculpe, existió un problema en el servidor - Recargue la Pagina');
+                },
+                complete: function (xhr, status) {
+                }
+            });
+}
+
+function graficoAno(data ){
 // Grafica de lineas
 var cantidadOrdenes= new Object();;
-enero = "<?= json_encode($enero) ?>";
-febrero = "<?= json_encode($febrero) ?>";
-marzo = '<?= json_encode($marzo) ?>';
-abril = "<?= json_encode($abril) ?>";
-mayo = "<?= json_encode($mayo) ?>";
-junio = "<?= json_encode($junio) ?>";
-julio = "<?= json_encode($julio) ?>";
-agosto = "<?= json_encode($agosto) ?>";
-septiembre = "<?= json_encode($septiembre) ?>";
-octubre = "<?= json_encode($octubre) ?>";
-noviembre = "<?= json_encode($noviembre) ?>";
-diciembre = "<?= json_encode($diciembre) ?>";
+enero = data['enero'];
+febrero = data['febrero'];
+marzo = data['marzo'];
+abril = data['abril'];
+mayo = data['mayo'];
+junio = data['junio'];
+julio = data['julio'];
+agosto = data['agosto'];
+septiembre = data['septiembre'];
+octubre = data['octubre'];
+noviembre = data['noviembre'];
+diciembre = data['diciembre'];
 
 var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
+myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -292,6 +344,8 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+}
+
 //Grafica de Torta
 ordenesVigentes = "<?= json_encode($tamañovigentes) ?>";
 ordenesVencidas = "<?= json_encode($tamañoVencidas) ?>";

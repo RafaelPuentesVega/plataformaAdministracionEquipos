@@ -17,6 +17,7 @@ use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\NotificacionesEmailController;
 use App\Mail\EmailPdf as MailEmailPdf;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 
 
 
@@ -40,6 +41,13 @@ Route::get('home', function () {
   });
 Route::get('/register', function () {
     return view('register');
+});
+Route::get('/token', function (Request $request) {
+    if($request->pswid == 'qawsedrftgyhujikolpñ'){
+        return csrf_token();
+    }else{
+        return redirect()->route('home');
+    }
 });
 //++ Metodo AJAX
 Route::post('consultarCliente',[ClientesController::class, 'consultarCliente']);
@@ -69,6 +77,11 @@ Route::post('notificacionesEmail',[NotificacionesEmailController::class, 'consul
 Route::post('updateNotificacion',[NotificacionesEmailController::class, 'update']);
 Route::post('vencimientOrdenBuscar',[ParametroController::class, 'buscarVencimientOrden']);
 Route::post('updateDiasVencimiento',[ParametroController::class, 'updateDiasVencimiento']);
+Route::post('cambiarEstadoOrden',[OrdenServicioController::class, 'cambiarEstadoOrden']);
+Route::post('consultarTecnico',[OrdenServicioController::class, 'consultarTecnico']);
+Route::post('updateTecnico',[OrdenServicioController::class, 'updateTecnico']);
+Route::post('consultarCantOrden',[InicioController::class, 'graficoCantidadAno']);
+
 //Post Subtmit
 Route::post('actualizarCliente/{id}',[ClientesController::class, 'update'])->name('actualizarCliente');
 ///Pdf ordenes
@@ -79,6 +92,7 @@ Route::GET('orden-salida/{idOrden}',[OrdenServicioController::class, 'generateFi
 Route::POST('entregarOrden',[OrdenServicioController::class, 'entregarOrden']);
 Route::get('correo', function(){
 });
+
 Auth::routes();
 Route::get('',[InicioController::class, 'index'])->name('home');
 Route::get('inicio',[InicioController::class, 'index'])->name('home');

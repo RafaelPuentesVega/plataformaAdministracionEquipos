@@ -45,12 +45,7 @@ class InicioController extends Controller
             }
     $tamañoVencidas = count($vencidas)-1;
     $tamañovigentes = count($vigentes) -1;
-    $añoActual = date('Y');
-    $cantidadOrdenMes = OrdenServicio::
-    whereYear('fecha_creacion_orden', $añoActual)
-    ->select(DB::raw(' MONTH(fecha_creacion_orden) as mes,count(*) as cantidad'))
-    ->groupBy('mes')
-    ->get()->toArray();
+    $anoActual = date('Y');
 
     $cantOrdenes = OrdenServicio::
     get()->count();
@@ -73,77 +68,16 @@ class InicioController extends Controller
     ->get()->toArray();
     $priceOrdenes = $priceOrdenes[0];
 
+        $anoInicial = 2022;//año en la cual inicio la plataforma BYG
+        $arrayAnoGrafico = array(2022);
+        do {
+            $anoInicial ++;
+            $arrayAnoGrafico[] = $anoInicial;
+        } while ($anoInicial < $anoActual);
 
-    $enero = 0;
-    $febrero = 0;
-    $marzo = 0;
-    $abril = 0;
-    $mayo = 0;
-    $junio = 0;
-    $julio = 0;
-    $agosto = 0;
-    $septiembre = 0;
-    $octubre = 0;
-    $noviembre = 0;
-    $diciembre = 0;
 
-    for($y=0 ; $y < count($cantidadOrdenMes); $y++){
-        switch($cantidadOrdenMes[$y]['mes']){
-
-            case 1:
-                $enero = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 2:
-                $febrero = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 3:
-                $marzo = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 4:
-                $abril = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 5:
-                $mayo = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 6:
-                $junio = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 7:
-                $julio = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 8:
-                $agosto = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 9:
-                $septiembre = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 10:
-                $octubre = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 11:
-                $noviembre = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            case 12:
-                $diciembre = intval($cantidadOrdenMes[$y]['cantidad']);
-                break;
-            default:
-                break;
-        }
-    }
             return view('modulos.inicio.inicio-administrativo')
-            ->with('enero' ,$enero)
-            ->with('febrero' ,$febrero)
-            ->with('marzo' ,$marzo)
-            ->with('abril' ,$abril)
-            ->with('mayo' ,$mayo)
-            ->with('junio' ,$junio)
-            ->with('julio' ,$julio)
-            ->with('agosto' ,$agosto)
-            ->with('septiembre' ,$septiembre)
-            ->with('octubre' ,$octubre)
-            ->with('noviembre' ,$noviembre)
-            ->with('diciembre' ,$diciembre)
-            ->with('añoActual' ,$añoActual)
+            ->with('anoActual' ,$anoActual)
             ->with('cantOrdenes' , $cantOrdenes)
             ->with('priceOrdenes' , $priceOrdenes)
             ->with('PendienteFacturar' , $PendienteFacturar)
@@ -151,7 +85,9 @@ class InicioController extends Controller
             ->with('Pendientes' ,$Pendientes)
             ->with('ordenesReparacion' ,$control)
             ->with('tamañoVencidas' ,$tamañoVencidas)
-            ->with('tamañovigentes' ,$tamañovigentes);
+            ->with('tamañovigentes' ,$tamañovigentes)
+            ->with('arrayAnoGrafico' ,$arrayAnoGrafico);
+
         }else{
             $idUsuario = auth()->id();
 
@@ -204,9 +140,73 @@ class InicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function graficoCantidadAno(Request $request)
     {
-        //
+        $consultaAno = $request['anoselect'];
+        $cantidadOrdenMes = OrdenServicio::
+        whereYear('fecha_creacion_orden', $consultaAno)
+        ->select(DB::raw(' MONTH(fecha_creacion_orden) as mes,count(*) as cantidad'))
+        ->groupBy('mes')
+        ->get()->toArray();
+
+        $responseData['enero'] = 0;
+        $responseData['febrero'] = 0;
+        $responseData['marzo'] = 0;
+        $responseData['abril'] = 0;
+        $responseData['mayo'] = 0;
+        $responseData['junio'] = 0;
+        $responseData['julio'] = 0;
+        $responseData['agosto'] = 0;
+        $responseData['septiembre'] = 0;
+        $responseData['octubre'] = 0;
+        $responseData['noviembre'] = 0;
+        $responseData['diciembre'] = 0;
+        for($y=0 ; $y < count($cantidadOrdenMes); $y++){
+            switch($cantidadOrdenMes[$y]['mes']){
+
+                case 1:
+                    $responseData['enero'] = intval($cantidadOrdenMes[$y]['cantidad']);
+
+                    break;
+                case 2:
+                    $responseData['febrero'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 3:
+                    $responseData['marzo'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 4:
+                    $responseData['abril'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 5:
+                    $responseData['mayo'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 6:
+                    $responseData['junio'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 7:
+                    $responseData['julio'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 8:
+                    $responseData['agosto'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 9:
+                    $responseData['septiembre'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 10:
+                    $responseData['octubre'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 11:
+                    $responseData['noviembre'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                case 12:
+                    $responseData['diciembre'] = intval($cantidadOrdenMes[$y]['cantidad']);
+                    break;
+                default:
+                    break;
+            }
+        }
+        $response['data'] = $responseData;
+        return json_encode($response);
     }
 
     /**
