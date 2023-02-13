@@ -77,7 +77,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <!-- LOGO -->
     <tr>
-        <td style="background-color: rgba(146, 231, 246, 0.577)" align="center">
+        <td style="background-color: rgb(222, 222, 222)" align="center">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -95,7 +95,7 @@
         </td>
     </tr>
     <tr>
-        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgba(146, 231, 246, 0.577)">
+        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgb(222, 222, 222)">
 
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" >
                 <tr>
@@ -109,7 +109,7 @@
         </td>
     </tr>
     <tr>
-        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgba(146, 231, 246, 0.577)">
+        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgb(222, 222, 222)">
 
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" >
                 <tr>
@@ -122,7 +122,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" align="center" style="background-color: rgba(146, 231, 246, 0.577); padding: 0px 10px 0px 10px;">
+        <td colspan="2" align="center" style="background-color: rgb(222, 222, 222); padding: 0px 10px 0px 10px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;" >
               <tr>
                 <td colspan="2" bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >

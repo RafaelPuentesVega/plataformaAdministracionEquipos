@@ -74,6 +74,12 @@
                      <p>PARAMETROS</p>
                  </a>
              </li>
+             <li @if (Request::url() == route('correos')) class="active" @endif>
+                <a href="{{ url('correos') }}">
+                    <i class="pe-7s-mail-open-file"></i>
+                    <p>PLANTILLAS CORREO</p>
+                </a>
+            </li>
              <li @if (Request::url() == route('informes')) class="active" @endif>
                 <a href="{{ url('informes') }}">
                     <i class="pe-7s-news-paper"></i>

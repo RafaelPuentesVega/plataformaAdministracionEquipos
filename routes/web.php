@@ -15,6 +15,7 @@ use App\Http\Controllers\RequerimientoInternoController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\NotificacionesEmailController;
+use App\Http\Controllers\CorreoController;
 use App\Mail\EmailPdf as MailEmailPdf;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -81,6 +82,8 @@ Route::post('cambiarEstadoOrden',[OrdenServicioController::class, 'cambiarEstado
 Route::post('consultarTecnico',[OrdenServicioController::class, 'consultarTecnico']);
 Route::post('updateTecnico',[OrdenServicioController::class, 'updateTecnico']);
 Route::post('consultarCantOrden',[InicioController::class, 'graficoCantidadAno']);
+Route::post('consultarPlantillaCorreo',[CorreoController::class, 'buscarPlantilla']);
+Route::post('consultarCaractPlantilla',[CorreoController::class, 'consultarCaractPlantilla']);
 
 //Post Subtmit
 Route::post('actualizarCliente/{id}',[ClientesController::class, 'update'])->name('actualizarCliente');
@@ -132,4 +135,6 @@ Route::get('informes',[InformeController::class, 'index']) ->name('informes');
 Route::get('parametros',[ParametroController::class, 'index']) ->name('parametros');
 Route::post('parametro/servicios',[ParametroController::class, 'store']);
 Route::get('parametro/servicios',[ParametroController::class, 'servicioIndex'])->name('servicioIndex');
+//Correos
+Route::get('correos',[CorreoController::class, 'index']) ->name('correos');
 

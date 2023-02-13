@@ -300,7 +300,7 @@
                                              <div class="col-md-2">
                                                 <div class="form-group">
                                                         <label>SERIAL</label>
-                                                            <input type="text" maxlength="6" class="form-control"  id="equipo_serial" placeholder="Serial" required autocomplete="off" >
+                                                            <input type="text"  class="form-control"  id="equipo_serial" placeholder="Serial" required autocomplete="off" >
                                                 </div>
                                              </div>
 
@@ -418,7 +418,7 @@
                                                                      <option value="{{ $users->id }}">{{$users->name}}
                                                                         @foreach ($ordenServicio as $item)
                                                                         @if($item['tecnico'] == $users->id )
-                                                                        ( {{$item['cantidad']}}  Asginadas)
+                                                                        ( {{$item['cantidad']}}  Asignadas)
 
                                                                         @break
                                                                         @endif
@@ -455,7 +455,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="{!! url('js/crearorden.js?v=2.1') !!}"></script>
+    <script src="{!! url('js/crearorden.js?v=2.2') !!}"></script>
     <script src="{!! url('assets/js/toastr.min.js') !!}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection

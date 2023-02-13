@@ -192,7 +192,7 @@
                         <a style="border-radius: 15px 15px 15px 15px;border-width: 15px 25px;text-decoration: none;
                         background: #ec6d64 none repeat scroll 0% 0%;
                         border-color: #ec6d64; border-style: solid; color: white; font-weight: 800; font-size: 18px;cursor: pointer !important"
-                         href="https://www.bygsistemas.com.co/plataformabyg/public/editarorden/{{encrypt($datos['orden'])}}">
+                         href="{!! url('editarorden') !!}/{{encrypt($datos['orden'])}}">
                         Orden # {{$datos['orden']}}
 
                         </a>

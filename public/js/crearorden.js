@@ -1002,6 +1002,7 @@ function tipoEquipo() {
 function codeAddress() {
         consultarMunicipio()
 }
+
 window.onload = codeAddress;
 
 $(document).ready(function () {
@@ -1039,6 +1040,31 @@ $(document).ready(function () {
     $('.js-example-basic-multiple').select2();
 
 });
+
+//se pego un texto, solo deja pegar los ultimos 6 digitos
+const inputField = document.getElementById("equipo_serial");
+
+inputField.addEventListener("paste", function(event) {
+  const text = event.clipboardData.getData("text");
+  event.preventDefault();
+
+  if (text.length > 6) {
+    inputField.value = text.slice(-6);
+  } else {
+    inputField.value = text;
+  }
+});
+
+inputField.addEventListener("keypress", function(event) {
+  if (inputField.value.length >= 6) {
+    event.preventDefault();
+  }
+});
+inputField.oninput = function() {
+    if (inputField.value.length > 6) {
+      inputField.value = inputField.value.substring(0, 6);
+    }
+  };
 var idioma_espanol = {
     "processing": "Procesando...",
     "lengthMenu": "Mostrar _MENU_ registros",

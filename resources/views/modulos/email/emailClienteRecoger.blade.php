@@ -70,14 +70,14 @@
     div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<body style="background-color: #dededefc; margin: 0 !important; padding: 0 !important;">
+<body style="background-color: rgb(222, 222, 222); margin: 0 !important; padding: 0 !important;">
 
 
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="0"  cellspacing="0" width="100%">
     <!-- LOGO -->
     <tr>
-        <td style="background-color: rgba(146, 231, 246, 0.577)" align="center">
+        <td style="background-color: rgb(222, 222, 222)" align="center">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -95,12 +95,12 @@
         </td>
     </tr>
     <tr>
-        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgba(146, 231, 246, 0.577)">
+        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgb(222, 222, 222)">
 
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 900px;" >
                 <tr>
                     <td bgcolor="#48299e" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 15px 15px 0px 0px; color: white; font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                      <h2 style="color: white; font-size: 30px; font-weight: 800; line-height: 36px; margin: 0;">
+                      <h2 style="color: rgb(255, 255, 255); font-size: 30px; font-weight: 800; line-height: 36px; margin: 0;">
                         ¡Equipo pendiente por recoger!
                     </h2>
                     </td>
@@ -108,8 +108,8 @@
             </table>
         </td>
     </tr>
-    <tr>
-        <td  align="center" style="padding: 0px 10px 0px 10px;background-color: rgba(146, 231, 246, 0.577)">
+    <tr >
+        <td   align="center" style="padding: 0px 10px 0px 10px;background-color: rgb(222, 222, 222)">
 
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 900px;" >
                 <tr>
@@ -122,7 +122,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" align="center" style="background-color: rgba(146, 231, 246, 0.577); padding: 0px 10px 0px 10px;">
+        <td colspan="2" align="center" style="background-color: rgb(222, 222, 222); padding: 0px 10px 0px 10px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 900px;" >
               <tr>
                 <td colspan="2" bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
@@ -147,7 +147,7 @@
                                     Orden #
                                 </td>
                                 <td width="45%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                    112
+                                    {{$datos['orden']}}
                                 </td>
                             </tr>
                             <tr>

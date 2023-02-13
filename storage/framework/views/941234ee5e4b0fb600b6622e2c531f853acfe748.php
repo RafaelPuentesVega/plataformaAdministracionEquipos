@@ -75,6 +75,12 @@
                      <p>PARAMETROS</p>
                  </a>
              </li>
+             <li <?php if(Request::url() == route('correos')): ?> class="active" <?php endif; ?>>
+                <a href="<?php echo e(url('correos')); ?>">
+                    <i class="pe-7s-mail-open-file"></i>
+                    <p>PLANTILLAS CORREO</p>
+                </a>
+            </li>
              <li <?php if(Request::url() == route('informes')): ?> class="active" <?php endif; ?>>
                 <a href="<?php echo e(url('informes')); ?>">
                     <i class="pe-7s-news-paper"></i>

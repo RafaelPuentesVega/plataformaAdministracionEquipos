@@ -239,7 +239,7 @@ class OrdenServicioController extends Controller
         ->where('id_ordenServicio', '=', $id_cliente) ->whereIn('tipo_observacion', [2, 3])->get()->toArray();
        ///Validamos si colocan en la URL un ID no valido
         if(sizeof($dataCliente) == 0){
-            return ('ERROR 404');
+            throw new \Throwable();
         }
 
             $Data = DB::table('orden_servicio as orden')
@@ -331,7 +331,7 @@ class OrdenServicioController extends Controller
         ->where('id_ordenServicio', '=', $id_cliente) ->whereIn('tipo_observacion', [2, 3])->get()->toArray();
        ///Validamos si colocan en la URL un ID no valido
         if(sizeof($dataCliente) == 0){
-            return ('ERROR 404');
+            throw new \Throwable();
         }
         $arrayQuestion = $dataCliente[0];
 

@@ -297,7 +297,7 @@
                                              <div class="col-md-2">
                                                 <div class="form-group">
                                                         <label>SERIAL</label>
-                                                            <input type="text" maxlength="6" class="form-control"  id="equipo_serial" placeholder="Serial" required autocomplete="off" >
+                                                            <input type="text"  class="form-control"  id="equipo_serial" placeholder="Serial" required autocomplete="off" >
                                                 </div>
                                              </div>
 
@@ -448,16 +448,14 @@
 <?php echo $__env->make('modulos.ordenServicio.modal.modal_buscar_cliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->startSection('js'); ?>
-    
     <script src="<?php echo url('js/jquery.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
-    <script src="<?php echo url('js/crearorden.js?v=2'); ?>"></script>
+    <script src="<?php echo url('js/crearorden.js?v=2.2'); ?>"></script>
     <script src="<?php echo url('assets/js/toastr.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
 <?php $__env->stopSection(); ?>
 
 
